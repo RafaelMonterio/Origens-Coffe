@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assinatura — ORIGENS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/global.css">
+<style>
+/* ── Assinatura Hero ─────────────────────── */
+.assin-hero {
+  background: var(--off-white);
+  padding: calc(var(--nav-h) + 5rem) 6rem 5rem;
+  border-bottom: 1px solid var(--gray-200);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: end;
+}
+/* ── Planos ──────────────────────────────── */
+.planos-section { padding: 7rem 6rem 9rem; background: var(--white); }
+.planos-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 0; border: 1px solid var(--gray-200);
+  border-right: none; margin-top: 4rem;
+}
+.plano-col {
+  border-right: 1px solid var(--gray-200);
+  padding: 3rem 2.5rem;
+  display: flex; flex-direction: column;
+  transition: background .4s;
+  position: relative;
+}
+.plano-col:hover { background: var(--off-white); }
+.plano-col.featured {
+  background: var(--black); color: var(--white);
+  border-color: var(--black);
+}
+.plano-col.featured:hover { background: var(--gray-800); }
+.plano-featured-label {
+  position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+  background: var(--brown-mid); color: var(--white);
+  padding: .3rem 1.2rem; font-size: .55rem; letter-spacing: .25em; text-transform: uppercase; white-space: nowrap;
+}
+.plano-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 300; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 2rem; }
+.plano-price { font-family: var(--font-display); font-size: 3.8rem; font-weight: 300; line-height: 1; }
+.plano-period { font-size: .62rem; letter-spacing: .18em; color: var(--gray-600); margin: .4rem 0 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--gray-200); }
+.featured .plano-period { color: rgba(255,255,255,.4); border-color: rgba(255,255,255,.1); }
+.plano-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; flex: 1; margin-bottom: 2.5rem; }
+.plano-list li { font-size: .73rem; display: flex; align-items: flex-start; gap: .8rem; line-height: 1.5; color: var(--gray-600); }
+.featured .plano-list li { color: rgba(255,255,255,.6); }
+.plano-list li::before { content: '—'; color: var(--brown-mid); flex-shrink: 0; }
+.featured .plano-list li::before { color: var(--brown-lt); }
+
+/* ── FAQ da assinatura ───────────────────── */
+.assin-faq { background: var(--off-white); padding: 6rem; border-top: 1px solid var(--gray-200); }
+.faq-list { display: flex; flex-direction: column; max-width: 720px; margin-top: 3rem; }
+.faq-item { border-bottom: 1px solid var(--gray-200); }
+.faq-q {
+  width: 100%; background: none; border: none;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.4rem 0; cursor: none;
+  font-family: var(--font-body); font-size: .82rem; font-weight: 400;
+  color: var(--black); text-align: left;
+  transition: color .3s;
+}
+.faq-q:hover { color: var(--brown-mid); }
+.faq-icon { font-size: 1.2rem; color: var(--gray-400); transition: transform .3s; flex-shrink: 0; }
+.faq-a { font-size: .75rem; color: var(--gray-600); line-height: 1.9; max-height: 0; overflow: hidden; transition: max-height .4s var(--ease-out), padding .4s; }
+.faq-item.open .faq-a { max-height: 200px; padding-bottom: 1.2rem; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav class="navbar" id="navbar" style="background:#0d0b09;border-bottom:1px solid rgba(255,255,255,.07);">
+  <a href="../index.html" style="display:flex;align-items:center;text-decoration:none;">
+    <img src="../assets/logo-dark.png" alt="ORIGENS" style="height:32px;width:auto;filter:brightness(0) invert(1);opacity:.9;">
+  </a>
+  <ul class="nav-links-internal" style="display:flex;gap:2rem;list-style:none;">
+    <li><a href="loja.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Loja</a></li>
+    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
+    <li><a href="assinatura.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Assinatura</a></li>
+    <li><a href="blog.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Blog</a></li>
+    <li><a href="contato.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Contato</a></li>
+  </ul>
+  <div id="nav-auth-actions" class="nav-actions"></div>
+</nav>
+
+<!-- HERO -->
+<div class="assin-hero">
+  <div class="reveal-left">
+    <div class="section-eyebrow" style="margin-bottom:1rem"><div class="eyebrow-line"></div><span class="eyebrow-text">Clube de Assinatura</span></div>
+    <h1 class="section-title">Café especial<br>todo <em>mês.</em></h1>
+    <p class="section-sub" style="margin-top:1.5rem">Grãos selecionados pessoalmente por Pedro Lima, entregues frescos na sua porta. Sem fidelidade, cancele quando quiser.</p>
+    <div style="display:flex;gap:.75rem;margin-top:2rem">
+      <a href="#planos" class="btn btn-dark btn-lg">Ver planos</a>
+      <a href="#faq-assin" class="btn btn-outline-dark btn-lg">Como funciona</a>
+    </div>
+  </div>
+  <div class="reveal-right" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+    <div style="padding:2rem;border:1px solid var(--gray-200);background:var(--white)">
+      <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:300;color:var(--brown-mid)">100%</div>
+      <div style="font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-600);margin-top:.4rem;line-height:1.7">Grãos<br>Frescos</div>
+    </div>
+    <div style="padding:2rem;border:1px solid var(--gray-200);background:var(--white)">
+      <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:300;color:var(--brown-mid)">72h</div>
+      <div style="font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-600);margin-top:.4rem;line-height:1.7">Após a<br>Torra</div>
+    </div>
+    <div style="padding:2rem;border:1px solid var(--gray-200);background:var(--white)">
+      <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:300;color:var(--brown-mid)">0</div>
+      <div style="font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-600);margin-top:.4rem;line-height:1.7">Taxa de<br>Fidelidade</div>
+    </div>
+    <div style="padding:2rem;border:1px solid var(--gray-200);background:var(--white)">
+      <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:300;color:var(--brown-mid)">800+</div>
+      <div style="font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-600);margin-top:.4rem;line-height:1.7">Assinantes<br>Ativos</div>
+    </div>
+  </div>
+</div>
+
+<!-- PLANOS -->
+<section class="planos-section" id="planos">
+  <div class="reveal">
+    <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Escolha seu plano</span></div>
+    <h2 class="section-title">Qual plano é<br><em>para você?</em></h2>
+  </div>
+  <div class="planos-grid">
+
+    <div class="plano-col reveal">
+      <div class="plano-name">Essencial</div>
+      <div class="plano-price">R$ 79</div>
+      <div class="plano-period">por mês · frete grátis</div>
+      <ul class="plano-list">
+        <li>250g de grão selecionado</li>
+        <li>1 origem por mês</li>
+        <li>Frete grátis para todo Brasil</li>
+        <li>Guia de preparo digital</li>
+        <li>Cancele quando quiser</li>
+      </ul>
+      <button class="btn btn-outline-dark" style="width:100%;justify-content:center;padding:.85rem" onclick="openModal('cadastro-modal')">Assinar Essencial</button>
+    </div>
+
+    <div class="plano-col featured reveal delay-1">
+      <div class="plano-featured-label">Mais Popular</div>
+      <div class="plano-name" style="color:var(--white)">Gourmet</div>
+      <div class="plano-price" style="color:var(--brown-lt)">R$ 139</div>
+      <div class="plano-period">por mês · frete grátis</div>
+      <ul class="plano-list">
+        <li>500g de grão premium</li>
+        <li>2 origens exclusivas por mês</li>
+        <li>Frete grátis para todo Brasil</li>
+        <li>Vídeo exclusivo do barista</li>
+        <li>10% de desconto na loja</li>
+        <li>Cancele quando quiser</li>
+      </ul>
+      <button class="btn btn-white" style="width:100%;justify-content:center;padding:.85rem" onclick="openModal('cadastro-modal')">Assinar Gourmet</button>
+    </div>
+
+    <div class="plano-col reveal delay-2">
+      <div class="plano-name">Barista</div>
+      <div class="plano-price">R$ 219</div>
+      <div class="plano-period">por mês · frete grátis</div>
+      <ul class="plano-list">
+        <li>1kg de grão premium</li>
+        <li>3 origens exclusivas por mês</li>
+        <li>Frete grátis para todo Brasil</li>
+        <li>Acesso completo a cursos online</li>
+        <li>20% de desconto na loja</li>
+        <li>Surpresa mensal do barista</li>
+        <li>Cancele quando quiser</li>
+      </ul>
+      <button class="btn btn-outline-dark" style="width:100%;justify-content:center;padding:.85rem" onclick="openModal('cadastro-modal')">Assinar Barista</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ ASSINATURA -->
+<section class="assin-faq" id="faq-assin">
+  <div class="reveal">
+    <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Dúvidas Frequentes</span></div>
+    <h2 class="section-title">Como <em>funciona?</em></h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Quando o café é enviado?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Todo mês, até o dia 10, você recebe uma notificação de que o café foi torrado e enviado. A entrega leva de 3 a 7 dias úteis dependendo da sua região.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Posso cancelar a qualquer momento?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Sim, sem multa e sem burocracia. Basta cancelar pelo seu painel de perfil com pelo menos 5 dias de antecedência ao próximo envio.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Posso escolher a origem do mês?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">A curadoria é feita por Pedro Lima — parte da experiência é a surpresa! Você receberá um e-mail antes do envio com informações detalhadas sobre a origem selecionada.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        O café chega em grãos ou moído?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Você escolhe no seu perfil: grãos inteiros, moagem fina (espresso), moagem média (V60) ou moagem grossa (Prensa Francesa). Pode alterar a qualquer momento.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Como funciona o desconto na loja?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">O desconto é aplicado automaticamente quando você estiver logado com a conta da assinatura. Válido em todos os produtos da loja, exceto outros planos de assinatura.</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-brand"><div class="footer-brand-logo" style="font-family:var(--font-logo)"><div class="footer-brand-badge">O</div>ORIGENS</div><p class="footer-desc">Cafeteria artesanal especializada em cafés de origem única.</p></div>
+  <div class="footer-col"><div class="footer-col-title">Loja</div><ul><li><a href="loja.html">Cafés</a></li><li><a href="assinatura.html">Assinatura</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Aprender</div><ul><li><a href="cursos.html">Cursos</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Contato</div><ul><li><a href="contato.html">Fale conosco</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+  <div class="footer-bottom"><span>© 2025 ORIGENS</span><span>contato@origens.cafe</span></div>
+</footer>
+
+<div id="login-modal" class="modal-overlay">
+  <div class="modal-backdrop" onclick="closeModal('login-modal')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('login-modal')">×</button>
+    <div class="modal-title">Entrar</div><div class="modal-sub">Bem-vindo de volta</div>
+    <form onsubmit="doLogin(event)">
+      <div class="form-group"><label class="form-label">E-mail</label><input id="login-email" type="email" class="form-input" required></div>
+      <div class="form-group"><label class="form-label">Senha</label><input id="login-pass" type="password" class="form-input" required></div>
+      <button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Entrar →</button>
+    </form>
+    <div class="modal-footer-txt">Não tem conta? <a href="#" onclick="switchModal('login-modal','cadastro-modal')">Criar conta</a></div>
+  </div>
+</div>
+<div id="cadastro-modal" class="modal-overlay">
+  <div class="modal-backdrop" onclick="closeModal('cadastro-modal')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('cadastro-modal')">×</button>
+    <div class="modal-title">Criar conta</div><div class="modal-sub">Junte-se à ORIGENS</div>
+    <form onsubmit="doCadastro(event)">
+      <div class="form-group"><label class="form-label">Nome</label><input id="cad-name" type="text" class="form-input" required></div>
+      <div class="form-group"><label class="form-label">E-mail</label><input id="cad-email" type="email" class="form-input" required></div>
+      <div class="form-group"><label class="form-label">Senha</label><input id="cad-pass" type="password" class="form-input" required></div>
+      <div class="form-group"><label class="form-label">Confirmar</label><input id="cad-pass2" type="password" class="form-input" required></div>
+      <button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Criar conta →</button>
+    </form>
+    <div class="modal-footer-txt">Já tem conta? <a href="#" onclick="switchModal('cadastro-modal','login-modal')">Entrar</a></div>
+  </div>
+</div>
+<div id="cart-panel" class="cart-panel">
+  <div class="cart-panel-header"><div class="cart-panel-title">Carrinho</div><div style="display:flex;align-items:center;gap:.75rem"><span id="cart-badge" style="width:22px;height:22px;border-radius:50%;background:var(--brown-mid);color:#fff;font-size:.6rem;display:flex;align-items:center;justify-content:center;font-weight:600">0</span><button class="cart-close-btn" onclick="closeCart()">×</button></div></div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer-panel">
+    <div class="cart-total-row"><span class="cart-total-label">Total</span><span class="cart-total-val" id="cart-total-val">R$ 0</span></div>
+    <a href="checkout.html" class="btn btn-dark" style="width:100%;justify-content:center;padding:.9rem">Finalizar compra →</a>
+    <button onclick="closeCart()" class="btn btn-outline-dark" style="width:100%;justify-content:center;padding:.75rem">Continuar</button>
+  </div>
+</div>
+<div id="global-toast" class="toast"></div>
+
+<script src="../js/global.js"></script>
+<script>
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>

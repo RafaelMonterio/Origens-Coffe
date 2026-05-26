@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIGENS — Cafeteria Artesanal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/global.css">
+<style>
+
+/* ══ NAVBAR — transparente sobre hero, preto no scroll ══ */
+#main-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 72px; z-index: 500;
+  background: transparent;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 4rem;
+  border-bottom: 1px solid transparent;
+  transition: background .5s ease, border-color .5s ease, backdrop-filter .5s ease;
+}
+#main-nav.scrolled {
+  background: rgba(13,11,9,.96);
+  backdrop-filter: blur(20px);
+  border-bottom-color: rgba(255,255,255,.07);
+}
+
+/* Logo: usa logoconcept2 (PNG branco) */
+.nav-logo-wrap {
+  display: flex; align-items: center; gap: 0;
+  text-decoration: none; flex-shrink: 0;
+}
+.nav-logo-wrap img {
+  height: 38px; width: auto;
+  display: block;
+}
+
+/* Links quando logado */
+.nav-links-logged {
+  display: flex; gap: 2rem; list-style: none;
+}
+.nav-links-logged a {
+  font-size: .62rem; font-weight: 500; font-family: 'Montserrat', sans-serif;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,255,255,.55); transition: color .3s;
+  position: relative; padding-bottom: 3px;
+}
+.nav-links-logged a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px; background: #a07040;
+  transition: width .3s ease;
+}
+.nav-links-logged a:hover { color: #fff; }
+.nav-links-logged a:hover::after { width: 100%; }
+
+.nav-actions-wrap { display: flex; align-items: center; gap: .75rem; }
+
+/* ══ HERO — vídeo direto, sem loading screen ══ */
+#hero {
+  position: relative; height: 100vh;
+  display: flex; align-items: center; justify-content: flex-start;
+  overflow: hidden; background: #0d0b09;
+}
+
+.hero-bg-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(.538) ;
+  transform: scale(1.04);
+  animation: heroZoom 20s ease-in-out infinite alternate;
+}
+@keyframes heroZoom { from{transform:scale(1.04)} to{transform:scale(1.1)} }
+
+.hero-noise {
+  position: absolute; inset: 0; pointer-events: none; opacity: .35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+  animation: grain .4s steps(1) infinite;
+}
+@keyframes grain {
+  0%,100%{transform:translate(0,0)} 20%{transform:translate(-2%,-1%)}
+  40%{transform:translate(1%,2%)} 60%{transform:translate(-1%,1%)} 80%{transform:translate(2%,-2%)}
+}
+.hero-vignette { position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 35%,rgba(0,0,0,.65) 100%); }
+.hero-bottom-grad { position:absolute;bottom:0;left:0;right:0;height:60vh;background:linear-gradient(to top,rgba(13,11,9,.95) 0%,transparent 100%); }
+
+/* Conteúdo hero deslogado — surge suavemente */
+.hero-content-guest {
+  position: relative; z-index: 2;
+  padding: 0 5rem;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0;
+}
+
+.hero-logo-block {
+  display: flex; align-items: center; gap: 1.2rem;
+  margin-bottom: 1.6rem;
+  opacity: 0; animation: surgir 1.1s cubic-bezier(0.16,1,0.3,1) .6s forwards;
+}
+/* usa logoconcept2 no hero */
+.hero-logo-block img.hero-logo-img {
+  height: 58px; width: auto;
+}
+
+.hero-slogan {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(.95rem, 1.8vw, 1.3rem);
+  font-weight: 300; font-style: italic;
+  color: rgba(255,255,255,.48); letter-spacing: .09em;
+  margin-bottom: 2.4rem;
+  opacity: 0; animation: surgir 1.1s cubic-bezier(0.16,1,0.3,1) .75s forwards;
+}
+
+.hero-actions {
+  display: flex; gap: .85rem;
+  opacity: 0; animation: surgir 1.1s cubic-bezier(0.16,1,0.3,1) .6s forwards;
+}
+
+@keyframes surgir {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll hint */
+.hero-scroll-hint {
+  position: absolute; bottom: 2.5rem; left: 5rem; z-index: 2;
+  display: flex; align-items: center; gap: .75rem;
+  opacity: 0; animation: surgir .8s ease 1.4s forwards;
+}
+.hero-scroll-hint span { font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:'Montserrat',sans-serif; }
+.scroll-line { width:40px;height:1px;background:linear-gradient(to right,rgba(255,255,255,.35),transparent);animation:scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse{0%,100%{transform:scaleX(1);opacity:1}50%{transform:scaleX(.5);opacity:.3}}
+
+/* Hero logado — menor */
+#hero.logged { height: 62vh; align-items: flex-end; }
+.hero-content-logged {
+  position: relative; z-index: 2;
+  padding: 0 5rem 4rem;
+  display: none;
+}
+#hero.logged .hero-content-logged { display: block; }
+#hero.logged .hero-content-guest  { display: none; }
+
+.hero-logged-greeting {
+  font-family: 'Ibarra Real Nova', Georgia, serif;
+  font-size: clamp(2.5rem, 5.5vw, 4.8rem);
+  font-weight: 400; color: #fff; line-height: 1.08;
+  opacity: 0; animation: surgir .9s cubic-bezier(0.16,1,0.3,1) .1s forwards;
+}
+.hero-logged-greeting em { font-style: italic; color: #a07040; }
+.hero-logged-sub {
+  font-size: .75rem; color: rgba(255,255,255,.38); line-height: 2; font-family: 'Montserrat', sans-serif;
+  margin: .6rem 0 1.8rem;
+  opacity: 0; animation: surgir .9s cubic-bezier(0.16,1,0.3,1) .2s forwards;
+}
+.hero-logged-cta {
+  opacity: 0; animation: surgir .9s cubic-bezier(0.16,1,0.3,1) .3s forwards;
+}
+
+/* ══ MARQUEE ══ */
+/* usa .marquee-wrap global */
+
+/* ══ SOBRE ══ */
+#sobre { background: #fff; }
+.sobre-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 90vh; }
+.sobre-sticky {
+  position: sticky; top: 72px; height: calc(100vh - 72px);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5rem 5rem 5rem 6rem; border-right: 1px solid #e8e0d8;
+}
+.sobre-scroll-side { padding: 5rem 6rem 5rem 5rem; display: flex; flex-direction: column; gap: 6rem; }
+.sobre-photo-inner { width:100%;min-height:340px;background:#f0ede8;display:flex;align-items:center;justify-content:center;font-size:.6rem;letter-spacing:.3em;color:#b0a090;text-transform:uppercase; }
+.sobre-photo-caption { margin-top:.9rem;font-size:.62rem;letter-spacing:.18em;color:#b0a090;text-transform:uppercase; }
+.sobre-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem;padding-top:3rem;border-top:1px solid #e8e0d8; }
+.stat-val { font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:300;color:#6b3a1f;line-height:1; }
+.stat-lbl { font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:#7a6a5a;margin-top:.4rem;line-height:1.7; }
+.sobre-quote { border-left:2px solid #6b3a1f;padding-left:2rem; }
+.sobre-quote blockquote { font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:300;font-style:italic;line-height:1.55;color:#2a2018; }
+.sobre-quote cite { display:block;margin-top:.75rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#6b3a1f;font-style:normal; }
+
+/* ══ PROCESSO ══ */
+#processo { background:#0d0b09;padding:8rem 0 0;overflow:hidden; }
+.processo-top { display:flex;align-items:flex-end;justify-content:space-between;padding:0 6rem 4rem; }
+.processo-hint { font-size:.6rem;letter-spacing:.22em;color:rgba(255,255,255,.18);text-transform:uppercase;font-family:'Montserrat',sans-serif; }
+.processo-track { display:flex;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;padding:0 6rem 5rem;cursor:grab;border-top:1px solid rgba(255,255,255,.05); }
+.processo-track:active{cursor:grabbing}
+.processo-track::-webkit-scrollbar{display:none}
+.processo-card { flex-shrink:0;width:360px;border-right:1px solid rgba(255,255,255,.06);padding:2.5rem;transition:background .4s; }
+.processo-card:first-child{border-left:1px solid rgba(255,255,255,.06)}
+.processo-card:hover{background:rgba(255,255,255,.03)}
+.step-no { font-family:'Cormorant Garamond',serif;font-size:4.5rem;font-weight:300;color:rgba(255,255,255,.06);line-height:1;transition:color .4s; }
+.processo-card:hover .step-no{color:#a07040}
+.step-name { font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;margin:1rem 0 .75rem;color:#fff; }
+.step-desc { font-size:.73rem;line-height:1.9;color:rgba(255,255,255,.36);font-family:'Montserrat',sans-serif; }
+.step-img { width:100%;aspect-ratio:16/9;background:rgba(255,255,255,.04);margin-top:2rem;display:flex;align-items:center;justify-content:center; }
+.step-img span { font-size:.55rem;letter-spacing:.25em;color:rgba(255,255,255,.1);text-transform:uppercase; }
+
+/* ══ CTA ══ */
+#cta-section { background:#0d0b09;padding:10rem 6rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2rem;position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.05); }
+#cta-section::before { content:'ORIGENS';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Ibarra Real Nova',serif;font-size:18vw;font-weight:700;color:rgba(255,255,255,.018);white-space:nowrap;pointer-events:none;letter-spacing:.08em; }
+.cta-title { font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,6rem);font-weight:300;color:#fff;line-height:1.05;position:relative;z-index:1; }
+.cta-title em { font-style:italic;color:#a07040; }
+.cta-sub { font-size:.78rem;color:rgba(255,255,255,.36);line-height:2;max-width:480px;position:relative;z-index:1;font-family:'Montserrat',sans-serif; }
+.cta-buttons { display:flex;gap:1rem;position:relative;z-index:1;flex-wrap:wrap;justify-content:center; }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ═══ NAVBAR ══════════════════════════════ -->
+<nav id="main-nav">
+  <!-- Logo: logoconcept2 PNG (branco sobre escuro) -->
+  <a href="index.html" class="logo-inline">
+    <img src="assets/icone.png" alt="" class="logo-inline-icon">
+    <div class="logo-inline-div"></div>
+    <span class="logo-inline-text">ORIGENS</span>
+  </a>
+
+  <!-- Links: só quando logado -->
+  <ul class="nav-links-logged" id="nav-links-logged" style="display:none">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="pages/loja.html">Loja</a></li>
+    <li><a href="pages/cursos.html">Cursos</a></li>
+    <li><a href="pages/assinatura.html">Assinatura</a></li>
+    <li><a href="pages/blog.html">Blog</a></li>
+  </ul>
+
+  <div class="nav-actions-wrap" id="nav-auth-actions"></div>
+</nav>
+
+<!-- ═══ HERO — vídeo direto ══════════════════ -->
+<section id="hero">
+  <video class="hero-bg-video" autoplay muted loop playsinline>
+    <source src="assets/coffee.mp4" type="video/mp4">
+  </video>
+  <div class="hero-noise"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-bottom-grad"></div>
+
+  <!-- DESLOGADO -->
+  <div class="hero-content-guest" id="hero-guest">
+    <!-- Logo concept2 branco -->
+    <div class="hero-logo-block">
+      <img src="assets/icone2.png" alt="" style="height:150px;width:auto;">
+      <div style="width:0.5px;height:100px;background:rgba(255, 255, 255, 0.89);flex-shrink:0;"></div>
+      <span style="font-family:'Ibarra Real Nova',Georgia,serif;font-size:clamp(2.5rem,6vw,5.5rem);font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:#fff;line-height:1;">ORIGENS</span>
+    </div>
+    <div class="hero-slogan">Do grão à xícara, com paixão.</div>
+    <div class="hero-actions">
+      <button class="btn btn-white btn-lg" onclick="openModal('cadastro-modal')">Criar conta</button>
+      <button class="btn btn-outline-white btn-lg" onclick="openModal('login-modal')">Entrar</button>
+    </div>
+  </div>
+
+  <!-- LOGADO -->
+  <div class="hero-content-logged" id="hero-logged">
+    <div class="hero-logged-greeting">Bom dia, <em id="logged-name">—</em></div>
+    <p class="hero-logged-sub">O que você vai explorar hoje?</p>
+    <div class="hero-logged-cta">
+      <a href="pages/loja.html" class="btn btn-white btn-lg">Explorar a loja</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" id="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Rolar</span>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ══════════════════════════════ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">
+      Bourbon Amarelo <div class="marquee-sep"></div> Sul de Minas <div class="marquee-sep"></div>
+      Gesha Etíope <div class="marquee-sep"></div> Yirgacheffe 1.900m <div class="marquee-sep"></div>
+      Natural Cerrado <div class="marquee-sep"></div> Honey Mogiana <div class="marquee-sep"></div>
+      Torra Artesanal <div class="marquee-sep"></div> 42 Fazendas Parceiras <div class="marquee-sep"></div>
+      12 Países de Origem <div class="marquee-sep"></div> 8 Anos de Experiência <div class="marquee-sep"></div>
+    </div>
+    <div class="marquee-item" aria-hidden="true">
+      Bourbon Amarelo <div class="marquee-sep"></div> Sul de Minas <div class="marquee-sep"></div>
+      Gesha Etíope <div class="marquee-sep"></div> Yirgacheffe 1.900m <div class="marquee-sep"></div>
+      Natural Cerrado <div class="marquee-sep"></div> Honey Mogiana <div class="marquee-sep"></div>
+      Torra Artesanal <div class="marquee-sep"></div> 42 Fazendas Parceiras <div class="marquee-sep"></div>
+      12 Países de Origem <div class="marquee-sep"></div> 8 Anos de Experiência <div class="marquee-sep"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SOBRE ════════════════════════════════ -->
+<section id="sobre">
+  <div class="sobre-grid">
+    <div class="sobre-sticky reveal-left">
+      <div class="section-eyebrow" style="margin-bottom:1rem">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">Nossa História</span>
+      </div>
+      <h2 class="section-title" style="margin-bottom:1.5rem">
+        Uma paixão<br>que virou <em>ofício.</em>
+      </h2>
+      <p class="section-sub">Pedro Lima começou como barista curioso aos 18 anos. Oito anos depois, a ORIGENS conecta produtores e apreciadores por meio de experiências únicas de sabor e origem.</p>
+      <p class="section-sub" style="margin-top:1rem">Cada xícara conta uma história — de altitude, solo, colheita e dedicação.</p>
+      <div style="display:flex;gap:1rem;margin-top:2.5rem">
+        <a href="#processo" class="btn btn-outline-dark">Nosso processo</a>
+        <a href="pages/loja.html" class="btn btn-brown">Explorar cafés</a>
+      </div>
+      <div class="sobre-stats">
+        <div><div class="stat-val">42+</div><div class="stat-lbl">Fazendas<br>Parceiras</div></div>
+        <div><div class="stat-val">12</div><div class="stat-lbl">Países de<br>Origem</div></div>
+        <div><div class="stat-val">8</div><div class="stat-lbl">Anos de<br>Experiência</div></div>
+      </div>
+    </div>
+    <div class="sobre-scroll-side">
+      <div class="reveal">
+        <div class="sobre-photo-inner">Foto / Vídeo — Pedro Lima na fazenda</div>
+        <div class="sobre-photo-caption">Pedro Lima — Sul de Minas, 2024</div>
+      </div>
+      <div class="sobre-quote reveal">
+        <blockquote>"Café não é só bebida. É o resultado de anos de cuidado, de mãos que plantaram e de olhos que escolheram."</blockquote>
+        <cite>— Pedro Lima, Fundador &amp; Barista Principal</cite>
+      </div>
+      <div class="reveal">
+        <div class="sobre-photo-inner" style="min-height:220px">Foto — Seleção de grãos</div>
+        <div class="sobre-photo-caption">Seleção manual — Mogiana, 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROCESSO ═════════════════════════════ -->
+<section id="processo">
+  <div class="processo-top">
+    <div class="reveal">
+      <div class="section-eyebrow" style="margin-bottom:.75rem">
+        <div class="eyebrow-line" style="background:#a07040"></div>
+        <span class="eyebrow-text" style="color:#a07040">Do Grão à Xícara</span>
+      </div>
+      <h2 class="section-title" style="color:#fff">Nosso<br><em>processo.</em></h2>
+    </div>
+    <span class="processo-hint">← Arraste →</span>
+  </div>
+  <div class="processo-track" id="processo-track">
+    <div class="processo-card"><div class="step-no">01</div><div class="step-name">Seleção de Origem</div><div class="step-desc">Visitamos cada fazenda pessoalmente. Avaliamos altitude, solo, microclima e práticas sustentáveis antes de qualquer parceria.</div><div class="step-img"><span>Foto / Vídeo</span></div></div>
+    <div class="processo-card"><div class="step-no">02</div><div class="step-name">Colheita Seletiva</div><div class="step-desc">Apenas grãos no ponto ideal de maturação são colhidos. Processo manual que garante homogeneidade e qualidade superior.</div><div class="step-img"><span>Foto / Vídeo</span></div></div>
+    <div class="processo-card"><div class="step-no">03</div><div class="step-name">Torra Artesanal</div><div class="step-desc">Torras em pequenos lotes com controle preciso de temperatura e tempo para realçar as notas únicas de cada origem.</div><div class="step-img"><span>Foto / Vídeo</span></div></div>
+    <div class="processo-card"><div class="step-no">04</div><div class="step-name">Controle de Qualidade</div><div class="step-desc">Cada lote passa por cupping — degustação técnica que avalia aroma, sabor, acidez, corpo e finalização.</div><div class="step-img"><span>Foto / Vídeo</span></div></div>
+    <div class="processo-card"><div class="step-no">05</div><div class="step-name">Entrega Fresca</div><div class="step-desc">Embalagem com válvula de desgaseificação. Enviado em até 72h após a torra para máximo frescor na sua xícara.</div><div class="step-img"><span>Foto / Vídeo</span></div></div>
+  </div>
+</section>
+
+<!-- ═══ CTA ══════════════════════════════════ -->
+<section id="cta-section">
+  <h2 class="cta-title reveal">Pronto para descobrir<br>o <em>café perfeito?</em></h2>
+  <p class="cta-sub reveal delay-1">Explore nossa loja, assine um plano mensal ou inscreva-se em um curso.</p>
+  <div class="cta-buttons reveal delay-2">
+    <a href="pages/loja.html" class="btn btn-white btn-lg">Ver cafés</a>
+    <a href="pages/assinatura.html" class="btn btn-outline-white btn-lg">Assinatura</a>
+    <a href="pages/cursos.html" class="btn btn-outline-white btn-lg">Cursos</a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══════════════════════════════ -->
+<footer class="footer">
+  <div>
+    <div class="footer-brand-logo" style="font-family:'Ibarra Real Nova',serif">
+      <div class="footer-brand-badge">O</div>ORIGENS
+    </div>
+    <p class="footer-desc">Cafeteria artesanal especializada em cafés de origem única.</p>
+  </div>
+  <div class="footer-col"><div class="footer-col-title">Loja</div><ul><li><a href="pages/loja.html">Cafés Especiais</a></li><li><a href="pages/assinatura.html">Assinatura</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Aprender</div><ul><li><a href="pages/cursos.html">Cursos</a></li><li><a href="pages/blog.html">Blog</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Contato</div><ul><li><a href="pages/contato.html">Fale conosco</a></li><li><a href="#">Instagram</a></li></ul></div>
+  <div class="footer-bottom"><span>© 2025 ORIGENS — São Paulo, SP</span><span>contato@origens.cafe</span></div>
+</footer>
+
+<!-- MODAIS -->
+<div id="login-modal" class="modal-overlay">
+  <div class="modal-backdrop" onclick="closeModal('login-modal')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('login-modal')">×</button>
+    <div class="modal-title">Entrar</div>
+    <div class="modal-sub">Bem-vindo de volta à ORIGENS</div>
+    <form onsubmit="doLogin(event)">
+      <div class="form-group"><label class="form-label">E-mail</label><input id="login-email" type="email" class="form-input" placeholder="seu@email.com" required></div>
+      <div class="form-group"><label class="form-label">Senha</label><input id="login-pass" type="password" class="form-input" placeholder="••••••••" required></div>
+      <button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Entrar →</button>
+    </form>
+    <div class="modal-footer-txt">Não tem conta? <a href="#" onclick="switchModal('login-modal','cadastro-modal')">Criar conta</a></div>
+  </div>
+</div>
+<div id="cadastro-modal" class="modal-overlay">
+  <div class="modal-backdrop" onclick="closeModal('cadastro-modal')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('cadastro-modal')">×</button>
+    <div class="modal-title">Criar conta</div>
+    <div class="modal-sub">Junte-se à comunidade ORIGENS</div>
+    <form onsubmit="doCadastro(event)">
+      <div class="form-group"><label class="form-label">Nome</label><input id="cad-name" type="text" class="form-input" placeholder="Pedro Lima" required></div>
+      <div class="form-group"><label class="form-label">E-mail</label><input id="cad-email" type="email" class="form-input" placeholder="seu@email.com" required></div>
+      <div class="form-group"><label class="form-label">Senha</label><input id="cad-pass" type="password" class="form-input" placeholder="••••••••" required></div>
+      <div class="form-group"><label class="form-label">Confirmar senha</label><input id="cad-pass2" type="password" class="form-input" placeholder="••••••••" required></div>
+      <button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Criar conta →</button>
+    </form>
+    <div class="modal-footer-txt">Já tem conta? <a href="#" onclick="switchModal('cadastro-modal','login-modal')">Entrar</a></div>
+  </div>
+</div>
+
+<!-- CARRINHO -->
+<div id="cart-panel" class="cart-panel">
+  <div class="cart-panel-header">
+    <div class="cart-panel-title">Carrinho</div>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <span id="cart-badge" style="width:22px;height:22px;border-radius:50%;background:#6b3a1f;color:#fff;font-size:.6rem;display:flex;align-items:center;justify-content:center;font-weight:600">0</span>
+      <button class="cart-close-btn" onclick="closeCart()">×</button>
+    </div>
+  </div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer-panel">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-val" id="cart-total-val">R$ 0</span>
+    </div>
+    <a href="pages/checkout.html" class="btn btn-dark" style="width:100%;justify-content:center;padding:.9rem">Finalizar compra →</a>
+    <button onclick="closeCart()" class="btn btn-outline-dark" style="width:100%;justify-content:center;padding:.75rem">Continuar comprando</button>
+  </div>
+</div>
+<div id="global-toast" class="toast"></div>
+
+<script src="js/global.js"></script>
+<script>
+// ── Navbar scroll: transparente sobre hero, preto ao rolar ──
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+// ── Hero: logado vs deslogado ──
+function updateHeroForLoggedUser() {
+  const user = getUser();
+  const heroEl     = document.getElementById('hero');
+  const guestEl    = document.getElementById('hero-guest');
+  const loggedEl   = document.getElementById('hero-logged');
+  const scrollHint = document.getElementById('scroll-hint');
+  const navLinks   = document.getElementById('nav-links-logged');
+  const loggedName = document.getElementById('logged-name');
+
+  if (user) {
+    heroEl.classList.add('logged');
+    guestEl.style.display   = 'none';
+    loggedEl.style.display  = 'block';
+    scrollHint.style.display = 'none';
+    if (navLinks)   navLinks.style.display = 'flex';
+    if (loggedName) loggedName.textContent = user.name.split(' ')[0];
+  } else {
+    heroEl.classList.remove('logged');
+    guestEl.style.display   = 'flex';
+    loggedEl.style.display  = 'none';
+    scrollHint.style.display = 'flex';
+    if (navLinks) navLinks.style.display = 'none';
+  }
+}
+window.updateHeroForLoggedUser = updateHeroForLoggedUser;
+document.addEventListener('DOMContentLoaded', updateHeroForLoggedUser);
+
+// ── Processo drag ──
+const pt = document.getElementById('processo-track');
+let isDragging = false, startX, sl;
+pt.addEventListener('mousedown', e => { isDragging = true; startX = e.pageX - pt.offsetLeft; sl = pt.scrollLeft; });
+pt.addEventListener('mouseleave', () => isDragging = false);
+pt.addEventListener('mouseup',    () => isDragging = false);
+pt.addEventListener('mousemove',  e => {
+  if (!isDragging) return; e.preventDefault();
+  pt.scrollLeft = sl - (e.pageX - pt.offsetLeft - startX) * 1.4;
+});
+</script>
+</body>
+</html>

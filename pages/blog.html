@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — ORIGENS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/global.css">
+<style>
+.page-hero { padding: calc(var(--nav-h) + 4rem) 6rem 4rem; border-bottom: 1px solid var(--gray-200); background: var(--white); }
+.blog-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 0; border: 1px solid var(--gray-200); border-top: none; }
+.blog-main { padding: 4rem 6rem; border-right: 1px solid var(--gray-200); }
+.blog-sidebar { padding: 4rem 3rem; background: var(--off-white); }
+.post-card { display: grid; grid-template-columns: 240px 1fr; border-bottom: 1px solid var(--gray-200); transition: background .3s; }
+.post-card:hover { background: var(--off-white); }
+.post-card:last-child { border-bottom: none; }
+.post-img { background: var(--gray-100); min-height: 180px; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--gray-200); }
+.post-img span { font-size:.55rem;letter-spacing:.22em;color:var(--gray-400);text-transform:uppercase; }
+.post-body { padding: 2rem; display: flex; flex-direction: column; }
+.post-cat { font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:.6rem;font-weight:500; }
+.post-title { font-family:var(--font-display);font-size:1.4rem;font-weight:300;line-height:1.3;margin-bottom:.7rem; }
+.post-excerpt { font-size:.72rem;color:var(--gray-600);line-height:1.9;flex:1; }
+.post-meta { display:flex;justify-content:space-between;margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--gray-200);font-size:.6rem;letter-spacing:.12em;color:var(--gray-400); }
+.post-meta a { color:var(--brown-mid);border-bottom:1px solid var(--brown-mid);padding-bottom:1px; }
+.sidebar-title { font-family:var(--font-display);font-size:1.2rem;font-weight:300;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--gray-200); }
+.sidebar-post { padding:.9rem 0;border-bottom:1px solid var(--gray-200); }
+.sidebar-post:last-child { border-bottom:none; }
+.sidebar-post-cat { font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:.3rem; }
+.sidebar-post-title { font-family:var(--font-display);font-size:.95rem;font-weight:300;line-height:1.3; }
+.newsletter-strip { background:var(--black);padding:5rem 6rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center; }
+.newsletter-form { display:flex;flex-direction:column;gap:1rem; }
+.nl-input { background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.15);padding:.8rem 0;color:var(--white);font-family:var(--font-body);font-size:.85rem;outline:none;transition:border-color .3s; }
+.nl-input:focus { border-bottom-color:var(--brown-lt); }
+.nl-input::placeholder { color:rgba(255,255,255,.25); }
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<nav class="navbar" id="navbar" style="background:#0d0b09;border-bottom:1px solid rgba(255,255,255,.07);">
+  <a href="../index.html" style="display:flex;align-items:center;text-decoration:none;">
+    <img src="../assets/logo-dark.png" alt="ORIGENS" style="height:32px;width:auto;filter:brightness(0) invert(1);opacity:.9;">
+  </a>
+  <ul class="nav-links-internal" style="display:flex;gap:2rem;list-style:none;">
+    <li><a href="loja.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Loja</a></li>
+    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
+    <li><a href="assinatura.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Assinatura</a></li>
+    <li><a href="blog.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Blog</a></li>
+    <li><a href="contato.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Contato</a></li>
+  </ul>
+  <div id="nav-auth-actions" class="nav-actions"></div>
+</nav>
+
+<div class="page-hero">
+  <div class="section-eyebrow" style="margin-bottom:.75rem"><div class="eyebrow-line"></div><span class="eyebrow-text">Blog & Conteúdo</span></div>
+  <h1 class="section-title">Aprenda mais sobre<br><em>o mundo do café.</em></h1>
+</div>
+
+<div class="blog-grid">
+  <div class="blog-main">
+    <div class="post-card reveal">
+      <div class="post-img"><img src="../assets/blog/v60-guide.jpg" alt="Guia Completo do V60" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="post-body">
+        <div class="post-cat">Técnica — Destaque</div>
+        <div class="post-title">Guia Completo do V60: do básico ao avançado</div>
+        <div class="post-excerpt">Aprenda como extrair o máximo sabor dos seus grãos com o método V60. Temperatura ideal, granulometria de moagem, tempo de extração e as diferentes técnicas de despejo.</div>
+        <div class="post-meta"><span>Pedro Lima · 12 min</span><a href="#">Ler artigo →</a></div>
+      </div>
+    </div>
+    <div class="post-card reveal delay-1">
+      <div class="post-img"><img src="../assets/blog/armazenamento.jpg" alt="Como armazenar grãos de café" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="post-body">
+        <div class="post-cat">Dicas</div>
+        <div class="post-title">Como armazenar grãos de café corretamente</div>
+        <div class="post-excerpt">Umidade, luz e oxigênio são os maiores inimigos do café. Descubra como preservar o frescor dos seus grãos por mais tempo com técnicas simples.</div>
+        <div class="post-meta"><span>Pedro Lima · 4 min</span><a href="#">Ler artigo →</a></div>
+      </div>
+    </div>
+    <div class="post-card reveal delay-2">
+      <div class="post-img"><img src="../assets/blog/latte-art.jpg" alt="Latte Art para iniciantes" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="post-body">
+        <div class="post-cat">Tutorial</div>
+        <div class="post-title">Latte Art para iniciantes: por onde começar</div>
+        <div class="post-excerpt">O coração e a tulipa são os primeiros desenhos que todo barista aprende. Confira o passo a passo para criar latte art em casa com consistência.</div>
+        <div class="post-meta"><span>Pedro Lima · 8 min</span><a href="#">Ler artigo →</a></div>
+      </div>
+    </div>
+    <div class="post-card reveal">
+      <div class="post-img"><img src="../assets/blog/origens-cafe.jpg" alt="As 5 melhores origens de café" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="post-body">
+        <div class="post-cat">Origens</div>
+        <div class="post-title">As 5 melhores origens de café do mundo em 2025</div>
+        <div class="post-excerpt">Da Etiópia ao Brasil, passando pela Colômbia e Quênia — Pedro Lima analisa as origens que mais se destacaram na temporada 2025.</div>
+        <div class="post-meta"><span>Pedro Lima · 6 min</span><a href="#">Ler artigo →</a></div>
+      </div>
+    </div>
+    <div class="post-card reveal delay-1">
+      <div class="post-img"><img src="../assets/blog/espresso-americano.jpg" alt="Espresso vs. Americano" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="post-body">
+        <div class="post-cat">Técnica</div>
+        <div class="post-title">Espresso vs. Americano: diferenças e quando usar cada um</div>
+        <div class="post-excerpt">Mais do que preferência pessoal, espresso e americano têm perfis completamente diferentes. Entenda a química por trás de cada método.</div>
+        <div class="post-meta"><span>Pedro Lima · 5 min</span><a href="#">Ler artigo →</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="blog-sidebar">
+    <div class="sidebar-title">Mais Lidos</div>
+    <div class="sidebar-post"><div class="sidebar-post-cat">Dicas</div><div class="sidebar-post-title">Moagem ideal para cada método</div></div>
+    <div class="sidebar-post"><div class="sidebar-post-cat">Origens</div><div class="sidebar-post-title">O que é café natural vs. lavado?</div></div>
+    <div class="sidebar-post"><div class="sidebar-post-cat">Técnica</div><div class="sidebar-post-title">Temperatura da água: por que importa?</div></div>
+    <div class="sidebar-post"><div class="sidebar-post-cat">Tutorial</div><div class="sidebar-post-title">Como fazer AeroPress em 3 minutos</div></div>
+    <div style="margin-top:3rem">
+      <div class="sidebar-title">Categorias</div>
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+        <span style="padding:.3rem .8rem;border:1px solid var(--gray-200);font-size:.6rem;letter-spacing:.15em;background:var(--white)">Técnica</span>
+        <span style="padding:.3rem .8rem;border:1px solid var(--gray-200);font-size:.6rem;letter-spacing:.15em;background:var(--white)">Dicas</span>
+        <span style="padding:.3rem .8rem;border:1px solid var(--gray-200);font-size:.6rem;letter-spacing:.15em;background:var(--white)">Origens</span>
+        <span style="padding:.3rem .8rem;border:1px solid var(--gray-200);font-size:.6rem;letter-spacing:.15em;background:var(--white)">Tutorial</span>
+        <span style="padding:.3rem .8rem;border:1px solid var(--gray-200);font-size:.6rem;letter-spacing:.15em;background:var(--white)">Receitas</span>
+      </div>
+    </div>
+    <div style="margin-top:3rem;padding:2rem;background:var(--black);color:var(--white)">
+      <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:300;margin-bottom:.75rem">Newsletter</div>
+      <p style="font-size:.7rem;color:rgba(255,255,255,.4);line-height:1.8;margin-bottom:1.2rem">Receba os melhores artigos toda semana.</p>
+      <input type="email" class="nl-input" placeholder="seu@email.com" style="width:100%;margin-bottom:.75rem">
+      <button class="btn btn-white btn-sm" style="width:100%;justify-content:center">Assinar</button>
+    </div>
+  </div>
+</div>
+
+<div class="newsletter-strip">
+  <div class="reveal-left">
+    <div class="section-eyebrow" style="margin-bottom:1rem"><div class="eyebrow-line" style="background:var(--brown-lt)"></div><span class="eyebrow-text" style="color:var(--brown-lt)">Newsletter</span></div>
+    <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:var(--white);line-height:1.1">Conteúdo exclusivo<br>direto no seu <em style="font-style:italic;color:var(--brown-lt)">e-mail.</em></h2>
+    <p style="font-size:.78rem;color:rgba(255,255,255,.4);line-height:2;margin-top:1rem">Artigos, receitas, promoções e histórias direto do barista. Sem spam.</p>
+  </div>
+  <div class="newsletter-form reveal-right">
+    <input type="text" class="nl-input" placeholder="Seu nome">
+    <input type="email" class="nl-input" placeholder="seu@email.com">
+    <button class="btn btn-white" style="align-self:flex-start;margin-top:.5rem">Assinar newsletter →</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand"><div class="footer-brand-logo" style="font-family:var(--font-logo)"><div class="footer-brand-badge">O</div>ORIGENS</div><p class="footer-desc">Cafeteria artesanal especializada em cafés de origem única.</p></div>
+  <div class="footer-col"><div class="footer-col-title">Loja</div><ul><li><a href="loja.html">Cafés</a></li><li><a href="assinatura.html">Assinatura</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Aprender</div><ul><li><a href="cursos.html">Cursos</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Contato</div><ul><li><a href="contato.html">Fale conosco</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+  <div class="footer-bottom"><span>© 2025 ORIGENS</span><span>contato@origens.cafe</span></div>
+</footer>
+<div id="login-modal" class="modal-overlay"><div class="modal-backdrop" onclick="closeModal('login-modal')"></div><div class="modal-box"><button class="modal-close" onclick="closeModal('login-modal')">×</button><div class="modal-title">Entrar</div><div class="modal-sub">Bem-vindo de volta</div><form onsubmit="doLogin(event)"><div class="form-group"><label class="form-label">E-mail</label><input id="login-email" type="email" class="form-input" required></div><div class="form-group"><label class="form-label">Senha</label><input id="login-pass" type="password" class="form-input" required></div><button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Entrar →</button></form><div class="modal-footer-txt">Não tem conta? <a href="#" onclick="switchModal('login-modal','cadastro-modal')">Criar conta</a></div></div></div>
+<div id="cadastro-modal" class="modal-overlay"><div class="modal-backdrop" onclick="closeModal('cadastro-modal')"></div><div class="modal-box"><button class="modal-close" onclick="closeModal('cadastro-modal')">×</button><div class="modal-title">Criar conta</div><div class="modal-sub">Junte-se à ORIGENS</div><form onsubmit="doCadastro(event)"><div class="form-group"><label class="form-label">Nome</label><input id="cad-name" type="text" class="form-input" required></div><div class="form-group"><label class="form-label">E-mail</label><input id="cad-email" type="email" class="form-input" required></div><div class="form-group"><label class="form-label">Senha</label><input id="cad-pass" type="password" class="form-input" required></div><div class="form-group"><label class="form-label">Confirmar</label><input id="cad-pass2" type="password" class="form-input" required></div><button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Criar conta →</button></form><div class="modal-footer-txt">Já tem conta? <a href="#" onclick="switchModal('cadastro-modal','login-modal')">Entrar</a></div></div></div>
+<div id="global-toast" class="toast"></div>
+<script src="../js/global.js"></script>
+</body>
+</html>

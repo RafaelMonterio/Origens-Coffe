@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato — ORIGENS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/global.css">
+<style>
+.contato-wrap {
+  display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - var(--nav-h));
+  margin-top: var(--nav-h);
+}
+.contato-left {
+  background: var(--black); padding: 6rem;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.contato-left::before {
+  content: 'OI'; font-family: var(--font-display);
+  font-size: 28vw; font-weight: 700;
+  color: rgba(255,255,255,.025);
+  position: absolute; bottom: -4rem; left: -2rem;
+  pointer-events: none; line-height: 1; letter-spacing: -.05em;
+}
+.contato-title { font-family: var(--font-display); font-size: clamp(2.5rem,5vw,5rem); font-weight: 300; color: var(--white); line-height: 1.05; position: relative; z-index: 1; }
+.contato-title em { font-style: italic; color: var(--brown-lt); }
+.contato-info { display: flex; flex-direction: column; gap: 2rem; position: relative; z-index: 1; }
+.info-item { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; }
+.info-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--brown-lt); margin-bottom: .5rem; font-weight: 500; }
+.info-val { font-size: .85rem; color: rgba(255,255,255,.7); line-height: 1.8; }
+.social-row { display: flex; gap: 1rem; position: relative; z-index: 1; }
+.social-btn { padding: .5rem 1.2rem; border: 1px solid rgba(255,255,255,.15); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.5); transition: all .3s; }
+.social-btn:hover { border-color: var(--brown-lt); color: var(--brown-lt); }
+
+.contato-right { background: var(--white); padding: 6rem; display: flex; flex-direction: column; justify-content: center; }
+.contato-form-title { font-family: var(--font-display); font-size: 2rem; font-weight: 300; margin-bottom: .4rem; }
+.contato-form-sub { font-size: .72rem; color: var(--gray-600); margin-bottom: 2.5rem; letter-spacing: .08em; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.form-textarea {
+  width: 100%; background: transparent; border: none;
+  border-bottom: 1px solid var(--gray-200); padding: .75rem 0;
+  font-family: var(--font-body); font-size: .85rem; color: var(--black);
+  outline: none; resize: none; transition: border-color .3s;
+  min-height: 100px;
+}
+.form-textarea:focus { border-bottom-color: var(--brown-mid); }
+.form-textarea::placeholder { color: var(--gray-400); }
+.map-placeholder {
+  width: 100%; height: 200px;
+  background: var(--gray-100); margin-top: 2rem;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--gray-200);
+}
+.map-placeholder span { font-size: .6rem; letter-spacing: .25em; color: var(--gray-400); text-transform: uppercase; }
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+
+<nav class="navbar" id="navbar" style="background:#0d0b09;border-bottom:1px solid rgba(255,255,255,.07);">
+  <a href="../index.html" style="display:flex;align-items:center;text-decoration:none;">
+    <img src="../assets/logo-dark.png" alt="ORIGENS" style="height:32px;width:auto;filter:brightness(0) invert(1);opacity:.9;">
+  </a>
+  <ul class="nav-links-internal" style="display:flex;gap:2rem;list-style:none;">
+    <li><a href="loja.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Loja</a></li>
+    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
+    <li><a href="assinatura.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Assinatura</a></li>
+    <li><a href="blog.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Blog</a></li>
+    <li><a href="contato.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Contato</a></li>
+  </ul>
+  <div id="nav-auth-actions" class="nav-actions"></div>
+</nav>
+
+<div class="contato-wrap">
+  <!-- Esquerda escura -->
+  <div class="contato-left">
+    <div>
+      <div class="section-eyebrow" style="margin-bottom:1rem">
+        <div class="eyebrow-line" style="background:var(--brown-lt)"></div>
+        <span class="eyebrow-text" style="color:var(--brown-lt)">Fale Conosco</span>
+      </div>
+      <h1 class="contato-title">Estamos aqui<br>para <em>ajudar.</em></h1>
+    </div>
+
+    <div class="contato-info reveal-left">
+      <div class="info-item">
+        <div class="info-label">Endereço</div>
+        <div class="info-val">Rua dos Cafeeiros, 42<br>Vila Madalena — São Paulo, SP</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Horário</div>
+        <div class="info-val">Segunda a Sexta: 8h – 20h<br>Sábado e Domingo: 9h – 18h</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Contato</div>
+        <div class="info-val">contato@origens.cafe<br>+55 (11) 9 9999-0000</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="info-label" style="color:var(--brown-lt);margin-bottom:.75rem">Redes Sociais</div>
+      <div class="social-row">
+        <a href="#" class="social-btn">Instagram</a>
+        <a href="#" class="social-btn">TikTok</a>
+        <a href="#" class="social-btn">YouTube</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Direita clara -->
+  <div class="contato-right">
+    <div class="contato-form-title reveal">Envie uma mensagem</div>
+    <div class="contato-form-sub reveal">Respondemos em até 24 horas úteis.</div>
+    <form onsubmit="submitContato(event)" class="reveal">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Nome</label><input type="text" class="form-input" placeholder="Pedro Lima" required></div>
+        <div class="form-group"><label class="form-label">E-mail</label><input type="email" class="form-input" placeholder="seu@email.com" required></div>
+      </div>
+      <div class="form-group" style="margin-top:.5rem"><label class="form-label">Assunto</label><input type="text" class="form-input" placeholder="Dúvida sobre assinatura..."></div>
+      <div class="form-group" style="margin-top:.5rem"><label class="form-label">Mensagem</label><textarea class="form-textarea" placeholder="Escreva sua mensagem..." rows="4"></textarea></div>
+      <button type="submit" class="btn btn-dark" style="margin-top:1.5rem">Enviar mensagem →</button>
+    </form>
+    <div class="map-placeholder"><span>Mapa — Vila Madalena, São Paulo</span></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand"><div class="footer-brand-logo" style="font-family:var(--font-logo)"><div class="footer-brand-badge">O</div>ORIGENS</div><p class="footer-desc">Cafeteria artesanal especializada em cafés de origem única.</p></div>
+  <div class="footer-col"><div class="footer-col-title">Loja</div><ul><li><a href="loja.html">Cafés</a></li><li><a href="assinatura.html">Assinatura</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Aprender</div><ul><li><a href="cursos.html">Cursos</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Contato</div><ul><li><a href="contato.html">Fale conosco</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+  <div class="footer-bottom"><span>© 2025 ORIGENS</span><span>contato@origens.cafe</span></div>
+</footer>
+
+<div id="login-modal" class="modal-overlay"><div class="modal-backdrop" onclick="closeModal('login-modal')"></div><div class="modal-box"><button class="modal-close" onclick="closeModal('login-modal')">×</button><div class="modal-title">Entrar</div><div class="modal-sub">Bem-vindo de volta</div><form onsubmit="doLogin(event)"><div class="form-group"><label class="form-label">E-mail</label><input id="login-email" type="email" class="form-input" required></div><div class="form-group"><label class="form-label">Senha</label><input id="login-pass" type="password" class="form-input" required></div><button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Entrar →</button></form><div class="modal-footer-txt">Não tem conta? <a href="#" onclick="switchModal('login-modal','cadastro-modal')">Criar conta</a></div></div></div>
+<div id="cadastro-modal" class="modal-overlay"><div class="modal-backdrop" onclick="closeModal('cadastro-modal')"></div><div class="modal-box"><button class="modal-close" onclick="closeModal('cadastro-modal')">×</button><div class="modal-title">Criar conta</div><div class="modal-sub">Junte-se à ORIGENS</div><form onsubmit="doCadastro(event)"><div class="form-group"><label class="form-label">Nome</label><input id="cad-name" type="text" class="form-input" required></div><div class="form-group"><label class="form-label">E-mail</label><input id="cad-email" type="email" class="form-input" required></div><div class="form-group"><label class="form-label">Senha</label><input id="cad-pass" type="password" class="form-input" required></div><div class="form-group"><label class="form-label">Confirmar</label><input id="cad-pass2" type="password" class="form-input" required></div><button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Criar conta →</button></form><div class="modal-footer-txt">Já tem conta? <a href="#" onclick="switchModal('cadastro-modal','login-modal')">Entrar</a></div></div></div>
+<div id="global-toast" class="toast"></div>
+<script src="../js/global.js"></script>
+<script>
+function submitContato(e) {
+  e.preventDefault();
+  showToast('Mensagem enviada! Responderemos em breve.');
+  e.target.reset();
+}
+// Navbar transparente scroll
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    nav.style.background = 'rgba(10,8,6,.9)';
+    nav.style.backdropFilter = 'blur(20px)';
+  } else {
+    nav.style.background = 'transparent';
+    nav.style.backdropFilter = '';
+  }
+}, { passive: true });
+</script>
+</body>
+</html>

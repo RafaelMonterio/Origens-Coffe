@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Perfil — ORIGENS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/global.css">
+<style>
+.perfil-wrap {
+  margin-top: var(--nav-h);
+  display: grid; grid-template-columns: 280px 1fr;
+  min-height: calc(100vh - var(--nav-h));
+}
+.perfil-sidebar {
+  background: var(--off-white);
+  border-right: 1px solid var(--gray-200);
+  padding: 3rem 2rem;
+  display: flex; flex-direction: column; gap: 2.5rem;
+}
+.perfil-avatar {
+  display: flex; flex-direction: column; align-items: center; gap: .75rem;
+  padding-bottom: 2rem; border-bottom: 1px solid var(--gray-200);
+}
+.avatar-circle {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--brown-mid); color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 2rem; font-weight: 300;
+}
+.perfil-name { font-family: var(--font-display); font-size: 1.2rem; font-weight: 300; text-align: center; }
+.perfil-email { font-size: .65rem; letter-spacing: .1em; color: var(--gray-600); text-align: center; }
+.perfil-nav { display: flex; flex-direction: column; gap: 0; }
+.perfil-nav-item {
+  display: flex; align-items: center; gap: .75rem;
+  padding: .9rem 1rem;
+  font-size: .72rem; letter-spacing: .1em; color: var(--gray-600);
+  border-left: 2px solid transparent;
+  transition: all .25s; cursor: pointer; background: none; border-right: none; border-top: none; border-bottom: none;
+  width: 100%; text-align: left; font-family: var(--font-body);
+}
+.perfil-nav-item:hover { color: var(--black); background: rgba(0,0,0,.03); }
+.perfil-nav-item.active { color: var(--brown); border-left-color: var(--brown-mid); background: var(--white); }
+.perfil-nav-item .nav-icon { width: 18px; text-align: center; font-size: .9rem; }
+
+.perfil-main { padding: 3rem 4rem; background: var(--white); }
+.perfil-section { display: none; }
+.perfil-section.active { display: block; }
+.section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--gray-200); }
+.section-head-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 300; }
+
+/* Pedidos */
+.pedido-card { border: 1px solid var(--gray-200); margin-bottom: 1rem; transition: box-shadow .3s; }
+.pedido-card:hover { box-shadow: 0 4px 20px rgba(59,31,8,.06); }
+.pedido-header { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 1.5rem; background: var(--off-white); border-bottom: 1px solid var(--gray-200); }
+.pedido-id { font-family: var(--font-display); font-size: 1rem; font-weight: 300; }
+.pedido-date { font-size: .62rem; letter-spacing: .12em; color: var(--gray-600); }
+.status-badge { padding: .25rem .8rem; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; }
+.status-entregue { background: rgba(34,139,34,.1); color: #228B22; }
+.status-caminho { background: rgba(160,112,74,.1); color: var(--brown-mid); }
+.status-processando { background: rgba(0,0,0,.06); color: var(--gray-600); }
+.pedido-body { padding: 1.2rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+.pedido-items { font-size: .75rem; color: var(--gray-600); line-height: 1.8; }
+.pedido-total { font-family: var(--font-display); font-size: 1.3rem; font-weight: 300; color: var(--brown-mid); }
+
+/* Assinatura ativa */
+.assin-card { border: 1px solid var(--gray-200); padding: 2rem; margin-bottom: 1.5rem; }
+.assin-plan-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; margin-bottom: .3rem; }
+.assin-plan-price { font-size: .8rem; color: var(--brown-mid); margin-bottom: 1.5rem; letter-spacing: .1em; }
+.assin-info-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; padding: 1.5rem 0; border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); margin-bottom: 1.5rem; }
+.assin-info-lbl { font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gray-600); margin-bottom: .3rem; }
+.assin-info-val { font-size: .82rem; color: var(--black); }
+
+/* Config form */
+.config-section { border: 1px solid var(--gray-200); padding: 2rem; margin-bottom: 1.5rem; }
+.config-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 300; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--gray-200); }
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+
+<nav class="navbar" id="navbar" style="background:#0d0b09;border-bottom:1px solid rgba(255,255,255,.07);">
+  <a href="../index.html" style="display:flex;align-items:center;text-decoration:none;">
+    <img src="../assets/logo-dark.png" alt="ORIGENS" style="height:32px;width:auto;filter:brightness(0) invert(1);opacity:.9;">
+  </a>
+  <ul class="nav-links-internal" style="display:flex;gap:2rem;list-style:none;">
+    <li><a href="loja.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Loja</a></li>
+    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
+    <li><a href="assinatura.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Assinatura</a></li>
+    <li><a href="blog.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Blog</a></li>
+    <li><a href="contato.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Contato</a></li>
+  </ul>
+  <div id="nav-auth-actions" class="nav-actions"></div>
+</nav>
+
+<div class="perfil-wrap">
+  <!-- Sidebar -->
+  <div class="perfil-sidebar">
+    <div class="perfil-avatar">
+      <div class="avatar-circle" id="avatar-initial">A</div>
+      <div class="perfil-name" id="perfil-name-display">Carregando...</div>
+      <div class="perfil-email" id="perfil-email-display">—</div>
+    </div>
+    <nav class="perfil-nav">
+      <button class="perfil-nav-item active" onclick="showTab('pedidos',this)"><span class="nav-icon">📦</span> Meus Pedidos</button>
+      <button class="perfil-nav-item" onclick="showTab('assinatura',this)"><span class="nav-icon">☕</span> Assinatura</button>
+      <button class="perfil-nav-item" onclick="showTab('cursos',this)"><span class="nav-icon">🎓</span> Meus Cursos</button>
+      <button class="perfil-nav-item" onclick="showTab('config',this)"><span class="nav-icon">⚙️</span> Configurações</button>
+      <button class="perfil-nav-item" onclick="logout()" style="margin-top:auto;color:var(--gray-400)"><span class="nav-icon">🚪</span> Sair</button>
+    </nav>
+  </div>
+
+  <!-- Main -->
+  <div class="perfil-main">
+
+    <!-- PEDIDOS -->
+    <div class="perfil-section active" id="tab-pedidos">
+      <div class="section-head">
+        <div class="section-head-title">Meus Pedidos</div>
+        <a href="loja.html" class="btn btn-outline-dark btn-sm">Continuar comprando</a>
+      </div>
+      <div class="pedido-card reveal">
+        <div class="pedido-header">
+          <div><div class="pedido-id">#00142</div><div class="pedido-date">10 Mai 2025</div></div>
+          <span class="status-badge status-entregue">Entregue</span>
+        </div>
+        <div class="pedido-body">
+          <div class="pedido-items">Bourbon Amarelo 250g<br>Gesha Etíope 250g</div>
+          <div>
+            <div class="pedido-total">R$ 202</div>
+            <a href="rastreamento.html" class="btn btn-outline-dark btn-sm" style="margin-top:.5rem;display:inline-flex">Rastrear</a>
+          </div>
+        </div>
+      </div>
+      <div class="pedido-card reveal delay-1">
+        <div class="pedido-header">
+          <div><div class="pedido-id">#00138</div><div class="pedido-date">22 Abr 2025</div></div>
+          <span class="status-badge status-caminho">A caminho</span>
+        </div>
+        <div class="pedido-body">
+          <div class="pedido-items">Kit Barista Iniciante</div>
+          <div>
+            <div class="pedido-total">R$ 189</div>
+            <a href="rastreamento.html" class="btn btn-brown btn-sm" style="margin-top:.5rem;display:inline-flex">Rastrear</a>
+          </div>
+        </div>
+      </div>
+      <div class="pedido-card reveal delay-2">
+        <div class="pedido-header">
+          <div><div class="pedido-id">#00131</div><div class="pedido-date">05 Abr 2025</div></div>
+          <span class="status-badge status-entregue">Entregue</span>
+        </div>
+        <div class="pedido-body">
+          <div class="pedido-items">Natural Cerrado 250g<br>Honey Mogiana 250g</div>
+          <div><div class="pedido-total">R$ 126</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASSINATURA -->
+    <div class="perfil-section" id="tab-assinatura">
+      <div class="section-head">
+        <div class="section-head-title">Minha Assinatura</div>
+        <a href="assinatura.html" class="btn btn-outline-dark btn-sm">Ver planos</a>
+      </div>
+      <div class="assin-card reveal">
+        <div class="assin-plan-name">Plano Gourmet</div>
+        <div class="assin-plan-price">R$ 139 / mês · Ativo</div>
+        <div class="assin-info-grid">
+          <div><div class="assin-info-lbl">Próximo envio</div><div class="assin-info-val">10 Jun 2025</div></div>
+          <div><div class="assin-info-lbl">Moagem</div><div class="assin-info-val">Grãos inteiros</div></div>
+          <div><div class="assin-info-lbl">Frete</div><div class="assin-info-val">Grátis</div></div>
+        </div>
+        <div style="display:flex;gap:.75rem">
+          <button class="btn btn-outline-dark btn-sm" onclick="showToast('Configurações de moagem salvas!')">Alterar moagem</button>
+          <button class="btn btn-outline-dark btn-sm" onclick="showToast('Assinatura pausada por 1 mês.')">Pausar mês</button>
+          <button class="btn btn-sm" style="background:none;border:1px solid var(--gray-200);color:var(--gray-600)" onclick="showToast('Assinatura cancelada.')">Cancelar</button>
+        </div>
+      </div>
+      <div style="padding:2rem;background:var(--off-white);border:1px solid var(--gray-200)">
+        <div style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:.5rem">Desconto ativo</div>
+        <div style="font-family:var(--font-display);font-size:1.5rem;font-weight:300">10% OFF em toda a loja</div>
+        <div style="font-size:.72rem;color:var(--gray-600);margin-top:.4rem">Aplicado automaticamente no checkout.</div>
+      </div>
+    </div>
+
+    <!-- CURSOS -->
+    <div class="perfil-section" id="tab-cursos">
+      <div class="section-head">
+        <div class="section-head-title">Meus Cursos</div>
+        <a href="cursos.html" class="btn btn-outline-dark btn-sm">Ver todos os cursos</a>
+      </div>
+      <div style="border:1px solid var(--gray-200);padding:2rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center" class="reveal">
+        <div>
+          <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:300">Barista do Zero</div>
+          <div style="font-size:.65rem;letter-spacing:.12em;color:var(--gray-600);margin-top:.3rem">8 semanas · Online</div>
+          <div style="margin-top:.75rem;display:flex;align-items:center;gap:.75rem">
+            <div style="flex:1;height:4px;background:var(--gray-100);border-radius:2px;max-width:200px">
+              <div style="width:60%;height:100%;background:var(--brown-mid);border-radius:2px"></div>
+            </div>
+            <span style="font-size:.62rem;color:var(--brown-mid)">60% concluído</span>
+          </div>
+        </div>
+        <button class="btn btn-brown btn-sm">Continuar</button>
+      </div>
+      <div style="border:1px solid var(--gray-200);padding:2rem;display:flex;justify-content:space-between;align-items:center;background:var(--off-white)" class="reveal delay-1">
+        <div>
+          <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--gray-400)">Métodos Alternativos</div>
+          <div style="font-size:.65rem;letter-spacing:.12em;color:var(--gray-400);margin-top:.3rem">Disponível com plano Gourmet+</div>
+        </div>
+        <a href="cursos.html" class="btn btn-outline-dark btn-sm">Inscrever-se</a>
+      </div>
+    </div>
+
+    <!-- CONFIG -->
+    <div class="perfil-section" id="tab-config">
+      <div class="section-head">
+        <div class="section-head-title">Configurações</div>
+      </div>
+      <div class="config-section reveal">
+        <div class="config-title">Dados Pessoais</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Nome</label><input type="text" class="form-input" id="config-name" placeholder="Seu nome"></div>
+          <div class="form-group"><label class="form-label">E-mail</label><input type="email" class="form-input" id="config-email" placeholder="seu@email.com"></div>
+        </div>
+        <button class="btn btn-dark btn-sm" onclick="saveConfig()">Salvar alterações</button>
+      </div>
+      <div class="config-section reveal delay-1">
+        <div class="config-title">Alterar Senha</div>
+        <div class="form-group"><label class="form-label">Senha atual</label><input type="password" class="form-input" placeholder="••••••••"></div>
+        <div class="form-group"><label class="form-label">Nova senha</label><input type="password" class="form-input" placeholder="••••••••"></div>
+        <div class="form-group"><label class="form-label">Confirmar nova senha</label><input type="password" class="form-input" placeholder="••••••••"></div>
+        <button class="btn btn-dark btn-sm" onclick="showToast('Senha alterada com sucesso!')">Alterar senha</button>
+      </div>
+      <div class="config-section reveal delay-2">
+        <div class="config-title">Endereço de Entrega</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">CEP</label><input type="text" class="form-input" placeholder="00000-000"></div>
+          <div class="form-group"><label class="form-label">Cidade</label><input type="text" class="form-input" placeholder="São Paulo"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Endereço</label><input type="text" class="form-input" placeholder="Rua, número, complemento"></div>
+        <button class="btn btn-dark btn-sm" onclick="showToast('Endereço salvo!')">Salvar endereço</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="login-modal" class="modal-overlay"><div class="modal-backdrop" onclick="closeModal('login-modal')"></div><div class="modal-box"><button class="modal-close" onclick="closeModal('login-modal')">×</button><div class="modal-title">Entrar</div><div class="modal-sub">Acesse sua conta</div><form onsubmit="doLogin(event)"><div class="form-group"><label class="form-label">E-mail</label><input id="login-email" type="email" class="form-input" required></div><div class="form-group"><label class="form-label">Senha</label><input id="login-pass" type="password" class="form-input" required></div><button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Entrar →</button></form></div></div>
+<div id="global-toast" class="toast"></div>
+
+<script src="../js/global.js"></script>
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.perfil-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.perfil-nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function saveConfig() {
+  const name  = document.getElementById('config-name').value.trim();
+  const email = document.getElementById('config-email').value.trim();
+  const user  = getUser();
+  if (user && name) { user.name = name; if (email) user.email = email; setUser(user); loadPerfilUI(); }
+  showToast('Dados salvos com sucesso!');
+}
+
+function loadPerfilUI() {
+  const user = getUser();
+  if (!user) { window.location.href = '../index.html'; return; }
+  document.getElementById('avatar-initial').textContent   = user.name[0].toUpperCase();
+  document.getElementById('perfil-name-display').textContent  = user.name;
+  document.getElementById('perfil-email-display').textContent = user.email;
+  const nm = document.getElementById('config-name');
+  const em = document.getElementById('config-email');
+  if (nm) nm.value = user.name;
+  if (em) em.value = user.email;
+}
+
+document.addEventListener('DOMContentLoaded', loadPerfilUI);
+</script>
+</body>
+</html>

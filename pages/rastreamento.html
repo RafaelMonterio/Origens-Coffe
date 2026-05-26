@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rastreamento — ORIGENS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/global.css">
+<style>
+.rastreio-wrap { margin-top: var(--nav-h); padding: 5rem 6rem; background: var(--white); }
+.rastreio-grid { display: grid; grid-template-columns: 1fr 380px; gap: 4rem; margin-top: 3rem; }
+
+/* Card do pedido */
+.pedido-summary { border: 1px solid var(--gray-200); padding: 2rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; }
+.ps-info { }
+.ps-id { font-family: var(--font-display); font-size: 1.4rem; font-weight: 300; }
+.ps-date { font-size: .62rem; letter-spacing: .12em; color: var(--gray-600); margin-top: .2rem; }
+.ps-items { font-size: .75rem; color: var(--gray-600); margin-top: .5rem; line-height: 1.7; }
+.ps-total { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; color: var(--brown-mid); }
+
+/* Timeline */
+.timeline { position: relative; display: flex; flex-direction: column; gap: 0; }
+.timeline-item { display: flex; gap: 1.5rem; padding-bottom: 2.5rem; position: relative; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-left { display: flex; flex-direction: column; align-items: center; width: 32px; flex-shrink: 0; }
+.tl-circle {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--gray-200); background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem; flex-shrink: 0; z-index: 1;
+  transition: all .4s;
+}
+.tl-circle.done { background: var(--brown-mid); border-color: var(--brown-mid); color: var(--white); }
+.tl-circle.active { background: var(--black); border-color: var(--black); color: var(--white); box-shadow: 0 0 0 4px rgba(59,31,8,.12); }
+.tl-line { width: 1px; flex: 1; background: var(--gray-200); margin-top: 4px; }
+.tl-line.done { background: var(--brown-mid); }
+.timeline-item:last-child .tl-line { display: none; }
+.tl-content { padding-top: 4px; flex: 1; }
+.tl-label { font-size: .85rem; font-weight: 400; color: var(--black); margin-bottom: .2rem; }
+.tl-label.muted { color: var(--gray-400); font-weight: 300; }
+.tl-date { font-size: .62rem; letter-spacing: .12em; color: var(--gray-600); margin-bottom: .4rem; }
+.tl-date.muted { color: var(--gray-200); }
+.tl-desc { font-size: .7rem; color: var(--gray-600); line-height: 1.7; }
+
+/* Mapa lateral */
+.mapa-card { border: 1px solid var(--gray-200); position: sticky; top: calc(var(--nav-h) + 2rem); }
+.mapa-placeholder { width: 100%; height: 300px; background: var(--gray-100); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--gray-200); }
+.mapa-placeholder span { font-size:.6rem;letter-spacing:.25em;color:var(--gray-400);text-transform:uppercase; }
+.mapa-info { padding: 1.5rem; display: flex; flex-direction: column; gap: .75rem; }
+.mapa-row { display: flex; justify-content: space-between; }
+.mapa-label { font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brown-mid); }
+.mapa-val { font-size:.78rem;color:var(--black); }
+.cod-rastreio { background: var(--off-white); border: 1px solid var(--gray-200); padding: 1.5rem; margin: 0 1.5rem 1.5rem; }
+.cod-label { font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gray-600);margin-bottom:.4rem; }
+.cod-val { font-family:monospace;font-size:.85rem;color:var(--black);letter-spacing:.08em;word-break:break-all; }
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+
+<nav class="navbar" id="navbar" style="background:#0d0b09;border-bottom:1px solid rgba(255,255,255,.07);">
+  <a href="../index.html" style="display:flex;align-items:center;text-decoration:none;">
+    <img src="../assets/logo-dark.png" alt="ORIGENS" style="height:32px;width:auto;filter:brightness(0) invert(1);opacity:.9;">
+  </a>
+  <ul class="nav-links-internal" style="display:flex;gap:2rem;list-style:none;">
+    <li><a href="loja.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Loja</a></li>
+    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
+    <li><a href="assinatura.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Assinatura</a></li>
+    <li><a href="blog.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Blog</a></li>
+    <li><a href="contato.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Contato</a></li>
+  </ul>
+  <div id="nav-auth-actions" class="nav-actions"></div>
+</nav>
+
+<div class="rastreio-wrap">
+  <div>
+    <div class="section-eyebrow" style="margin-bottom:.75rem"><div class="eyebrow-line"></div><span class="eyebrow-text">Pedido #00138</span></div>
+    <h1 class="section-title">Rastreamento<br><em>do pedido.</em></h1>
+  </div>
+
+  <div class="rastreio-grid">
+    <div>
+      <!-- Resumo pedido -->
+      <div class="pedido-summary reveal">
+        <div class="ps-info">
+          <div class="ps-id">#00138</div>
+          <div class="ps-date">22 de Abril de 2025</div>
+          <div class="ps-items">Kit Barista Iniciante</div>
+        </div>
+        <div style="text-align:right">
+          <div class="ps-total">R$ 189</div>
+          <span style="display:inline-block;margin-top:.5rem;padding:.3rem .9rem;background:rgba(160,112,74,.1);border:1px solid rgba(160,112,74,.25);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brown-mid)">A caminho</span>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="tl-circle done">✓</div>
+            <div class="tl-line done"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-label">Pedido Confirmado</div>
+            <div class="tl-date">22 Abr · 14:32</div>
+            <div class="tl-desc">Seu pedido foi recebido e confirmado no sistema.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="tl-circle done">✓</div>
+            <div class="tl-line done"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-label">Pagamento Aprovado</div>
+            <div class="tl-date">22 Abr · 14:45</div>
+            <div class="tl-desc">Pagamento via Pix confirmado com sucesso.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="tl-circle done">✓</div>
+            <div class="tl-line done"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-label">Em Separação</div>
+            <div class="tl-date">23 Abr · 09:10</div>
+            <div class="tl-desc">Seu pedido está sendo preparado com cuidado pela nossa equipe.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="tl-circle active">→</div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-label">Saiu para Entrega</div>
+            <div class="tl-date">25 Abr · 07:30</div>
+            <div class="tl-desc">O pedido saiu do nosso centro de distribuição e está a caminho.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="tl-circle" style="color:var(--gray-200)">○</div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-label muted">Entregue</div>
+            <div class="tl-date muted">Previsão: 28 Abr</div>
+            <div class="tl-desc" style="color:var(--gray-200)">Aguardando entrega no endereço informado.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar mapa -->
+    <div class="mapa-card reveal-right">
+      <div class="mapa-placeholder"><span>Mapa de Entrega</span></div>
+      <div class="mapa-info">
+        <div class="mapa-row">
+          <div><div class="mapa-label">Previsão</div><div class="mapa-val">28 de Abril, 2025</div></div>
+        </div>
+        <div class="mapa-row">
+          <div><div class="mapa-label">Transportadora</div><div class="mapa-val">Correios — PAC</div></div>
+        </div>
+        <div class="mapa-row">
+          <div><div class="mapa-label">Destino</div><div class="mapa-val">Vila Madalena — SP</div></div>
+        </div>
+      </div>
+      <div class="cod-rastreio">
+        <div class="cod-label">Código de rastreio</div>
+        <div class="cod-val">BR 4729 0183 7 BR</div>
+      </div>
+      <div style="padding:0 1.5rem 1.5rem;display:flex;flex-direction:column;gap:.5rem">
+        <button class="btn btn-dark" style="width:100%;justify-content:center" onclick="showToast('Redirecionando para os Correios...')">Rastrear nos Correios →</button>
+        <a href="contato.html" class="btn btn-outline-dark" style="width:100%;justify-content:center">Precisa de ajuda?</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand"><div class="footer-brand-logo" style="font-family:var(--font-logo)"><div class="footer-brand-badge">O</div>ORIGENS</div><p class="footer-desc">Cafeteria artesanal especializada em cafés de origem única.</p></div>
+  <div class="footer-col"><div class="footer-col-title">Loja</div><ul><li><a href="loja.html">Cafés</a></li><li><a href="assinatura.html">Assinatura</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Conta</div><ul><li><a href="perfil.html">Meu Perfil</a></li><li><a href="contato.html">Contato</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Ajuda</div><ul><li><a href="faq.html">FAQ</a></li></ul></div>
+  <div class="footer-bottom"><span>© 2025 ORIGENS</span><span>contato@origens.cafe</span></div>
+</footer>
+
+<div id="login-modal" class="modal-overlay"><div class="modal-backdrop" onclick="closeModal('login-modal')"></div><div class="modal-box"><button class="modal-close" onclick="closeModal('login-modal')">×</button><div class="modal-title">Entrar</div><div class="modal-sub">Acesse sua conta</div><form onsubmit="doLogin(event)"><div class="form-group"><label class="form-label">E-mail</label><input id="login-email" type="email" class="form-input" required></div><div class="form-group"><label class="form-label">Senha</label><input id="login-pass" type="password" class="form-input" required></div><button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Entrar →</button></form></div></div>
+<div id="global-toast" class="toast"></div>
+<script src="../js/global.js"></script>
+</body>
+</html>

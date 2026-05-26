@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loja — ORIGENS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/global.css">
+<style>
+
+/* ── Navbar preta fixa ────────────────────── */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; height: 72px;
+  background: #000; border-bottom: 1px solid rgba(255,255,255,.07);
+  z-index: 500; display: flex; align-items: center;
+  justify-content: space-between; padding: 0 4rem;
+}
+.nav-links a.active { color: #fff; }
+.nav-links a.active::after { width: 100%; }
+
+/* ── Page header ─────────────────────────── */
+.page-header {
+  padding-top: calc(72px + 4.5rem);
+  padding-bottom: 0;
+  padding-left: 6rem; padding-right: 0;
+  background: #fff;
+  border-bottom: 1px solid #e0d8d0;
+  display: grid; grid-template-columns: 1fr 400px;
+  align-items: end; overflow: hidden; min-height: 320px;
+}
+.page-header-text { padding-bottom: 4rem; }
+.page-header-copo {
+  display: flex; align-items: flex-end; justify-content: center;
+  height: 100%;
+}
+.page-header-copo img {
+  width: 360px; max-width: 100%; object-fit: contain;
+  object-position: bottom;
+  filter: drop-shadow(0 16px 36px rgba(107,58,31,.16));
+  transform: translateY(10px);
+  transition: transform .6s cubic-bezier(0.16,1,0.3,1);
+}
+.page-header-copo img:hover { transform: translateY(0) scale(1.02); }
+
+/* ── Filtros ─────────────────────────────── */
+.filter-bar {
+  position: sticky; top: 72px; z-index: 10;
+  background: #fff; border-bottom: 1px solid #e0d8d0;
+  padding: 0 6rem;
+  display: flex; gap: 0; align-items: center;
+}
+.filter-btn {
+  padding: 1.1rem 1.8rem;
+  font-family: 'TAN Pearl', 'Cormorant Garamond', serif;
+  font-size: .68rem; font-weight: 400;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: #888; background: none; border: none;
+  border-bottom: 2px solid transparent;
+  cursor: none; transition: color .25s, border-color .25s;
+}
+.filter-btn:hover { color: #000; }
+.filter-btn.active { color: #000; border-bottom-color: #3b1f08; }
+
+/* ── Grid produtos ───────────────────────── */
+.produtos-section { padding: 0 6rem 8rem; background: #fff; }
+.produtos-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  border: 1px solid #e0d8d0;
+  border-top: none; border-right: none; border-bottom: none;
+  margin-top: 4rem;
+}
+
+.prod-card {
+  border-right: 1px solid #e0d8d0;
+  border-bottom: 1px solid #e0d8d0;
+  display: flex; flex-direction: column;
+  transition: background .3s;
+  position: relative; overflow: hidden;
+}
+.prod-card:hover { background: #faf7f3; }
+
+/* Destaque wide */
+.prod-card.wide { grid-column: span 2; flex-direction: row; }
+.prod-card.wide .prod-img { width: 50%; aspect-ratio: auto; min-height: 300px; flex-shrink: 0; }
+.prod-card.wide .prod-body { padding: 2.5rem; }
+.prod-card.wide .prod-name { font-size: 2rem; }
+
+.prod-img {
+  width: 100%; aspect-ratio: 4/3;
+  overflow: hidden; position: relative;
+  background: #f0ebe4;
+}
+.prod-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .8s cubic-bezier(0.16,1,0.3,1);
+  display: block;
+}
+.prod-card:hover .prod-img img { transform: scale(1.04); }
+.prod-img-placeholder {
+  width: 100%; height: 100%; min-height: 200px;
+  background: #ede8e0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .55rem; letter-spacing: .25em; color: #bbb; text-transform: uppercase;
+}
+
+.prod-badge {
+  position: absolute; top: 1rem; left: 1rem;
+  background: #fff; padding: .28rem .8rem;
+  font-family: 'TAN Pearl','Cormorant Garamond',serif;
+  font-size: .55rem; letter-spacing: .2em; text-transform: uppercase;
+  color: #6b3a1f; border: 1px solid #6b3a1f;
+}
+
+.prod-body { padding: 1.6rem 1.6rem 1.2rem; flex: 1; display: flex; flex-direction: column; }
+.prod-origin {
+  font-family: 'TAN Pearl','Cormorant Garamond',serif;
+  font-size: .58rem; letter-spacing: .22em; text-transform: uppercase;
+  color: #a07040; margin-bottom: .4rem;
+}
+.prod-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem; font-weight: 300; line-height: 1.2;
+  color: #000; margin-bottom: .5rem;
+}
+.prod-notes {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .8rem; font-style: italic;
+  color: #7a6a58; line-height: 1.8; flex: 1;
+}
+.prod-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 1.6rem 1.3rem;
+  border-top: 1px solid #e0d8d0;
+}
+.prod-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 300; color: #000;
+}
+.btn-add {
+  width: 36px; height: 36px;
+  border: 1px solid #000; background: transparent;
+  color: #000; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .25s, color .25s; cursor: none;
+}
+.btn-add:hover { background: #000; color: #fff; }
+
+/* ── Kits ────────────────────────────────── */
+.kits-section {
+  padding: 6rem 6rem 8rem;
+  background: #f5f1ec;
+  border-top: 1px solid #e0d8d0;
+}
+.kits-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3.5rem; }
+.kit-card {
+  background: #fff; border: 1px solid #e0d8d0;
+  transition: box-shadow .3s;
+  display: flex; flex-direction: column;
+}
+.kit-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.07); }
+.kit-img {
+  width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #ede8e0;
+  display: flex; align-items: center; justify-content: center;
+}
+.kit-img img { width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out); }
+.kit-card:hover .kit-img img { transform: scale(1.04); }
+.kit-img-placeholder { font-family:'Montserrat',sans-serif;font-size:.55rem;letter-spacing:.25em;color:#bbb;text-transform:uppercase; }
+.kit-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.kit-name { font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;margin-bottom:.5rem; }
+.kit-desc { font-family:'Cormorant Garamond',serif;font-size:.8rem;font-style:italic;color:#7a6a58;line-height:1.8;flex:1;margin-bottom:1.2rem; }
+.kit-price { font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300; }
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo-inline">
+    <img src="../assets/icone.png" alt="" class="logo-inline-icon">
+    <div class="logo-inline-div"></div>
+    <span class="logo-inline-text">ORIGENS</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="loja.html" class="active">Loja</a></li>
+    <li><a href="cursos.html">Cursos</a></li>
+    <li><a href="assinatura.html">Assinatura</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contato.html">Contato</a></li>
+  </ul>
+  <div id="nav-auth-actions" class="nav-actions"></div>
+</nav>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="page-header-text">
+    <div class="section-eyebrow" style="margin-bottom:.75rem">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Loja Virtual</span>
+    </div>
+    <h1 class="section-title">Cafés, Grãos<br><em>&amp; Acessórios.</em></h1>
+    <p class="section-sub" style="max-width:360px;margin-top:1.2rem">
+      Seleção curada por Pedro Lima. Torras artesanais em pequenos lotes, entregues frescos.
+    </p>
+  </div>
+  <div class="page-header-copo reveal-right">
+    <img src="../assets/copo.png" alt="Copo ORIGENS">
+  </div>
+</div>
+
+<!-- FILTROS -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterProducts(this,'todos')">Todos</button>
+  <button class="filter-btn" onclick="filterProducts(this,'cafe')">Cafés Especiais</button>
+  <button class="filter-btn" onclick="filterProducts(this,'graos')">Grãos</button>
+  <button class="filter-btn" onclick="filterProducts(this,'acessorio')">Acessórios</button>
+  <button class="filter-btn" onclick="filterProducts(this,'kit')">Kits</button>
+</div>
+
+<!-- PRODUTOS -->
+<section class="produtos-section">
+  <div class="produtos-grid" id="produtos-grid">
+
+    <!-- DESTAQUE WIDE: Bourbon Amarelo -->
+    <div class="prod-card wide reveal" data-cat="cafe">
+      <div class="prod-img">
+        <img src="../assets/produtos/bourbon-amarelo.png" alt="Bourbon Amarelo">
+        <div class="prod-badge">Destaque</div>
+      </div>
+      <div style="display:flex;flex-direction:column;flex:1">
+        <div class="prod-body">
+          <div class="prod-origin">Sul de Minas · 1.200m</div>
+          <div class="prod-name">Bourbon Amarelo</div>
+          <div class="prod-notes">
+            Grão cultivado a 1.200m com processamento natural.<br>
+            Notas de caramelo, nozes e chocolate ao leite.<br>
+            Torra média · 250g
+          </div>
+        </div>
+        <div class="prod-footer">
+          <div class="prod-price">R$ 68</div>
+          <button class="btn-add" onclick="addToCart('Bourbon Amarelo','R$ 68','Sul de Minas · 1.200m')">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gesha Etíope -->
+    <div class="prod-card reveal delay-1" data-cat="cafe">
+      <div class="prod-img">
+        <img src="../assets/produtos/gesha-etiope.jpg" alt="Gesha Etíope">
+        <div class="prod-badge">Premium</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-origin">Yirgacheffe · 1.900m</div>
+        <div class="prod-name">Gesha Etíope</div>
+        <div class="prod-notes">Floral · Jasmim · Bergamota<br>Torra clara · 250g</div>
+      </div>
+      <div class="prod-footer">
+        <div class="prod-price">R$ 134</div>
+        <button class="btn-add" onclick="addToCart('Gesha Etíope','R$ 134','Yirgacheffe · 1.900m')">+</button>
+      </div>
+    </div>
+
+    <!-- Honey Mogiana -->
+    <div class="prod-card reveal delay-2" data-cat="cafe">
+      <div class="prod-img">
+        <img src="../assets/produtos/mogiana.webp" alt="Honey Mogiana">
+        <div class="prod-badge">Novo</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-origin">Mogiana · 1.100m</div>
+        <div class="prod-name">Honey Mogiana</div>
+        <div class="prod-notes">Mel · Frutas Vermelhas · Suave<br>Torra média · 250g</div>
+      </div>
+      <div class="prod-footer">
+        <div class="prod-price">R$ 74</div>
+        <button class="btn-add" onclick="addToCart('Honey Mogiana','R$ 74','Mogiana · 1.100m')">+</button>
+      </div>
+    </div>
+
+    <!-- Natural Cerrado -->
+    <div class="prod-card reveal" data-cat="cafe graos">
+      <div class="prod-img">
+        <div class="prod-img-placeholder">Foto em breve</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-origin">Cerrado Mineiro · 1.050m</div>
+        <div class="prod-name">Natural Cerrado</div>
+        <div class="prod-notes">Frutado · Chocolate · Mel<br>Torra média-escura · 250g</div>
+      </div>
+      <div class="prod-footer">
+        <div class="prod-price">R$ 52</div>
+        <button class="btn-add" onclick="addToCart('Natural Cerrado','R$ 52','Cerrado Mineiro')">+</button>
+      </div>
+    </div>
+
+    <!-- Natural Bahia -->
+    <div class="prod-card reveal delay-1" data-cat="cafe graos">
+      <div class="prod-img">
+        <div class="prod-img-placeholder">Foto em breve</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-origin">Chapada Diamantina · 1.400m</div>
+        <div class="prod-name">Natural Bahia</div>
+        <div class="prod-notes">Tabaco · Cacau · Especiarias<br>Torra escura · 250g</div>
+      </div>
+      <div class="prod-footer">
+        <div class="prod-price">R$ 89</div>
+        <button class="btn-add" onclick="addToCart('Natural Bahia','R$ 89','Chapada Diamantina')">+</button>
+      </div>
+    </div>
+
+    <!-- Dripper V60 -->
+    <div class="prod-card reveal delay-2" data-cat="acessorio">
+      <div class="prod-img">
+        <img src="../assets/produtos/dripper-v60.jpg" alt="Dripper V60">
+      </div>
+      <div class="prod-body">
+        <div class="prod-origin">Equipamento</div>
+        <div class="prod-name">Dripper V60</div>
+        <div class="prod-notes">Cerâmica branca · Com 40 filtros<br>Para 1–4 xícaras</div>
+      </div>
+      <div class="prod-footer">
+        <div class="prod-price">R$ 118</div>
+        <button class="btn-add" onclick="addToCart('Dripper V60','R$ 118','Equipamento')">+</button>
+      </div>
+    </div>
+
+    <!-- Moedor Manual -->
+    <div class="prod-card reveal delay-3" data-cat="acessorio">
+      <div class="prod-img">
+        <img src="../assets/produtos/moedor-manual.webp" alt="Moedor Manual">
+      </div>
+      <div class="prod-body">
+        <div class="prod-origin">Equipamento</div>
+        <div class="prod-name">Moedor Manual</div>
+        <div class="prod-notes">Aço inox · Regulagem fina a grossa<br>Ideal para V60 e Prensa</div>
+      </div>
+      <div class="prod-footer">
+        <div class="prod-price">R$ 245</div>
+        <button class="btn-add" onclick="addToCart('Moedor Manual','R$ 245','Equipamento')">+</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- KITS -->
+<section class="kits-section">
+  <div class="reveal">
+    <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Kits Curados</span></div>
+    <h2 class="section-title">Kits &amp; <em>Presentes.</em></h2>
+  </div>
+  <div class="kits-grid">
+    <div class="kit-card reveal">
+      <div class="kit-img">
+        <div class="kit-img-placeholder">Foto em breve</div>
+      </div>
+      <div class="kit-body">
+        <div class="kit-name">Kit Barista Iniciante</div>
+        <div class="kit-desc">Prensa Francesa 350ml + 250g Bourbon Amarelo + Guia de preparo impresso.</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+          <div class="kit-price">R$ 189</div>
+          <button class="btn btn-dark btn-sm" onclick="addToCart('Kit Barista Iniciante','R$ 189','Curadoria ORIGENS')">Comprar</button>
+        </div>
+      </div>
+    </div>
+    <div class="kit-card reveal delay-1">
+      <div class="kit-img">
+        <div class="kit-img-placeholder">Foto em breve</div>
+      </div>
+      <div class="kit-body">
+        <div class="kit-name">Kit V60 Completo</div>
+        <div class="kit-desc">Dripper V60 + Filtros + 250g Gesha Etíope + Kettle dosador 350ml.</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+          <div class="kit-price">R$ 320</div>
+          <button class="btn btn-dark btn-sm" onclick="addToCart('Kit V60 Completo','R$ 320','Curadoria ORIGENS')">Comprar</button>
+        </div>
+      </div>
+    </div>
+    <div class="kit-card reveal delay-2">
+      <div class="kit-img">
+        <div class="kit-img-placeholder">Foto em breve</div>
+      </div>
+      <div class="kit-body">
+        <div class="kit-name">Caixa Presente Premium</div>
+        <div class="kit-desc">3 origens exclusivas 100g cada + Moedor manual + Livro de origens assinado.</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+          <div class="kit-price">R$ 450</div>
+          <button class="btn btn-dark btn-sm" onclick="addToCart('Caixa Presente Premium','R$ 450','Curadoria ORIGENS')">Comprar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>
+    <div class="footer-brand-logo">
+      <img src="../assets/icone.png" alt="">
+      <div class="fdiv"></div>
+      ORIGENS
+    </div>
+    <p class="footer-desc">Cafeteria artesanal especializada em cafés de origem única.</p>
+  </div>
+  <div class="footer-col"><div class="footer-col-title">Loja</div><ul><li><a href="loja.html">Cafés</a></li><li><a href="assinatura.html">Assinatura</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Aprender</div><ul><li><a href="cursos.html">Cursos</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Contato</div><ul><li><a href="contato.html">Fale conosco</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+  <div class="footer-bottom"><span>© 2025 ORIGENS</span><span>contato@origens.cafe</span></div>
+</footer>
+
+<!-- MODAIS -->
+<div id="login-modal" class="modal-overlay">
+  <div class="modal-backdrop" onclick="closeModal('login-modal')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('login-modal')">×</button>
+    <div class="modal-title">Entrar</div><div class="modal-sub">Bem-vindo de volta</div>
+    <form onsubmit="doLogin(event)">
+      <div class="form-group"><label class="form-label">E-mail</label><input id="login-email" type="email" class="form-input" required></div>
+      <div class="form-group"><label class="form-label">Senha</label><input id="login-pass" type="password" class="form-input" required></div>
+      <button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Entrar →</button>
+    </form>
+    <div class="modal-footer-txt">Não tem conta? <a href="#" onclick="switchModal('login-modal','cadastro-modal')">Criar conta</a></div>
+  </div>
+</div>
+<div id="cadastro-modal" class="modal-overlay">
+  <div class="modal-backdrop" onclick="closeModal('cadastro-modal')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('cadastro-modal')">×</button>
+    <div class="modal-title">Criar conta</div><div class="modal-sub">Junte-se à ORIGENS</div>
+    <form onsubmit="doCadastro(event)">
+      <div class="form-group"><label class="form-label">Nome</label><input id="cad-name" type="text" class="form-input" required></div>
+      <div class="form-group"><label class="form-label">E-mail</label><input id="cad-email" type="email" class="form-input" required></div>
+      <div class="form-group"><label class="form-label">Senha</label><input id="cad-pass" type="password" class="form-input" required></div>
+      <div class="form-group"><label class="form-label">Confirmar</label><input id="cad-pass2" type="password" class="form-input" required></div>
+      <button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Criar conta →</button>
+    </form>
+    <div class="modal-footer-txt">Já tem conta? <a href="#" onclick="switchModal('cadastro-modal','login-modal')">Entrar</a></div>
+  </div>
+</div>
+<div id="cart-panel" class="cart-panel">
+  <div class="cart-panel-header">
+    <div class="cart-panel-title">Carrinho</div>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <span id="cart-badge" style="width:22px;height:22px;border-radius:50%;background:#6b3a1f;color:#fff;font-size:.6rem;display:flex;align-items:center;justify-content:center;font-weight:600">0</span>
+      <button class="cart-close-btn" onclick="closeCart()">×</button>
+    </div>
+  </div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer-panel">
+    <div class="cart-total-row"><span class="cart-total-label">Total</span><span class="cart-total-val" id="cart-total-val">R$ 0</span></div>
+    <a href="checkout.html" class="btn btn-dark" style="width:100%;justify-content:center;padding:.9rem">Finalizar compra →</a>
+    <button onclick="closeCart()" class="btn btn-outline-dark" style="width:100%;justify-content:center;padding:.75rem">Continuar comprando</button>
+  </div>
+</div>
+<div id="global-toast" class="toast"></div>
+
+<script src="../js/global.js"></script>
+<script>
+function filterProducts(btn, cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.prod-card[data-cat]').forEach(card => {
+    const cats = card.dataset.cat.split(' ');
+    card.style.display = (cat === 'todos' || cats.includes(cat)) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

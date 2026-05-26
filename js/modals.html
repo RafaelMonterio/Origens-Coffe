@@ -1,0 +1,93 @@
+<!-- ═══════════════════════════════════════════
+     MODAIS — Login & Cadastro
+     Inclua este bloco antes do </body> em todas as páginas
+═══════════════════════════════════════════ -->
+
+<!-- LOGIN -->
+<div id="login-modal" class="modal-overlay">
+  <div class="modal-backdrop" onclick="closeModal('login-modal')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('login-modal')">×</button>
+    <div class="modal-title">Entrar</div>
+    <div class="modal-sub">Bem-vindo de volta à ORIGENS</div>
+    <form onsubmit="doLogin(event)">
+      <div class="form-group">
+        <label class="form-label">E-mail</label>
+        <input id="login-email" type="email" class="form-input" placeholder="seu@email.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Senha</label>
+        <input id="login-pass" type="password" class="form-input" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">
+        Entrar →
+      </button>
+    </form>
+    <div class="modal-footer-txt">
+      Não tem conta? <a href="#" onclick="switchModal('login-modal','cadastro-modal')">Criar conta</a>
+    </div>
+  </div>
+</div>
+
+<!-- CADASTRO -->
+<div id="cadastro-modal" class="modal-overlay">
+  <div class="modal-backdrop" onclick="closeModal('cadastro-modal')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('cadastro-modal')">×</button>
+    <div class="modal-title">Criar conta</div>
+    <div class="modal-sub">Junte-se à comunidade ORIGENS</div>
+    <form onsubmit="doCadastro(event)">
+      <div class="form-group">
+        <label class="form-label">Nome completo</label>
+        <input id="cad-name" type="text" class="form-input" placeholder="Pedro Lima" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">E-mail</label>
+        <input id="cad-email" type="email" class="form-input" placeholder="seu@email.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Senha</label>
+        <input id="cad-pass" type="password" class="form-input" placeholder="••••••••" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirmar senha</label>
+        <input id="cad-pass2" type="password" class="form-input" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">
+        Criar conta →
+      </button>
+    </form>
+    <div class="modal-footer-txt">
+      Já tem conta? <a href="#" onclick="switchModal('cadastro-modal','login-modal')">Entrar</a>
+    </div>
+  </div>
+</div>
+
+<!-- CARRINHO -->
+<div id="cart-panel" class="cart-panel">
+  <div class="cart-panel-header">
+    <div class="cart-panel-title">Carrinho</div>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <span id="cart-badge" style="width:22px;height:22px;border-radius:50%;background:var(--brown-mid);color:#fff;font-size:.6rem;display:flex;align-items:center;justify-content:center;font-weight:600">0</span>
+      <button class="cart-close-btn" onclick="closeCart()">×</button>
+    </div>
+  </div>
+  <div class="cart-items" id="cart-items-list">
+    <p style="font-size:.75rem;color:var(--gray-600);text-align:center;margin-top:3rem;letter-spacing:.08em">Seu carrinho está vazio.</p>
+  </div>
+  <div class="cart-footer-panel">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-val" id="cart-total-val">R$ 0</span>
+    </div>
+    <a href="pages/checkout.html" class="btn btn-dark" style="width:100%;justify-content:center;padding:.9rem">
+      Finalizar compra →
+    </a>
+    <button onclick="closeCart()" class="btn btn-outline-dark" style="width:100%;justify-content:center;padding:.75rem">
+      Continuar comprando
+    </button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="global-toast" class="toast"></div>

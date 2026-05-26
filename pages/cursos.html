@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursos & Workshops — ORIGENS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/global.css">
+<style>
+.cursos-hero {
+  background: var(--black);
+  padding-top: calc(var(--nav-h) + 5rem);
+  padding-bottom: 5rem;
+  padding-left: 6rem; padding-right: 6rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+  align-items: end;
+  position: relative; overflow: hidden;
+}
+.cursos-hero::before {
+  content: 'CURSOS';
+  position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-display); font-size: 18vw; font-weight: 700;
+  color: rgba(255,255,255,.03); pointer-events: none; letter-spacing: -.05em;
+}
+.cursos-hero-title { font-family: var(--font-display); font-size: clamp(3rem,6vw,6rem); font-weight:300; color:var(--white); line-height:1.05; }
+.cursos-hero-title em { font-style:italic; color:var(--brown-lt); }
+.cursos-hero-sub { font-size:.8rem; color:rgba(255,255,255,.45); line-height:2; margin-top:1.5rem; }
+.cursos-hero-stats { display:flex; gap:3rem; margin-top:3rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,.1); }
+.hero-stat-val { font-family:var(--font-display); font-size:2.5rem; font-weight:300; color:var(--brown-lt); }
+.hero-stat-lbl { font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-top:.3rem; }
+
+.tabs-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 0 6rem;
+  display: flex; gap: 0;
+  position: sticky; top: var(--nav-h); z-index: 10;
+}
+.tab-btn {
+  padding: 1.2rem 2rem;
+  font-family: var(--font-body);
+  font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gray-600); background: none; border: none;
+  border-bottom: 2px solid transparent;
+  cursor: none; transition: color .3s, border-color .3s;
+}
+.tab-btn:hover { color: var(--black); }
+.tab-btn.active { color: var(--brown); border-bottom-color: var(--brown-mid); }
+
+.cursos-section { padding: 5rem 6rem 8rem; background: var(--white); }
+.cursos-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--gray-200);
+  border-right: none; border-bottom: none;
+  margin-top: 3.5rem;
+}
+.curso-card {
+  border-right: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 2.5rem 2.5rem 2rem;
+  display: flex; flex-direction: column;
+  transition: background .35s;
+}
+.curso-card:hover { background: var(--off-white); }
+.curso-type-tag {
+  display: flex; align-items: center; gap: .6rem;
+  font-size: .58rem; letter-spacing: .25em; text-transform: uppercase;
+  color: var(--brown-mid); margin-bottom: 1.4rem; font-weight: 500;
+}
+.curso-type-tag::before { content: ''; width: 16px; height: 1px; background: var(--brown-mid); }
+.curso-name { font-family: var(--font-display); font-size: 1.9rem; font-weight: 300; line-height: 1.2; margin-bottom: .8rem; }
+.curso-desc { font-size: .73rem; color: var(--gray-600); line-height: 1.9; flex: 1; }
+.curso-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+.curso-tag { padding: .25rem .75rem; border: 1px solid var(--gray-200); font-size: .58rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gray-600); }
+.curso-bottom {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-top: 1.8rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--gray-200);
+}
+.curso-price-val { font-family: var(--font-display); font-size: 2rem; font-weight: 300; }
+.curso-meta-info { text-align: right; font-size: .6rem; letter-spacing: .12em; color: var(--gray-600); line-height: 1.8; }
+
+/* workshop especial */
+.curso-card.workshop {
+  grid-column: span 2;
+  flex-direction: row; gap: 0;
+  background: var(--off-white);
+}
+.workshop-img {
+  width: 420px; flex-shrink: 0;
+  background: var(--gray-200);
+  display: flex; align-items: center; justify-content: center;
+}
+.workshop-img span { font-size:.55rem;letter-spacing:.25em;color:var(--gray-400);text-transform:uppercase; }
+.workshop-body { padding: 3rem; flex: 1; display: flex; flex-direction: column; }
+
+/* depoimentos */
+.depoimentos-section {
+  background: var(--off-white);
+  padding: 7rem 6rem;
+  border-top: 1px solid var(--gray-200);
+}
+.depo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3.5rem; }
+.depo-card { background: var(--white); border: 1px solid var(--gray-200); padding: 2rem; }
+.depo-text { font-family: var(--font-display); font-size: 1.05rem; font-style: italic; font-weight: 300; line-height: 1.7; color: var(--gray-800); }
+.depo-author { margin-top: 1.2rem; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--brown-mid); }
+.stars { color: var(--brown-lt); font-size: .8rem; margin-bottom: .75rem; letter-spacing: .1em; }
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav class="navbar" id="navbar" style="background:#0d0b09;border-bottom:1px solid rgba(255,255,255,.07);">
+  <a href="../index.html" style="display:flex;align-items:center;text-decoration:none;">
+    <img src="../assets/logo-dark.png" alt="ORIGENS" style="height:32px;width:auto;filter:brightness(0) invert(1);opacity:.9;">
+  </a>
+  <ul class="nav-links-internal" style="display:flex;gap:2rem;list-style:none;">
+    <li><a href="loja.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Loja</a></li>
+    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
+    <li><a href="assinatura.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Assinatura</a></li>
+    <li><a href="blog.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Blog</a></li>
+    <li><a href="contato.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Contato</a></li>
+  </ul>
+  <div id="nav-auth-actions" class="nav-actions"></div>
+</nav>
+
+<div class="cursos-hero">
+  <div class="reveal-left">
+    <div class="section-eyebrow" style="margin-bottom:1rem">
+      <div class="eyebrow-line" style="background:var(--brown-lt)"></div>
+      <span class="eyebrow-text" style="color:var(--brown-lt)">Aprenda com Pedro Lima</span>
+    </div>
+    <h1 class="cursos-hero-title">Cursos &amp;<br><em>Workshops</em><br>de Café.</h1>
+    <div class="cursos-hero-stats">
+      <div><div class="hero-stat-val">4</div><div class="hero-stat-lbl">Cursos<br>Disponíveis</div></div>
+      <div><div class="hero-stat-val">800+</div><div class="hero-stat-lbl">Alunos<br>Formados</div></div>
+      <div><div class="hero-stat-val">4.9</div><div class="hero-stat-lbl">Avaliação<br>Média</div></div>
+    </div>
+  </div>
+  <div class="reveal-right">
+    <p class="cursos-hero-sub">Pedro Lima é barista com 8 anos de experiência, campeão regional de cupping e fundador da ORIGENS. Seus cursos combinam técnica apurada com uma abordagem acessível para todos os níveis.</p>
+    <div style="display:flex;gap:1rem;margin-top:2rem">
+      <a href="#cursos-lista" class="btn btn-white btn-lg">Ver todos os cursos</a>
+    </div>
+  </div>
+</div>
+
+<div class="tabs-bar">
+  <button class="tab-btn active" onclick="filterCursos(this,'todos')">Todos</button>
+  <button class="tab-btn" onclick="filterCursos(this,'online')">Online</button>
+  <button class="tab-btn" onclick="filterCursos(this,'presencial')">Presencial</button>
+  <button class="tab-btn" onclick="filterCursos(this,'avancado')">Avançado</button>
+</div>
+
+<section class="cursos-section" id="cursos-lista">
+  <div class="reveal">
+    <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Catálogo de Cursos</span></div>
+    <h2 class="section-title">Escolha seu<br><em>caminho.</em></h2>
+  </div>
+  <div class="cursos-grid">
+
+    <!-- Workshop destaque -->
+    <div class="curso-card workshop reveal" data-tipo="presencial">
+      <div class="workshop-img"><span>Foto / Vídeo</span></div>
+      <div class="workshop-body">
+        <div class="curso-type-tag">Presencial — São Paulo</div>
+        <div class="curso-name">Workshop Imersivo com Pedro Lima</div>
+        <div class="curso-desc">Um dia inteiro na cafeteria ORIGENS. Cupping de 8 origens, extração com diferentes métodos, latte art ao vivo e visita guiada ao laboratório de torras. Turmas reduzidas — máximo 12 alunos.</div>
+        <div class="curso-tags">
+          <span class="curso-tag">Cupping</span>
+          <span class="curso-tag">Latte Art</span>
+          <span class="curso-tag">Torra</span>
+          <span class="curso-tag">Todos os níveis</span>
+        </div>
+        <div class="curso-bottom">
+          <div>
+            <div class="curso-price-val">R$ 350</div>
+            <div style="font-size:.62rem;color:var(--gray-600);margin-top:.25rem;letter-spacing:.08em">por pessoa</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem">
+            <div class="curso-meta-info">1 dia completo<br>Sáb ou Dom</div>
+            <button class="btn btn-brown" onclick="openModal('cadastro-modal')">Inscrever-se</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="curso-card reveal" data-tipo="online">
+      <div class="curso-type-tag">Online · 8 semanas</div>
+      <div class="curso-name">Barista do Zero</div>
+      <div class="curso-desc">Do básico ao avançado: histórico do café, extrações perfeitas (espresso, coado, prensa), latte art e degustação técnica. Aulas ao vivo + gravadas + materiais em PDF.</div>
+      <div class="curso-tags">
+        <span class="curso-tag">Iniciante</span>
+        <span class="curso-tag">Espresso</span>
+        <span class="curso-tag">Coado</span>
+        <span class="curso-tag">Latte Art</span>
+      </div>
+      <div class="curso-bottom">
+        <div><div class="curso-price-val">R$ 297</div></div>
+        <div style="display:flex;align-items:center;gap:1rem">
+          <div class="curso-meta-info">8 semanas<br>Ao vivo + gravado</div>
+          <button class="btn btn-brown" onclick="openModal('cadastro-modal')">Inscrever-se</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="curso-card reveal delay-1" data-tipo="online">
+      <div class="curso-type-tag">Online · 4 semanas</div>
+      <div class="curso-name">Métodos Alternativos</div>
+      <div class="curso-desc">Chemex, V60, AeroPress, Prensa Francesa, Moka Pot. Cada método tem sua técnica ideal de moagem, temperatura e tempo. Descubra qual combina com você.</div>
+      <div class="curso-tags">
+        <span class="curso-tag">Intermediário</span>
+        <span class="curso-tag">V60</span>
+        <span class="curso-tag">AeroPress</span>
+        <span class="curso-tag">Chemex</span>
+      </div>
+      <div class="curso-bottom">
+        <div><div class="curso-price-val">R$ 197</div></div>
+        <div style="display:flex;align-items:center;gap:1rem">
+          <div class="curso-meta-info">4 semanas<br>Ao vivo + gravado</div>
+          <button class="btn btn-brown" onclick="openModal('cadastro-modal')">Inscrever-se</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="curso-card reveal delay-2" data-tipo="avancado">
+      <div class="curso-type-tag">Online · 3 semanas</div>
+      <div class="curso-name">Degustação &amp; Blend</div>
+      <div class="curso-desc">Aprenda a identificar origens, notas sensoriais (acidez, corpo, doçura, amargor) e a criar seus próprios blends com consistência. Curso de nível avançado.</div>
+      <div class="curso-tags">
+        <span class="curso-tag">Avançado</span>
+        <span class="curso-tag">Cupping</span>
+        <span class="curso-tag">Sensorial</span>
+        <span class="curso-tag">Blend</span>
+      </div>
+      <div class="curso-bottom">
+        <div><div class="curso-price-val">R$ 167</div></div>
+        <div style="display:flex;align-items:center;gap:1rem">
+          <div class="curso-meta-info">3 semanas<br>Ao vivo + gravado</div>
+          <button class="btn btn-brown" onclick="openModal('cadastro-modal')">Inscrever-se</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="depoimentos-section">
+  <div class="reveal">
+    <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Depoimentos</span></div>
+    <h2 class="section-title">O que nossos<br><em>alunos dizem.</em></h2>
+  </div>
+  <div class="depo-grid">
+    <div class="depo-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="depo-text">"O curso Barista do Zero transformou completamente minha relação com o café. Pedro é um professor incrível, paciente e muito técnico."</div>
+      <div class="depo-author">Ana Paula — São Paulo, SP</div>
+    </div>
+    <div class="depo-card reveal delay-1">
+      <div class="stars">★★★★★</div>
+      <div class="depo-text">"O workshop presencial foi uma das melhores experiências da minha vida. Vale cada centavo. Voltarei mais vezes com certeza."</div>
+      <div class="depo-author">Marcos Ferreira — Campinas, SP</div>
+    </div>
+    <div class="depo-card reveal delay-2">
+      <div class="stars">★★★★★</div>
+      <div class="depo-text">"Finalmente entendi como fazer um V60 perfeito em casa. Os materiais do curso são muito completos e as aulas ao vivo são dinâmicas."</div>
+      <div class="depo-author">Juliana Costa — Rio de Janeiro, RJ</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-brand"><div class="footer-brand-logo" style="font-family:var(--font-logo)"><div class="footer-brand-badge">O</div>ORIGENS</div><p class="footer-desc">Cafeteria artesanal especializada em cafés de origem única.</p></div>
+  <div class="footer-col"><div class="footer-col-title">Loja</div><ul><li><a href="loja.html">Cafés</a></li><li><a href="assinatura.html">Assinatura</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Aprender</div><ul><li><a href="cursos.html">Cursos</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+  <div class="footer-col"><div class="footer-col-title">Contato</div><ul><li><a href="contato.html">Fale conosco</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+  <div class="footer-bottom"><span>© 2025 ORIGENS</span><span>contato@origens.cafe</span></div>
+</footer>
+
+<div id="login-modal" class="modal-overlay">
+  <div class="modal-backdrop" onclick="closeModal('login-modal')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('login-modal')">×</button>
+    <div class="modal-title">Entrar</div><div class="modal-sub">Bem-vindo de volta</div>
+    <form onsubmit="doLogin(event)">
+      <div class="form-group"><label class="form-label">E-mail</label><input id="login-email" type="email" class="form-input" required></div>
+      <div class="form-group"><label class="form-label">Senha</label><input id="login-pass" type="password" class="form-input" required></div>
+      <button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Entrar →</button>
+    </form>
+    <div class="modal-footer-txt">Não tem conta? <a href="#" onclick="switchModal('login-modal','cadastro-modal')">Criar conta</a></div>
+  </div>
+</div>
+<div id="cadastro-modal" class="modal-overlay">
+  <div class="modal-backdrop" onclick="closeModal('cadastro-modal')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('cadastro-modal')">×</button>
+    <div class="modal-title">Criar conta</div><div class="modal-sub">Junte-se à comunidade ORIGENS</div>
+    <form onsubmit="doCadastro(event)">
+      <div class="form-group"><label class="form-label">Nome</label><input id="cad-name" type="text" class="form-input" required></div>
+      <div class="form-group"><label class="form-label">E-mail</label><input id="cad-email" type="email" class="form-input" required></div>
+      <div class="form-group"><label class="form-label">Senha</label><input id="cad-pass" type="password" class="form-input" required></div>
+      <div class="form-group"><label class="form-label">Confirmar</label><input id="cad-pass2" type="password" class="form-input" required></div>
+      <button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Criar conta →</button>
+    </form>
+    <div class="modal-footer-txt">Já tem conta? <a href="#" onclick="switchModal('cadastro-modal','login-modal')">Entrar</a></div>
+  </div>
+</div>
+<div id="global-toast" class="toast"></div>
+
+<script src="../js/global.js"></script>
+<script>
+function filterCursos(btn, tipo) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.curso-card[data-tipo]').forEach(card => {
+    card.style.display = (tipo === 'todos' || card.dataset.tipo === tipo) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>
