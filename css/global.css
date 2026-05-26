@@ -88,7 +88,7 @@ button { cursor: none; }
 .logo-inline-icon {
   height: 50px; width: auto;
   /* inverte para branco sobre fundo escuro */
-  filter: brightness(0) invert(1);
+
   opacity: .88;
 }
 .logo-inline-div {
@@ -105,9 +105,7 @@ button { cursor: none; }
 }
 
 /* Logo sobre fundo claro (não usada atualmente mas disponível) */
-.logo-inline.on-light .logo-inline-icon { filter: none; opacity: .9; }
-.logo-inline.on-light .logo-inline-div  { background: rgba(0,0,0,.18); }
-.logo-inline.on-light .logo-inline-text { color: var(--black); }
+
 
 /* Nav links internos */
 .nav-links {
