@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contato — ORIGENS</title>
+<link rel="icon" href="/assets/icone2.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
@@ -47,12 +48,7 @@
 }
 .form-textarea:focus { border-bottom-color: var(--brown-mid); }
 .form-textarea::placeholder { color: var(--gray-400); }
-.map-placeholder {
-  width: 100%; height: 200px;
-  background: var(--gray-100); margin-top: 2rem;
-  display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--gray-200);
-}
+
 .map-placeholder span { font-size: .6rem; letter-spacing: .25em; color: var(--gray-400); text-transform: uppercase; }
 </style>
 </head>
@@ -124,7 +120,37 @@
       <div class="form-group" style="margin-top:.5rem"><label class="form-label">Mensagem</label><textarea class="form-textarea" placeholder="Escreva sua mensagem..." rows="4"></textarea></div>
       <button type="submit" class="btn btn-dark" style="margin-top:1.5rem">Enviar mensagem →</button>
     </form>
-    <div class="map-placeholder"><span>Mapa — Vila Madalena, São Paulo</span></div>
+ <div style="font-family: sans-serif; max-width: 600px;">
+
+  <!-- Cabeçalho -->
+  <div style="border: 1px solid #ddd; border-radius: 12px; overflow: hidden;">
+    <div style="padding: 12px 16px; border-bottom: 1px solid #ddd; display: flex; align-items: center; gap: 10px;">
+      <span style="font-size: 22px;">📍</span>
+      <div>
+        <p style="margin: 0; font-weight: 600; font-size: 15px;">Minha Loja</p>
+        <p style="margin: 0; font-size: 13px; color: #666;">R. Bélgica, 88 – Jardim Alvorada, Ribeirão Pires – SP</p>
+      </div>
+    </div>
+
+    <!-- Mapa -->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3653.508503919092!2d-46.388756923879846!3d-23.69352846646269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce6d0bdf1e0149%3A0x464a1b18088fa948!2sR.%20Colorado%2C%2070%20-%20Santa%20Luzia%2C%20Ribeir%C3%A3o%20Pires%20-%20SP%2C%2009431-060!5e0!3m2!1spt-BR!2sbr!4v1779818483410!5m2!1spt-BR!2sbr"
+      width="100%" height="320" style="border: none; display: block;"
+      allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+
+    <!-- Rodapé -->
+    <div style="padding: 10px 16px; display: flex; justify-content: space-between; align-items: center;">
+      <span style="font-size: 12px; color: #999;">Ribeirão Pires – SP</span>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=R.+Bélgica,+88,+Ribeirão+Pires,+SP"
+         target="_blank" style="font-size: 13px; color: #1a73e8; text-decoration: none;">
+        🧭 Como chegar
+      </a>
+    </div>
+  </div> 
+
+</div> </div>
+
+    </div></div>
   </div>
 </div>
 
