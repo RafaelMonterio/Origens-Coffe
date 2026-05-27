@@ -6,9 +6,66 @@
 const cursor = document.getElementById('cursor');
 const ring   = document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
+let currentCursorMode = 'dark';
+let lastCursorTarget = null;
+let lastBgColor = null;
+let cursorThemeScheduled = false;
+
+function parseRGB(value){
+  const match = value.match(/rgba?\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+  return match ? {r: Number(match[1]), g: Number(match[2]), b: Number(match[3])} : null;
+}
+
+function getEffectiveBackgroundColor(el){
+  while(el && el !== document.documentElement){
+    const style = getComputedStyle(el);
+    const bg = style.backgroundColor;
+    if(bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'rgba(255, 255, 255, 0)'){
+      return bg;
+    }
+    el = el.parentElement;
+  }
+  return getComputedStyle(document.documentElement).backgroundColor || 'rgb(255, 255, 255)';
+}
+
+function isDarkColor(color){
+  const rgb = parseRGB(color);
+  if(!rgb) return false;
+  const luminance = (0.2126 * rgb.r + 0.7152 * rgb.g + 0.0722 * rgb.b) / 255;
+  return luminance < 0.55;
+}
+
+function setCursorMode(mode){
+  if(mode === currentCursorMode) return;
+  currentCursorMode = mode;
+  document.body.classList.toggle('cursor-light', mode === 'light');
+  document.body.classList.toggle('cursor-dark', mode === 'dark');
+}
+
+function updateCursorThemeAtPoint(x, y){
+  if(!cursor) return;
+  const target = document.elementFromPoint(x, y) || document.documentElement;
+  if(target === lastCursorTarget) return;
+  lastCursorTarget = target;
+  const bg = getEffectiveBackgroundColor(target);
+  if(bg === lastBgColor) return;
+  lastBgColor = bg;
+  setCursorMode(isDarkColor(bg) ? 'light' : 'dark');
+}
+
+function scheduleCursorThemeUpdate(){
+  if(cursorThemeScheduled) return;
+  cursorThemeScheduled = true;
+  requestAnimationFrame(()=>{
+    cursorThemeScheduled = false;
+    updateCursorThemeAtPoint(mx, my);
+  });
+}
+
 document.addEventListener('mousemove', e=>{
   mx=e.clientX; my=e.clientY;
   if(cursor){cursor.style.left=mx+'px';cursor.style.top=my+'px';}
+  scheduleCursorThemeUpdate();
 });
 (function animRing(){
   rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
@@ -305,7 +362,7 @@ function renderNavAuth(){
   if(user){
     actionsEl.innerHTML=`
       <div style="position:relative">
-        <button id="cart-nav-btn" onclick="openCart()" title="Carrinho" style="background:none;border:none;color:var(--black);display:flex;align-items:center;justify-content:center;position:relative;padding:.3rem .5rem;">
+        <button id="cart-nav-btn" onclick="openCart()" title="Carrinho" style="background:none;border:none;color:#fff;display:flex;align-items:center;justify-content:center;position:relative;padding:.3rem .5rem;">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
             <line x1="3" y1="6" x2="21" y2="6"/>
@@ -315,11 +372,11 @@ function renderNavAuth(){
         </button>
       </div>
       <div style="position:relative" id="user-menu-wrap">
-        <button class="btn btn-dark btn-sm" onclick="toggleUserMenu()" style="display:flex;align-items:center;gap:.5rem">
+      <button id="user-nav-btn" onclick="toggleUserMenu()" style="display:flex;align-items:center;gap:.5rem;background:transparent;border:none;padding:0;color:#fff;font-family:'TAN Pearl', 'Cormorant Garamond', serif;font-size:.72rem;text-transform:uppercase;">
           <span style="width:18px;height:18px;border-radius:50%;background:var(--brown-mid);display:inline-flex;align-items:center;justify-content:center;font-size:.55rem;color:#fff">${(user.name||'U')[0].toUpperCase()}</span>
           ${user.name?user.name.split(' ')[0]:'Conta'}
         </button>
-        <div id="user-menu" style="display:none;position:absolute;top:calc(100% + .5rem);right:0;background:var(--white);border:1px solid var(--gray-200);min-width:180px;box-shadow:0 8px 32px rgba(59,31,8,.1);z-index:600">
+        <div id="user-menu" class="user-menu" style="display:none;">
           <a href="${base}pages/perfil.html" style="display:block;padding:.75rem 1.2rem;font-size:.72rem;color:var(--gray-600);border-bottom:1px solid var(--gray-100);transition:color .2s" onmouseenter="this.style.color='var(--black)'" onmouseleave="this.style.color='var(--gray-600)'">Meu Perfil</a>
           <a href="${base}pages/rastreamento.html" style="display:block;padding:.75rem 1.2rem;font-size:.72rem;color:var(--gray-600);border-bottom:1px solid var(--gray-100);transition:color .2s" onmouseenter="this.style.color='var(--black)'" onmouseleave="this.style.color='var(--gray-600)'">Meus Pedidos</a>
           <button onclick="logout()" style="display:block;width:100%;text-align:left;padding:.75rem 1.2rem;font-size:.72rem;color:var(--gray-600);background:none;border:none;transition:color .2s" onmouseenter="this.style.color='var(--black)'" onmouseleave="this.style.color='var(--gray-600)'">Sair</button>
@@ -337,12 +394,26 @@ function renderNavAuth(){
 
 function toggleUserMenu(){
   const m=document.getElementById('user-menu');
-  if(m)m.style.display=m.style.display==='none'?'block':'none';
+  if(!m) return;
+  const isOpen = m.classList.contains('open');
+  if(isOpen){
+    m.classList.remove('open');
+    setTimeout(()=>{ if(!m.classList.contains('open')) m.style.display = 'none'; }, 220);
+  } else {
+    m.style.display = 'block';
+    requestAnimationFrame(()=>m.classList.add('open'));
+  }
 }
 window.toggleUserMenu=toggleUserMenu;
 document.addEventListener('click',e=>{
   const wrap=document.getElementById('user-menu-wrap');
-  if(wrap&&!wrap.contains(e.target)){const m=document.getElementById('user-menu');if(m)m.style.display='none';}
+  if(wrap&&!wrap.contains(e.target)){
+    const m=document.getElementById('user-menu');
+    if(m){
+      m.classList.remove('open');
+      setTimeout(()=>{ if(!m.classList.contains('open')) m.style.display='none'; }, 220);
+    }
+  }
 });
 
 // ── Login / Cadastro ──────────────────────
