@@ -192,12 +192,11 @@
 .processo-card { flex-shrink:0;width:360px;border-right:1px solid rgba(255,255,255,.06);padding:2.5rem;transition:background .4s; }
 .processo-card:first-child{border-left:1px solid rgba(255,255,255,.06)}
 .processo-card:hover{background:rgba(255,255,255,.03)}
+.processo-card img { width:100%;height:200px;object-fit:cover;border-radius:12px;margin:1.5rem 0 .75rem 0; }
 .step-no { font-family:'Cormorant Garamond',serif;font-size:4.5rem;font-weight:300;color:rgba(255,255,255,.06);line-height:1;transition:color .4s; }
 .processo-card:hover .step-no{color:#a07040}
 .step-name { font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;margin:1rem 0 .75rem;color:#fff; }
 .step-desc { font-size:.73rem;line-height:1.9;color:rgba(255,255,255,.36);font-family:'Montserrat',sans-serif; }
-.step-img { width:100%;aspect-ratio:16/9;background:rgba(255,255,255,.04);margin-top:2rem;display:flex;align-items:center;justify-content:center; }
-.step-img span { font-size:.55rem;letter-spacing:.25em;color:rgba(255,255,255,.1);text-transform:uppercase; }
 
 /* ══ CTA ══ */
 #cta-section { background:#0d0b09;padding:10rem 6rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2rem;position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.05); }
@@ -224,11 +223,12 @@
 
   <!-- Links: só quando logado -->
   <ul class="nav-links-logged" id="nav-links-logged" style="display:none">
-    <li><a href="#sobre">Sobre</a></li>
     <li><a href="pages/loja.html">Loja</a></li>
-    <li><a href="pages/cursos.html">Cursos</a></li>
+    <li><a href="#sobre">Sobre</a></li>
     <li><a href="pages/assinatura.html">Assinatura</a></li>
     <li><a href="pages/blog.html">Blog</a></li>
+    <li><a href="pages/cursos.html">Cursos</a></li>
+    <li><a href="pages/contato.html">Contato</a></li>
   </ul>
 
   <div class="nav-actions-wrap" id="nav-auth-actions"></div>
@@ -346,11 +346,11 @@
     <span class="processo-hint">← Arraste →</span>
   </div>
   <div class="processo-track" id="processo-track">
-    <div class="processo-card"><div class="step-no">01</div><div class="step-name">Seleção de Origem</div><div class="step-desc">Visitamos cada fazenda pessoalmente. Avaliamos altitude, solo, microclima e práticas sustentáveis antes de qualquer parceria.</div><div class="step-img"><span>Foto / Vídeo</span></div></div>
-    <div class="processo-card"><div class="step-no">02</div><div class="step-name">Colheita Seletiva</div><div class="step-desc">Apenas grãos no ponto ideal de maturação são colhidos. Processo manual que garante homogeneidade e qualidade superior.</div><div class="step-img"><span>Foto / Vídeo</span></div></div>
-    <div class="processo-card"><div class="step-no">03</div><div class="step-name">Torra Artesanal</div><div class="step-desc">Torras em pequenos lotes com controle preciso de temperatura e tempo para realçar as notas únicas de cada origem.</div><div class="step-img"><span>Foto / Vídeo</span></div></div>
-    <div class="processo-card"><div class="step-no">04</div><div class="step-name">Controle de Qualidade</div><div class="step-desc">Cada lote passa por cupping — degustação técnica que avalia aroma, sabor, acidez, corpo e finalização.</div><div class="step-img"><span>Foto / Vídeo</span></div></div>
-    <div class="processo-card"><div class="step-no">05</div><div class="step-name">Entrega Fresca</div><div class="step-desc">Embalagem com válvula de desgaseificação. Enviado em até 72h após a torra para máximo frescor na sua xícara.</div><div class="step-img"><span>Foto / Vídeo</span></div></div>
+    <div class="processo-card"><div class="step-no">01</div><div class="step-name">Seleção de Origem</div><img src="assets/visita.jpg" alt=""><div class="step-desc">Visitamos cada fazenda pessoalmente. Avaliamos altitude, solo, microclima e práticas sustentáveis antes de qualquer parceria.</div></div>
+    <div class="processo-card"><div class="step-no">02</div><div class="step-name">Colheita Seletiva</div><img src="assets/colhido.jpg" alt=""><div class="step-desc">Apenas grãos no ponto ideal de maturação são colhidos. Processo manual que garante homogeneidade e qualidade superior.</div></div>
+    <div class="processo-card"><div class="step-no">03</div><div class="step-name">Torra Artesanal</div><img src="assets/torra.jpg" alt=""><div class="step-desc">Torras em pequenos lotes com controle preciso de temperatura e tempo para realçar as notas únicas de cada origem.</div></div>
+    <div class="processo-card"><div class="step-no">04</div><div class="step-name">Controle de Qualidade</div><img src="assets/analise.jpeg" alt=""><div class="step-desc">Cada lote passa por cupping — degustação técnica que avalia aroma, sabor, acidez, corpo e finalização.</div></div>
+    <div class="processo-card"><div class="step-no">05</div><div class="step-name">Entrega Fresca</div><img src="assets/cafénosso-removebg-preview.png" alt=""><div class="step-desc">Embalagem com válvula de desgaseificação. Enviado em até 72h após a torra para máximo frescor na sua xícara.</div></div>
   </div>
 </section>
 

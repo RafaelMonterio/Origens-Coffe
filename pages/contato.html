@@ -10,46 +10,72 @@
 <link rel="stylesheet" href="../css/global.css">
 <style>
 .contato-wrap {
-  display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - var(--nav-h));
-  margin-top: var(--nav-h);
+  display: grid;
+  grid-template-columns: minmax(320px,1.05fr) minmax(320px,0.95fr);
+  max-width: 1280px;
+  margin: calc(var(--nav-h) + 2rem) auto 3rem;
+  min-height: auto;
+  gap: 1.5rem;
+  padding: 0 1.5rem;
 }
 .contato-left {
-  background: var(--black); padding: 6rem;
-  display: flex; flex-direction: column; justify-content: space-between;
-  position: relative; overflow: hidden;
+  background: linear-gradient(180deg, #0c0a08 0%, #120f0d 100%);
+  padding: 4rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2rem;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
 }
 .contato-left::before {
-  content: 'OI'; font-family: var(--font-display);
-  font-size: 28vw; font-weight: 700;
-  color: rgba(255,255,255,.025);
-  position: absolute; bottom: -4rem; left: -2rem;
-  pointer-events: none; line-height: 1; letter-spacing: -.05em;
+  content: 'OI';
+  font-family: var(--font-display);
+  font-size: 28vw;
+  font-weight: 700;
+  color: rgba(255,255,255,.015);
+  position: absolute;
+  bottom: -4rem;
+  left: -2rem;
+  pointer-events: none;
+  line-height: 1;
+  letter-spacing: -.05em;
 }
-.contato-title { font-family: var(--font-display); font-size: clamp(2.5rem,5vw,5rem); font-weight: 300; color: var(--white); line-height: 1.05; position: relative; z-index: 1; }
+.contato-title { font-family: var(--font-display); font-size: clamp(2.25rem,4vw,4.5rem); font-weight: 300; color: #fff; line-height: 1.05; position: relative; z-index: 1; }
 .contato-title em { font-style: italic; color: var(--brown-lt); }
-.contato-info { display: flex; flex-direction: column; gap: 2rem; position: relative; z-index: 1; }
-.info-item { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; }
-.info-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--brown-lt); margin-bottom: .5rem; font-weight: 500; }
-.info-val { font-size: .85rem; color: rgba(255,255,255,.7); line-height: 1.8; }
-.social-row { display: flex; gap: 1rem; position: relative; z-index: 1; }
-.social-btn { padding: .5rem 1.2rem; border: 1px solid rgba(255,255,255,.15); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.5); transition: all .3s; }
-.social-btn:hover { border-color: var(--brown-lt); color: var(--brown-lt); }
+.contato-hero-copy { max-width: 42rem; font-size: .95rem; line-height: 1.9; color: rgba(255,255,255,.7); margin-top: 1.2rem; position: relative; z-index: 1; }
+.contato-info { display: grid; gap: 1rem; margin-top: 1.4rem; position: relative; z-index: 1; }
+.info-item { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 24px; padding: 1.4rem 1.6rem; box-shadow: inset 0 0 0 1px rgba(255,255,255,.01); }
+.info-label { font-size: .65rem; letter-spacing: .25em; text-transform: uppercase; color: var(--brown-lt); margin-bottom: .75rem; font-weight: 600; }
+.info-val { font-size: .95rem; color: rgba(255,255,255,.82); line-height: 1.8; }
+.social-row { display: flex; gap: 1rem; flex-wrap: wrap; position: relative; z-index: 1; }
+.social-btn { padding: .8rem 1.4rem; border: 1px solid rgba(255,255,255,.15); font-size: .65rem; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.75); border-radius: 999px; transition: all .3s; background: rgba(255,255,255,.03); }
+.social-btn:hover { border-color: var(--brown-lt); color: var(--brown-lt); transform: translateY(-1px); }
 
-.contato-right { background: var(--white); padding: 6rem; display: flex; flex-direction: column; justify-content: center; }
-.contato-form-title { font-family: var(--font-display); font-size: 2rem; font-weight: 300; margin-bottom: .4rem; }
-.contato-form-sub { font-size: .72rem; color: var(--gray-600); margin-bottom: 2.5rem; letter-spacing: .08em; }
+.contato-right { background: var(--off-white); padding: 3rem; display: flex; flex-direction: column; gap: 1.5rem; justify-content: flex-start; }
+.contato-form-card { background: #fff; border-radius: 32px; padding: 2.25rem; border: 1px solid rgba(19,13,6,.07); box-shadow: 0 30px 90px rgba(0,0,0,.06); }
+.contato-form-title { font-family: var(--font-display); font-size: clamp(1.9rem,4vw,2.6rem); font-weight: 300; margin-bottom: .75rem; }
+.contato-form-sub { font-size: .9rem; color: var(--gray-600); margin-bottom: 2rem; letter-spacing: .05em; line-height: 1.9; }
+.contato-form-grid { display: grid; gap: 1.5rem; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-.form-textarea {
-  width: 100%; background: transparent; border: none;
-  border-bottom: 1px solid var(--gray-200); padding: .75rem 0;
-  font-family: var(--font-body); font-size: .85rem; color: var(--black);
-  outline: none; resize: none; transition: border-color .3s;
-  min-height: 100px;
-}
-.form-textarea:focus { border-bottom-color: var(--brown-mid); }
-.form-textarea::placeholder { color: var(--gray-400); }
-
-.map-placeholder span { font-size: .6rem; letter-spacing: .25em; color: var(--gray-400); text-transform: uppercase; }
+.form-group label { color: var(--gray-500); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; margin-bottom: .75rem; display: block; }
+.form-input, .form-textarea { width: 100%; background: #f8f4ef; border: 1px solid rgba(19,13,6,.12); border-radius: 18px; padding: 1rem 1.1rem; font-family: var(--font-body); font-size: .95rem; color: var(--black); outline: none; transition: border-color .3s, box-shadow .3s; }
+.form-input:focus, .form-textarea:focus { border-color: var(--brown-mid); box-shadow: 0 0 0 6px rgba(147,109,85,.08); }
+.form-textarea { min-height: 150px; resize: vertical; }
+.contato-card-row { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+.contato-card { background: #fff; border: 1px solid rgba(19,13,6,.08); border-radius: 28px; padding: 1.8rem; transition: transform .3s, border-color .3s, box-shadow .3s; }
+.contato-card:hover { transform: translateY(-3px); border-color: rgba(147,109,85,.16); box-shadow: 0 18px 45px rgba(0,0,0,.06); }
+.card-eyebrow { font-size: .68rem; letter-spacing: .24em; text-transform: uppercase; color: var(--brown-lt); font-weight: 700; margin-bottom: .9rem; }
+.card-title { font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 1rem; line-height: 1.4; color: var(--black); }
+.card-copy { color: var(--gray-600); font-size: .92rem; line-height: 1.8; }
+.contato-map-card { background: #fff; border: 1px solid rgba(19,13,6,.07); border-radius: 28px; overflow: hidden; }
+.contato-map-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding: 1.75rem 2rem; border-bottom: 1px solid rgba(19,13,6,.08); }
+.contato-map-head .info-label { margin: 0; color: var(--brown-lt); font-size: .7rem; letter-spacing: .24em; text-transform: uppercase; }
+.contato-map-head .info-val { color: var(--gray-600); margin-top: .35rem; font-size: .95rem; line-height: 1.7; }
+.link-secondary { font-size: .84rem; color: var(--brown-mid); text-decoration: none; letter-spacing: .06em; font-weight: 600; }
+.link-secondary:hover { color: var(--brown-lt); }
+.contato-map-embed { width: 100%; height: 340px; border: none; display: block; }
 </style>
 </head>
 <body>
@@ -63,9 +89,10 @@
   </a>
   <ul class="nav-links-internal" style="display:flex;gap:2rem;list-style:none;">
     <li><a href="loja.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Loja</a></li>
-    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
+    <li><a href="../index.html#sobre" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Sobre</a></li>
     <li><a href="assinatura.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Assinatura</a></li>
     <li><a href="blog.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Blog</a></li>
+    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
     <li><a href="contato.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Contato</a></li>
   </ul>
   <div id="nav-auth-actions" class="nav-actions"></div>
@@ -80,6 +107,7 @@
         <span class="eyebrow-text" style="color:var(--brown-lt)">Fale Conosco</span>
       </div>
       <h1 class="contato-title">Estamos aqui<br>para <em>ajudar.</em></h1>
+      <p class="contato-hero-copy">Precisa de uma proposta personalizada ou deseja conhecer nossos sabores exclusivos? Nosso time está pronto para ajudar com estilo e atenção aos detalhes.</p>
     </div>
 
     <div class="contato-info reveal-left">
@@ -105,53 +133,51 @@
         <a href="#" class="social-btn">YouTube</a>
       </div>
     </div>
+
+    <div class="contato-map-card reveal delay-2">
+      <div class="contato-map-head">
+        <div>
+          <div class="info-label">Localização</div>
+          <div class="info-val">Rua dos Cafeeiros, 42 — Vila Madalena, São Paulo</div>
+        </div>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Rua+dos+Cafeeiros,+42,+São+Paulo" target="_blank" class="link-secondary">Ver rota →</a>
+      </div>
+      <iframe class="contato-map-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3653.508503919092!2d-46.388756923879846!3d-23.69352846646269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce6d0bdf1e0149%3A0x464a1b18088fa948!2sR.%20Colorado%2C%2070%20-%20Santa%20Luzia%2C%20Ribeir%C3%A3o%20Pires%20-%20SP%2C%2009431-060!5e0!3m2!1spt-BR!2sbr!4v1779818483410!5m2!1spt-BR!2sbr" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
   </div>
 
   <!-- Direita clara -->
   <div class="contato-right">
-    <div class="contato-form-title reveal">Envie uma mensagem</div>
-    <div class="contato-form-sub reveal">Respondemos em até 24 horas úteis.</div>
-    <form onsubmit="submitContato(event)" class="reveal">
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Nome</label><input type="text" class="form-input" placeholder="Pedro Lima" required></div>
-        <div class="form-group"><label class="form-label">E-mail</label><input type="email" class="form-input" placeholder="seu@email.com" required></div>
-      </div>
-      <div class="form-group" style="margin-top:.5rem"><label class="form-label">Assunto</label><input type="text" class="form-input" placeholder="Dúvida sobre assinatura..."></div>
-      <div class="form-group" style="margin-top:.5rem"><label class="form-label">Mensagem</label><textarea class="form-textarea" placeholder="Escreva sua mensagem..." rows="4"></textarea></div>
-      <button type="submit" class="btn btn-dark" style="margin-top:1.5rem">Enviar mensagem →</button>
-    </form>
- <div style="font-family: sans-serif; max-width: 600px;">
+    <div class="contato-form-card reveal">
+      <div class="section-eyebrow" style="margin-bottom:1rem"><div class="eyebrow-line" style="background:var(--brown-lt)"></div><span class="eyebrow-text" style="color:var(--brown-lt)">Contato Premium</span></div>
+      <div class="contato-form-title">Vamos conversar sobre café, eventos e parcerias.</div>
+      <div class="contato-form-sub">Use o formulário abaixo para falar com a nossa equipe. Nossos especialistas atendem com atenção ao detalhe e retorno rápido.</div>
+    </div>
 
-  <!-- Cabeçalho -->
-  <div style="border: 1px solid #ddd; border-radius: 12px; overflow: hidden;">
-    <div style="padding: 12px 16px; border-bottom: 1px solid #ddd; display: flex; align-items: center; gap: 10px;">
-      <span style="font-size: 22px;">📍</span>
-      <div>
-        <p style="margin: 0; font-weight: 600; font-size: 15px;">Nossa Loja Física</p>
-        <p style="margin: 0; font-size: 13px; color: #666;">R. Bélgica, 88 – Jardim Alvorada, Ribeirão Pires – SP</p>
-        <p style="margin: 8px 0 0; font-size: 13px; color: #444; line-height: 1.6;">Venha conhecer nossa seleção de cafés, kits e presentes exclusivos. Na loja você encontra produtos especiais e atendimento personalizado.</p>
+    <div class="contato-card-row reveal delay-1">
+      <div class="contato-card">
+        <div class="card-eyebrow">Atendimento</div>
+        <div class="card-title">Retorno em até 24h úteis</div>
+        <div class="card-copy">Nossa equipe prioriza respostas claras, rápidas e com ideias práticas para cada solicitação.</div>
+      </div>
+      <div class="contato-card">
+        <div class="card-eyebrow">Consultoria</div>
+        <div class="card-title">Eventos & presentes</div>
+        <div class="card-copy">Precisa de café para seu evento ou presente corporativo? Nós criamos soluções elegantes sob medida.</div>
       </div>
     </div>
 
-    <!-- Mapa -->
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3653.508503919092!2d-46.388756923879846!3d-23.69352846646269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce6d0bdf1e0149%3A0x464a1b18088fa948!2sR.%20Colorado%2C%2070%20-%20Santa%20Luzia%2C%20Ribeir%C3%A3o%20Pires%20-%20SP%2C%2009431-060!5e0!3m2!1spt-BR!2sbr!4v1779818483410!5m2!1spt-BR!2sbr"
-      width="100%" height="320" style="border: none; display: block;"
-      allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-
-    <!-- Rodapé -->
-    <div style="padding: 10px 16px; display: flex; justify-content: space-between; align-items: center;">
-      <span style="font-size: 12px; color: #999;">Ribeirão Pires – SP</span>
-      <a href="https://www.google.com/maps/dir/?api=1&destination=R.+Bélgica,+88,+Ribeirão+Pires,+SP"
-         target="_blank" style="font-size: 13px; color: #1a73e8; text-decoration: none;">
-        🧭 Como chegar
-      </a>
+    <div class="contato-form-card reveal delay-2">
+      <form onsubmit="submitContato(event)" class="reveal contato-form-grid">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Nome</label><input type="text" class="form-input" placeholder="Pedro Lima" required></div>
+          <div class="form-group"><label class="form-label">E-mail</label><input type="email" class="form-input" placeholder="seu@email.com" required></div>
+        </div>
+        <div class="form-group"><label class="form-label">Assunto</label><input type="text" class="form-input" placeholder="Pedido, evento ou parceria"></div>
+        <div class="form-group"><label class="form-label">Mensagem</label><textarea class="form-textarea" placeholder="Escreva sua mensagem..." rows="5"></textarea></div>
+        <button type="submit" class="btn btn-dark" style="margin-top:1.5rem">Enviar mensagem →</button>
+      </form>
     </div>
-  </div> 
-
-</div> </div>
-
-    </div></div>
   </div>
 </div>
 
