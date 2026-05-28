@@ -89,10 +89,38 @@ if(navbar){
 }
 
 // ── Scroll reveal ─────────────────────────
+const autoRevealSelectors = [
+  '[class*="card"]',
+  '[class*="prod"]',
+  '[class*="kit"]',
+  '[class*="timeline"]',
+  '[class*="resumo"]',
+  '[class*="pedido"]',
+  '[class*="curso"]',
+  '[class*="depo"]',
+  '[class*="post"]',
+  '[class*="assin"]',
+  '[class*="store"]'
+];
+
+autoRevealSelectors.forEach(selector => {
+  document.querySelectorAll(selector).forEach(el => {
+    if (!el.classList.contains('reveal') && !el.classList.contains('reveal-left') && !el.classList.contains('reveal-right')) {
+      el.classList.add('reveal');
+    }
+  });
+});
+
 const revealAll=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
 const revealObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
-},{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+  entries.forEach(e=>{
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+    } else {
+      e.target.classList.remove('in');
+    }
+  });
+},{threshold:0.1,rootMargin:'0px 0px -80px 0px'});
 revealAll.forEach(el=>revealObs.observe(el));
 
 // ── Active nav link ───────────────────────

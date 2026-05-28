@@ -106,6 +106,10 @@
   transition: transform .8s cubic-bezier(0.16,1,0.3,1);
   display: block;
 }
+.prod-img--contain img {
+  object-fit: contain;
+  object-position: center;
+}
 .prod-card:hover .prod-img img { transform: scale(1.04); }
 .prod-img-placeholder {
   width: 100%; height: 100%; min-height: 200px;
@@ -115,8 +119,14 @@
   font-size: .55rem; letter-spacing: .25em; color: #bbb; text-transform: uppercase;
 }
 
+.prod-badge-group {
+  position: absolute;
+  top: 1rem; left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+}
 .prod-badge {
-  position: absolute; top: 1rem; left: 1rem;
   background: #fff; padding: .28rem .8rem;
   font-family: 'TAN Pearl','Cormorant Garamond',serif;
   font-size: .55rem; letter-spacing: .2em; text-transform: uppercase;
@@ -203,9 +213,10 @@
   </a>
   <ul class="nav-links-internal" style="display:flex;gap:2rem;list-style:none;">
     <li><a href="loja.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Loja</a></li>
-    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
+    <li><a href="../index.html#sobre" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Sobre</a></li>
     <li><a href="assinatura.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Assinatura</a></li>
     <li><a href="blog.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Blog</a></li>
+    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
     <li><a href="contato.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Contato</a></li>
   </ul>
   <div id="nav-auth-actions" class="nav-actions"></div>
@@ -246,7 +257,11 @@
     <div class="prod-card wide reveal" data-cat="cafe">
       <div class="prod-img">
         <img src="../assets/produtos/bourbon-amarelo.png" alt="Bourbon Amarelo">
-        <div class="prod-badge">Destaque</div>
+        <div class="prod-badge-group">
+          <div class="prod-badge">Destaque</div>
+          <div class="prod-badge">Seleção Premium</div>
+          
+        </div>
       </div>
       <div style="display:flex;flex-direction:column;flex:1">
         <div class="prod-body">
@@ -259,8 +274,8 @@
           </div>
         </div>
         <div class="prod-footer">
-          <div class="prod-price">R$ 68</div>
-          <button class="btn-add" onclick="addToCart('Bourbon Amarelo','R$ 68','Sul de Minas · 1.200m')">+</button>
+          <div class="prod-price">R$ 67,00</div>
+          <button class="btn-add" onclick="addToCart('Bourbon Amarelo','R$ 67,00','Sul de Minas · 1.200m')">+</button>
         </div>
       </div>
     </div>
@@ -277,8 +292,8 @@
         <div class="prod-notes">Floral · Jasmim · Bergamota<br>Torra clara · 250g</div>
       </div>
       <div class="prod-footer">
-        <div class="prod-price">R$ 134</div>
-        <button class="btn-add" onclick="addToCart('Gesha Etíope','R$ 134','Yirgacheffe · 1.900m')">+</button>
+        <div class="prod-price">R$ 133,99</div>
+        <button class="btn-add" onclick="addToCart('Gesha Etíope','R$ 133,99','Yirgacheffe · 1.900m')">+</button>
       </div>
     </div>
 
@@ -294,15 +309,15 @@
         <div class="prod-notes">Mel · Frutas Vermelhas · Suave<br>Torra média · 250g</div>
       </div>
       <div class="prod-footer">
-        <div class="prod-price">R$ 74</div>
-        <button class="btn-add" onclick="addToCart('Honey Mogiana','R$ 74','Mogiana · 1.100m')">+</button>
+        <div class="prod-price">R$ 74,50</div>
+        <button class="btn-add" onclick="addToCart('Honey Mogiana','R$ 74,50','Mogiana · 1.100m')">+</button>
       </div>
     </div>
 
     <!-- Natural Cerrado -->
     <div class="prod-card reveal" data-cat="cafe graos">
-      <div class="prod-img">
-        <div class="prod-img-placeholder">Foto em breve</div>
+      <div class="prod-img prod-img--contain">
+        <img src="../assets/cafenormal.png" alt="Natural Cerrado">
       </div>
       <div class="prod-body">
         <div class="prod-origin">Cerrado Mineiro · 1.050m</div>
@@ -310,8 +325,8 @@
         <div class="prod-notes">Frutado · Chocolate · Mel<br>Torra média-escura · 250g</div>
       </div>
       <div class="prod-footer">
-        <div class="prod-price">R$ 52</div>
-        <button class="btn-add" onclick="addToCart('Natural Cerrado','R$ 52','Cerrado Mineiro')">+</button>
+        <div class="prod-price">R$ 51,99</div>
+        <button class="btn-add" onclick="addToCart('Natural Cerrado','R$ 51,99','Cerrado Mineiro')">+</button>
       </div>
     </div>
 
@@ -326,8 +341,8 @@
         <div class="prod-notes">Tabaco · Cacau · Especiarias<br>Torra escura · 250g</div>
       </div>
       <div class="prod-footer">
-        <div class="prod-price">R$ 89</div>
-        <button class="btn-add" onclick="addToCart('Natural Bahia','R$ 89','Chapada Diamantina')">+</button>
+        <div class="prod-price">R$ 88,50</div>
+        <button class="btn-add" onclick="addToCart('Natural Bahia','R$ 88,50','Chapada Diamantina')">+</button>
       </div>
     </div>
 
@@ -342,8 +357,8 @@
         <div class="prod-notes">Cerâmica branca · Com 40 filtros<br>Para 1–4 xícaras</div>
       </div>
       <div class="prod-footer">
-        <div class="prod-price">R$ 118</div>
-        <button class="btn-add" onclick="addToCart('Dripper V60','R$ 118','Equipamento')">+</button>
+        <div class="prod-price">R$ 117,99</div>
+        <button class="btn-add" onclick="addToCart('Dripper V60','R$ 117,99','Equipamento')">+</button>
       </div>
     </div>
 
@@ -358,7 +373,7 @@
         <div class="prod-notes">Aço inox · Regulagem fina a grossa<br>Ideal para V60 e Prensa</div>
       </div>
       <div class="prod-footer">
-        <div class="prod-price">R$ 245</div>
+        <div class="prod-price">R$ 245,00</div>
         <button class="btn-add" onclick="addToCart('Moedor Manual','R$ 245','Equipamento')">+</button>
       </div>
     </div>

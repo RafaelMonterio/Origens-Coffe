@@ -10,9 +10,9 @@
 <link rel="stylesheet" href="../css/global.css">
 <style>
 .page-hero { padding: calc(var(--nav-h) + 4rem) 6rem 4rem; border-bottom: 1px solid var(--gray-200); background: var(--white); }
-.blog-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 0; border: 1px solid var(--gray-200); border-top: none; }
+.blog-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 0; border: 1px solid var(--gray-200); border-top: none; align-items: stretch; }
 .blog-main { padding: 4rem 6rem; border-right: 1px solid var(--gray-200); }
-.blog-sidebar { padding: 4rem 3rem; background: var(--off-white); }
+.blog-sidebar { padding: 4rem 3rem; background: var(--off-white); display: flex; flex-direction: column; gap: 2.5rem; }
 .post-card { display: grid; grid-template-columns: 240px 1fr; border-bottom: 1px solid var(--gray-200); transition: background .3s; }
 .post-card:hover { background: var(--off-white); }
 .post-card:last-child { border-bottom: none; }
@@ -46,9 +46,10 @@
   </a>
   <ul class="nav-links-internal" style="display:flex;gap:2rem;list-style:none;">
     <li><a href="loja.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Loja</a></li>
-    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
+    <li><a href="../index.html#sobre" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Sobre</a></li>
     <li><a href="assinatura.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Assinatura</a></li>
     <li><a href="blog.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Blog</a></li>
+    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
     <li><a href="contato.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Contato</a></li>
   </ul>
   <div id="nav-auth-actions" class="nav-actions"></div>
@@ -62,7 +63,7 @@
 <div class="blog-grid">
   <div class="blog-main">
     <div class="post-card reveal">
-      <div class="post-img"><img src="../assets/blog/guia-v60.jpg" alt="Guia Completo do V60" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="post-img"><img src="../assets/dono.jpg" alt="Guia Completo do V60" style="width:100%;height:100%;object-fit:cover;"></div>
       <div class="post-body">
         <div class="post-cat">Técnica — Destaque</div>
         <div class="post-title">Guia Completo do V60: do básico ao avançado</div>
@@ -115,25 +116,18 @@
         <span style="padding:.3rem .8rem;border:1px solid var(--gray-200);font-size:.6rem;letter-spacing:.15em;background:var(--white)">Receitas</span>
       </div>
     </div>
-    <div style="margin-top:3rem;padding:2rem;background:var(--black);color:var(--white)">
+   
+    <div style="margin-top:0;padding:2rem;background:var(--white);border:1px solid var(--gray-200)">
+      <div class="sidebar-title">Receitas em alta</div>
+      <div class="sidebar-post"><div class="sidebar-post-cat">Receitas</div><div class="sidebar-post-title">Café gelado com especiarias</div></div>
+      <div class="sidebar-post"><div class="sidebar-post-cat">Receitas</div><div class="sidebar-post-title">Mocha de chocolate amargo</div></div>
+    </div>
+    <div style="margin-top:0;padding:2rem;background:var(--black);color:var(--white)">
       <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:300;margin-bottom:.75rem">Newsletter</div>
       <p style="font-size:.7rem;color:rgba(255,255,255,.4);line-height:1.8;margin-bottom:1.2rem">Receba os melhores artigos toda semana.</p>
       <input type="email" class="nl-input" placeholder="seu@email.com" style="width:100%;margin-bottom:.75rem">
       <button class="btn btn-white btn-sm" style="width:100%;justify-content:center">Assinar</button>
     </div>
-  </div>
-</div>
-
-<div class="newsletter-strip">
-  <div class="reveal-left">
-    <div class="section-eyebrow" style="margin-bottom:1rem"><div class="eyebrow-line" style="background:var(--brown-lt)"></div><span class="eyebrow-text" style="color:var(--brown-lt)">Newsletter</span></div>
-    <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:var(--white);line-height:1.1">Conteúdo exclusivo<br>direto no seu <em style="font-style:italic;color:var(--brown-lt)">e-mail.</em></h2>
-    <p style="font-size:.78rem;color:rgba(255,255,255,.4);line-height:2;margin-top:1rem">Artigos, receitas, promoções e histórias direto do barista. Sem spam.</p>
-  </div>
-  <div class="newsletter-form reveal-right">
-    <input type="text" class="nl-input" placeholder="Seu nome">
-    <input type="email" class="nl-input" placeholder="seu@email.com">
-    <button class="btn btn-white" style="align-self:flex-start;margin-top:.5rem">Assinar newsletter →</button>
   </div>
 </div>
 
