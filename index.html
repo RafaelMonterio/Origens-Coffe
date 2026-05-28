@@ -168,7 +168,10 @@
   display: flex; flex-direction: column; justify-content: center;
   padding: 5rem 5rem 5rem 6rem; border-right: 1px solid #e8e0d8;
 }
-.sobre-scroll-side { padding: 5rem 6rem 5rem 5rem; display: flex; flex-direction: column; gap: 6rem; }
+.sobre-scroll-side { padding: 5rem 3rem; display: flex; flex-direction: row; gap: 3rem; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; cursor: grab; }
+.sobre-scroll-side:active { cursor: grabbing; }
+.sobre-scroll-side::-webkit-scrollbar { display: none; }
+.sobre-scroll-side > .reveal { flex-shrink: 0; width: 380px; }
 .sobre-photo-inner { width:100%;min-height:340px;background:#f0ede8;display:flex;align-items:center;justify-content:center;font-size:.6rem;letter-spacing:.3em;color:#b0a090;text-transform:uppercase; }
 .sobre-photo-caption { margin-top:.9rem;font-size:.62rem;letter-spacing:.18em;color:#b0a090;text-transform:uppercase; }
 .sobre-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem;padding-top:3rem;border-top:1px solid #e8e0d8; }
@@ -177,6 +180,7 @@
 .sobre-quote { border-left:2px solid #6b3a1f;padding-left:2rem; }
 .sobre-quote blockquote { font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:300;font-style:italic;line-height:1.55;color:#2a2018; }
 .sobre-quote cite { display:block;margin-top:.75rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#6b3a1f;font-style:normal; }
+.sobre-quote.reveal { flex-shrink: 0; width: 380px; display: flex; flex-direction: column; justify-content: center; border-left: 2px solid #6b3a1f; padding: 3rem 0 3rem 2rem; }
 
 /* ══ PROCESSO ══ */
 #processo { background:#0d0b09;padding:8rem 0 0;overflow:hidden; }
@@ -213,7 +217,7 @@
 <nav id="main-nav">
   <!-- Logo: logoconcept2 PNG (branco sobre escuro) -->
   <a href="index.html" class="logo-inline">
-    <img src="assets/icone.png" alt="" class="logo-inline-icon">
+    <img src="assets/icone2.png" alt="" class="logo-inline-icon">
     <div class="logo-inline-div"></div>
     <span class="logo-inline-text">ORIGENS</span>
   </a>
@@ -314,7 +318,7 @@
     </div>
     <div class="sobre-scroll-side">
       <div class="reveal">
-        <div class="sobre-photo-inner"><img src="assets/sobre/pedro-lima-barista.jpg" alt="" srcset=""></div>
+        <div class="sobre-photo-inner"><img src="assets/sobre/pedro-lima-barista.jpg" style="min-width:100%" alt="" srcset=""></div>
         <div class="sobre-photo-caption">Pedro Lima — Sul de Minas, 2024</div>
       </div>
       <div class="sobre-quote reveal">
@@ -474,6 +478,81 @@ pt.addEventListener('mousemove',  e => {
   if (!isDragging) return; e.preventDefault();
   pt.scrollLeft = sl - (e.pageX - pt.offsetLeft - startX) * 1.4;
 });
+
+// ── Sobre Carousel — loop infinito contínuo (estilo Netflix) ──
+const carouselTrack = document.querySelector('.sobre-scroll-side');
+if (carouselTrack) {
+  const revealItems = Array.from(carouselTrack.querySelectorAll('.reveal'));
+  const itemWidth = 380 + 48; // width + gap (3rem = 48px)
+  const itemCount = revealItems.length;
+  
+  // Clona todos os itens múltiplas vezes para criar efeito de loop
+  const clonedItems = revealItems.map(item => item.cloneNode(true));
+  const clonedItems2 = revealItems.map(item => item.cloneNode(true));
+  
+  clonedItems.forEach(clone => carouselTrack.appendChild(clone));
+  clonedItems2.forEach(clone => carouselTrack.appendChild(clone));
+  
+  let currentIndex = 0;
+  let autoplayInterval;
+
+  function scrollToItem(index) {
+    currentIndex = index;
+    carouselTrack.style.scrollBehavior = 'smooth';
+    carouselTrack.scrollLeft = currentIndex * itemWidth;
+  }
+
+  function handleScroll() {
+    const scrollLeft = carouselTrack.scrollLeft;
+    const maxScroll = itemCount * itemWidth;
+    
+    // Se chegou no final do primeiro conjunto de clones, reseta sem transição
+    if (scrollLeft >= maxScroll * 2 - 50) {
+      carouselTrack.style.scrollBehavior = 'auto';
+      carouselTrack.scrollLeft = 0;
+      currentIndex = 0;
+      carouselTrack.style.scrollBehavior = 'smooth';
+    }
+  }
+
+  function startAutoplay() {
+    autoplayInterval = setInterval(() => {
+      scrollToItem(currentIndex + 1);
+    }, 3000);
+  }
+
+  function resetAutoplay() {
+    clearInterval(autoplayInterval);
+    startAutoplay();
+  }
+
+  // Drag control
+  let isDraggingCarousel = false, startXCarousel, slCarousel;
+  carouselTrack.addEventListener('mousedown', e => {
+    isDraggingCarousel = true;
+    startXCarousel = e.pageX - carouselTrack.offsetLeft;
+    slCarousel = carouselTrack.scrollLeft;
+    clearInterval(autoplayInterval);
+  });
+  
+  carouselTrack.addEventListener('mouseleave', () => isDraggingCarousel = false);
+  
+  carouselTrack.addEventListener('mouseup', () => {
+    isDraggingCarousel = false;
+    resetAutoplay();
+  });
+  
+  carouselTrack.addEventListener('mousemove', e => {
+    if (!isDraggingCarousel) return;
+    e.preventDefault();
+    carouselTrack.scrollLeft = slCarousel - (e.pageX - carouselTrack.offsetLeft - startXCarousel) * 1.4;
+  });
+
+  // Detecta quando chega no final
+  carouselTrack.addEventListener('scroll', handleScroll, { passive: true });
+
+  startAutoplay();
+}
 </script>
 </body>
 </html>
