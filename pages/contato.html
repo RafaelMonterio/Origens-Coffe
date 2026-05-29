@@ -197,6 +197,7 @@
 <div id="cadastro-modal" class="modal-overlay"><div class="modal-backdrop" onclick="closeModal('cadastro-modal')"></div><div class="modal-box"><button class="modal-close" onclick="closeModal('cadastro-modal')">×</button><div class="modal-title">Criar conta</div><div class="modal-sub">Junte-se à ORIGENS</div><form onsubmit="doCadastro(event)"><div class="form-group"><label class="form-label">Nome</label><input id="cad-name" type="text" class="form-input" required></div><div class="form-group"><label class="form-label">E-mail</label><input id="cad-email" type="email" class="form-input" required></div><div class="form-group"><label class="form-label">Senha</label><input id="cad-pass" type="password" class="form-input" required></div><div class="form-group"><label class="form-label">Confirmar</label><input id="cad-pass2" type="password" class="form-input" required></div><button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Criar conta →</button></form><div class="modal-footer-txt">Já tem conta? <a href="#" onclick="switchModal('cadastro-modal','login-modal')">Entrar</a></div></div></div>
 <div id="global-toast" class="toast"></div>
 <script src="../js/global.js"></script>
+<script src="../js/scroll-animations.js"></script>
 <script>
 function submitContato(e) {
   e.preventDefault();
