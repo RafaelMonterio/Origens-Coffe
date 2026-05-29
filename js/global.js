@@ -193,6 +193,15 @@ const MINI_STAGES=[
 ];
 let miniCur=0, miniInterval=null;
 
+function getMiniSavedStage(){
+  const saved=localStorage.getItem('miniStage');
+  return saved?parseInt(saved):0;
+}
+
+function setMiniSavedStage(stage){
+  localStorage.setItem('miniStage',stage);
+}
+
 function injectMiniLoading(){
   if(document.getElementById('mini-loading'))return;
   const el=document.createElement('div');
@@ -327,14 +336,15 @@ function showMiniLoading(msg){
   if(msgEl)msgEl.textContent=msg||'processando';
   el.style.display='flex';
   requestAnimationFrame(()=>{ el.style.opacity='1'; });
-  miniCur=0; miniGoStage(0);
-  miniInterval=setInterval(()=>{ miniGoStage((miniCur+1)%MINI_STAGES.length); },2200);
+  miniCur=getMiniSavedStage(); miniGoStage(miniCur);
+  miniInterval=setInterval(()=>{ miniGoStage((miniCur+1)%MINI_STAGES.length); },1600);
 }
 
 function hideMiniLoading(){
   const el=document.getElementById('mini-loading');
   if(!el)return;
   el.style.opacity='0';
+  setMiniSavedStage(miniCur);
   setTimeout(()=>{ el.style.display='none'; },350);
   if(miniInterval){clearInterval(miniInterval);miniInterval=null;}
 }

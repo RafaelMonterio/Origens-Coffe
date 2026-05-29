@@ -81,7 +81,7 @@
 <body>
 <div id="cursor"></div><div id="cursor-ring"></div>
 
-<nav class="navbar" id="navbar" style="background:#0d0b09;border-bottom:1px solid rgba(255,255,255,.07);">
+<nav class="navbar" id="navbar">
   <a href="../index.html" class="logo-inline">
     <img src="../assets/icone2.png" alt="" class="logo-inline-icon">
     <div class="logo-inline-div"></div>
@@ -89,10 +89,9 @@
   </a>
   <ul class="nav-links-internal" style="display:flex;gap:2rem;list-style:none;">
     <li><a href="loja.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Loja</a></li>
-    <li><a href="../index.html#sobre" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Sobre</a></li>
+    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
     <li><a href="assinatura.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Assinatura</a></li>
     <li><a href="blog.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Blog</a></li>
-    <li><a href="cursos.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Cursos</a></li>
     <li><a href="contato.html" style="font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:color .3s;text-decoration:none;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,.55)'">Contato</a></li>
   </ul>
   <div id="nav-auth-actions" class="nav-actions"></div>
@@ -113,7 +112,14 @@
     <div class="contato-info reveal-left">
       <div class="info-item">
         <div class="info-label">Endereço</div>
-        <div class="info-val">Rua dos Cafeeiros, 42<br>Vila Madalena — São Paulo, SP</div>
+        <div class="info-val">Rua dos Cafeeiros, 42<br>Vila Madalena — São Paulo, SP
+                  <div class="contato-map-head">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Rua+dos+Cafeeiros,+42,+São+Paulo" target="_blank" class="link-secondary">Ver rota →</a>
+        </div>
+        <iframe class="contato-map-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3653.508503919092!2d-46.388756923879846!3d-23.69352846646269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce6d0bdf1e0149%3A0x464a1b18088fa948!2sR.%20Colorado%2C%2070%20-%20Santa%20Luzia%2C%20Ribeir%C3%A3o%20Pires%20-%20SP%2C%2009431-060!5e0!3m2!1spt-BR!2sbr!4v1779818483410!5m2!1spt-BR!2sbr" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+        </div>
+        
       </div>
       <div class="info-item">
         <div class="info-label">Horário</div>
@@ -123,6 +129,8 @@
         <div class="info-label">Contato</div>
         <div class="info-val">contato@origens.cafe<br>+55 (11) 9 9999-0000</div>
       </div>
+      <div class="contato-map-card">
+
     </div>
 
     <div>
@@ -136,10 +144,6 @@
 
     <div class="contato-map-card reveal delay-2">
       <div class="contato-map-head">
-        <div>
-          <div class="info-label">Localização</div>
-          <div class="info-val">Rua dos Cafeeiros, 42 — Vila Madalena, São Paulo</div>
-        </div>
         <a href="https://www.google.com/maps/dir/?api=1&destination=Rua+dos+Cafeeiros,+42,+São+Paulo" target="_blank" class="link-secondary">Ver rota →</a>
       </div>
       <iframe class="contato-map-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3653.508503919092!2d-46.388756923879846!3d-23.69352846646269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce6d0bdf1e0149%3A0x464a1b18088fa948!2sR.%20Colorado%2C%2070%20-%20Santa%20Luzia%2C%20Ribeir%C3%A3o%20Pires%20-%20SP%2C%2009431-060!5e0!3m2!1spt-BR!2sbr!4v1779818483410!5m2!1spt-BR!2sbr" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

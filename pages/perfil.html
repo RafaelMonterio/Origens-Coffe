@@ -43,7 +43,13 @@
 }
 .perfil-nav-item:hover { color: var(--black); background: rgba(0,0,0,.03); }
 .perfil-nav-item.active { color: var(--brown); border-left-color: var(--brown-mid); background: var(--white); }
-.perfil-nav-item .nav-icon { width: 18px; text-align: center; font-size: .9rem; }
+.perfil-nav-item .nav-icon-wrapper { display: flex; align-items: center; justify-content: center; width: 24px; height: 22px; }
+.perfil-nav-item .nav-icon { object-fit: contain; }
+.nav-img-pedidos { width: 20px; height: auto; }
+.nav-img-assinatura { width: 18px; height: auto; }
+.nav-img-cursos { width: 24px; height: auto; }
+.nav-img-config { width: 20px; height: auto; }
+.nav-img-sair { width: 20px; height: auto; }
 
 .perfil-main { padding: 3rem 4rem; background: var(--white); }
 .perfil-section { display: none; }
@@ -81,7 +87,7 @@
 <body>
 <div id="cursor"></div><div id="cursor-ring"></div>
 
-<nav class="navbar" id="navbar" style="background:#0d0b09;border-bottom:1px solid rgba(255,255,255,.07);">
+<nav class="navbar" id="navbar">
   <a href="../index.html" class="logo-inline">
     <img src="../assets/icone2.png" alt="" class="logo-inline-icon">
     <div class="logo-inline-div"></div>
@@ -106,11 +112,11 @@
       <div class="perfil-email" id="perfil-email-display">—</div>
     </div>
     <nav class="perfil-nav">
-      <button class="perfil-nav-item active" onclick="showTab('pedidos',this)"><span class="nav-icon"></span> Meus Pedidos</button>
-      <button class="perfil-nav-item" onclick="showTab('assinatura',this)"><span class="nav-icon"></span> Assinatura</button>
-      <button class="perfil-nav-item" onclick="showTab('cursos',this)"><span class="nav-icon"></span> Meus Cursos</button>
-      <button class="perfil-nav-item" onclick="showTab('config',this)"><span class="nav-icon"></span> Configurações</button>
-      <button class="perfil-nav-item" onclick="logout()" style="margin-top:auto;color:var(--gray-400)"><span class="nav-icon"></span> Sair</button>
+      <button class="perfil-nav-item active" onclick="showTab('pedidos',this)"><div class="nav-icon-wrapper"><img src="../assets/perfil/pedidos.png" alt="" class="nav-icon nav-img-pedidos"></div> Meus Pedidos</button>
+      <button class="perfil-nav-item" onclick="showTab('assinatura',this)"><div class="nav-icon-wrapper"><img src="../assets/perfil/assinaturasicon.png" alt="" class="nav-icon nav-img-assinatura"></div> Assinatura</button>
+      <button class="perfil-nav-item" onclick="showTab('cursos',this)"><div class="nav-icon-wrapper"><img src="../assets/perfil/curos.png" alt="" class="nav-icon nav-img-cursos"></div> Meus Cursos</button>
+      <button class="perfil-nav-item" onclick="showTab('config',this)"><div class="nav-icon-wrapper"><img src="../assets/perfil/config.png" alt="" class="nav-icon nav-img-config"></div> Configurações</button>
+      <button class="perfil-nav-item" onclick="logout()" style="margin-top:auto;color:var(--gray-400)"><div class="nav-icon-wrapper"><img src="../assets/perfil/sair.png" alt="" class="nav-icon nav-img-sair"></div> Sair</button>
     </nav>
   </div>
 
