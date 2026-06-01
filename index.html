@@ -183,7 +183,7 @@
 .sobre-quote.reveal { flex-shrink: 0; width: 380px; display: flex; flex-direction: column; justify-content: center; border-left: 2px solid #6b3a1f; padding: 3rem 0 3rem 2rem; }
 
 /* ══ PROCESSO ══ */
-#processo { background:#0d0b09;padding:8rem 0 0;overflow:hidden; }
+#processo { background:#0d0b09;padding:3rem 0 0;overflow:hidden; }
 .processo-top { display:flex;align-items:flex-end;justify-content:space-between;padding:0 6rem 4rem; }
 .processo-hint { font-size:.6rem;letter-spacing:.22em;color:rgba(255,255,255,.18);text-transform:uppercase;font-family:'Montserrat',sans-serif; }
 .processo-track { display:flex;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;padding:0 6rem 5rem;cursor:grab;border-top:1px solid rgba(255,255,255,.05); }
@@ -205,7 +205,220 @@
 .cta-title em { font-style:italic;color:#a07040; }
 .cta-sub { font-size:.78rem;color:rgba(255,255,255,.36);line-height:2;max-width:480px;position:relative;z-index:1;font-family:'Montserrat',sans-serif; }
 .cta-buttons { display:flex;gap:1rem;position:relative;z-index:1;flex-wrap:wrap;justify-content:center; }
-</style>
+
+/* ══ LOJA FÍSICA ══ */
+.store-section {
+  border-top: 1.5px solid #000;
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.store-section::after {
+  content: "";
+  position: absolute;
+  bottom: -2rem;
+  left: 6rem;
+  right: 6rem;
+  height: 1px;
+  background: #000;
+}
+
+.store-layout {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  align-items: stretch;
+  min-height: 450px;
+}
+
+.carousel-container,
+.maps-container {
+  transition: all 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e0d8d0;
+}
+
+.carousel-container {
+  background: #f0ebe4;
+  cursor: grab;
+  border-right: 1.5px solid #000;
+}
+
+.carousel-container:active {
+  cursor: grabbing;
+}
+
+.maps-container {
+  cursor: pointer;
+  background: #fff;
+}
+
+.maps-container:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.maps-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  border-radius: 12px;
+}
+
+.store-layout.maps-active {
+  grid-template-columns: 1fr 4fr;
+}
+
+.store-layout.maps-active .carousel-container {
+  transform: scale(0.96);
+  opacity: 0.8;
+}
+
+.store-layout.maps-active .maps-container {
+  transform: scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.carousel-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.store-layout.maps-active .carousel-container:hover {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ══ NOVO CARROSSEL COM RADIO BUTTONS ══ */
+.carousel {
+  display: block;
+  text-align: left;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel > input {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+
+.carousel > input:nth-of-type(3):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: -200%; }
+.carousel > input:nth-of-type(2):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: -100%; }
+.carousel > input:nth-of-type(1):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: 0%; }
+
+.carousel > input:nth-of-type(1):checked ~ .carousel__thumbnails li:nth-of-type(1) { box-shadow: 0px 0px 0px 4px #a07040; }
+.carousel > input:nth-of-type(2):checked ~ .carousel__thumbnails li:nth-of-type(2) { box-shadow: 0px 0px 0px 4px #a07040; }
+.carousel > input:nth-of-type(3):checked ~ .carousel__thumbnails li:nth-of-type(3) { box-shadow: 0px 0px 0px 4px #a07040; }
+
+.carousel__slides {
+  position: relative;
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+}
+
+.carousel__slide {
+  position: relative;
+  display: block;
+  flex: 1 0 100%;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-sizing: border-box;
+  white-space: normal;
+}
+
+.carousel__slide figure {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.carousel__slide div {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0ebe4;
+}
+
+.carousel__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel__slide figcaption {
+  padding: 1rem;
+  background: #fff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #5f5043;
+  border-top: 1px solid #e0d8d0;
+  flex: 0 0 auto;
+}
+
+.carousel__thumbnails {
+  list-style: none;
+  padding: 1rem;
+  margin: 0;
+  display: flex;
+  gap: 0.75rem;
+  background: #f0ebe4;
+  border-top: 1px solid #e0d8d0;
+}
+
+.carousel__thumbnails li {
+  flex: 1;
+  aspect-ratio: 1;
+  transition: all 0.3s ease;
+}
+
+.carousel__thumbnails label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.carousel__thumbnails label:hover {
+  opacity: 0.8;
+}
+
+.carousel__thumbnails img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}</style>
 </head>
 <body>
 
@@ -291,6 +504,76 @@
     </div>
   </div>
 </div>
+
+<!-- ═══ LOJA FÍSICA ═════════════════════════════ -->
+<section class="store-section" style="padding: 6rem 6rem 8rem; background: #fff;">
+  <div class="reveal">
+    <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Loja Física</span></div>
+    <h2 class="section-title">Visite nossa loja em<br><em>Ribeirão Pires.</em></h2>
+    <p style="max-width:620px;margin-top:1.5rem;color:#5f5043;font-size:.95rem;line-height:1.8;">R. Colorado, 70 - Santa Luzia, Ribeirão Pires - SP. Aqui você encontra mais cafés, kits exclusivos e presentes — além de atendimento personalizado.</p>
+  </div>
+  
+  <div class="store-layout reveal delay-1" id="store-layout">
+    <!-- Carrossel à esquerda -->
+    <div class="carousel-container" id="carousel-container">
+      <div class="carousel">
+        <input type="radio" name="slides" checked="checked" id="slide-1">
+        <input type="radio" name="slides" id="slide-2">
+        <input type="radio" name="slides" id="slide-3">
+        
+        <ul class="carousel__slides">
+          <li class="carousel__slide">
+            <figure>
+              <div>
+                <img src="assets/sobre/pedro-lima-barista.jpg" alt="Loja física">
+              </div>
+              <figcaption>
+                Atendimento personalizado em nossa loja
+              </figcaption>
+            </figure>
+          </li>
+          <li class="carousel__slide">
+            <figure>
+              <div>
+                <img src="assets/sobre/selecao-graos.jpg" alt="Seleção de grãos">
+              </div>
+              <figcaption>
+                Seleção cuidadosa de grãos de origem
+              </figcaption>
+            </figure>
+          </li>
+          <li class="carousel__slide">
+            <figure>
+              <div>
+                <img src="assets/produtos/bourbon-amarelo.png" alt="Bourbon Amarelo">
+              </div>
+              <figcaption>
+                Variedades exclusivas disponíveis
+              </figcaption>
+            </figure>
+          </li>
+        </ul>
+        
+        <ul class="carousel__thumbnails">
+          <li>
+            <label for="slide-1"><img src="assets/sobre/pedro-lima-barista.jpg" alt=""></label>
+          </li>
+          <li>
+            <label for="slide-2"><img src="assets/sobre/selecao-graos.jpg" alt=""></label>
+          </li>
+          <li>
+            <label for="slide-3"><img src="assets/produtos/bourbon-amarelo.png" alt=""></label>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Mapa à direita -->
+    <div class="maps-container" id="maps-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3653.508503919092!2d-46.388756923879846!3d-23.69352846646269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce6d0bdf1e0149%3A0x464a1b18088fa948!2sR.+Colorado%2C+70+-+Santa+Luzia%2C+Ribeir%C3%A3o+Pires+-+SP%2C+09431-060!5e0!3m2!1spt-BR!2sbr!4v1779818483410!5m2!1spt-BR!2sbr" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
 
 <!-- ═══ SOBRE ════════════════════════════════ -->
 <section id="sobre">
@@ -479,6 +762,21 @@ pt.addEventListener('mousemove',  e => {
   if (!isDragging) return; e.preventDefault();
   pt.scrollLeft = sl - (e.pageX - pt.offsetLeft - startX) * 1.4;
 });
+
+// ── Store section — interativo (carrossel vs maps) ──
+const storeLayout = document.getElementById('store-layout');
+const carouselContainer = document.getElementById('carousel-container');
+const mapsContainer = document.getElementById('maps-container');
+
+if (storeLayout && mapsContainer && carouselContainer) {
+  mapsContainer.addEventListener('mouseenter', () => {
+    storeLayout.classList.add('maps-active');
+  });
+  
+  carouselContainer.addEventListener('mouseenter', () => {
+    storeLayout.classList.remove('maps-active');
+  });
+}
 
 // ── Sobre Carousel — loop infinito contínuo (estilo Netflix) ──
 const carouselTrack = document.querySelector('.sobre-scroll-side');

@@ -49,6 +49,269 @@
 }
 .page-header-copo video:hover { transform: translateY(-6px) scale(1.02); }
 
+/* ── Animação Máquina de Café ──────────────────────── */
+.coffee-container {
+  width: 300px;
+  height: 280px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.coffee-header {
+  width: 100%;
+  height: 80px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ddcfcc;
+  border-radius: 10px;
+  z-index: 5;
+}
+.coffee-header__buttons {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 25px;
+  background-color: #282323;
+  border-radius: 50%;
+}
+.coffee-header__buttons::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  bottom: -8px;
+  left: calc(50% - 4px);
+  background-color: #615e5e;
+}
+.coffee-header__button-one {
+  left: 15px;
+}
+.coffee-header__button-two {
+  left: 50px;
+}
+.coffee-header__display {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: calc(50% - 25px);
+  left: calc(50% - 25px);
+  border-radius: 50%;
+  background-color: #f4a261;
+  border: 5px solid #e88a3a;
+  box-sizing: border-box;
+}
+.coffee-header__details {
+  width: 8px;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #9b9091;
+  box-shadow: -12px 0 0 #9b9091, -24px 0 0 #9b9091;
+}
+.coffee-medium {
+  width: 90%;
+  height: 160px;
+  position: absolute;
+  top: 80px;
+  left: calc(50% - 45%);
+  background-color: #bcb0af;
+  z-index: 3;
+}
+.coffee-medium:before {
+  content: "";
+  width: 90%;
+  height: 100px;
+  background-color: #776f6e;
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 45%);
+  border-radius: 20px 20px 0 0;
+}
+.coffe-medium__exit {
+  width: 60px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  left: calc(50% - 30px);
+  background-color: #231f20;
+}
+.coffe-medium__exit::before {
+  content: "";
+  width: 50px;
+  height: 20px;
+  border-radius: 0 0 50% 50%;
+  position: absolute;
+  bottom: -20px;
+  left: calc(50% - 25px);
+  background-color: #231f20;
+}
+.coffe-medium__exit::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  bottom: -30px;
+  left: calc(50% - 5px);
+  background-color: #231f20;
+}
+.coffee-medium__arm {
+  width: 70px;
+  height: 20px;
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  background-color: #231f20;
+}
+.coffee-medium__arm::before {
+  content: "";
+  width: 15px;
+  height: 5px;
+  position: absolute;
+  top: 7px;
+  left: -15px;
+  background-color: #9e9495;
+}
+.coffee-medium__cup {
+  width: 80px;
+  height: 47px;
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 40px);
+  background-color: #FFF;
+  border-radius: 0 0 70px 70px / 0 0 110px 110px;
+}
+.coffee-medium__cup::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 6px;
+  right: -13px;
+  border: 5px solid #FFF;
+  border-radius: 50%;
+}
+@keyframes liquid {
+  0% {
+    height: 0px;  
+    opacity: 1;
+  }
+  5% {
+    height: 0px;  
+    opacity: 1;
+  }
+  20% {
+    height: 62px;  
+    opacity: 1;
+  }
+  95% {
+    height: 62px;
+    opacity: 1;
+  }
+  100% {
+    height: 62px;
+    opacity: 0;
+  }
+}
+.coffee-medium__liquid {
+  width: 6px;
+  height: 63px;
+  opacity: 0;
+  position: absolute;
+  top: 50px;
+  left: calc(50% - 3px);
+  background-color: #74372b;
+  animation: liquid 4s 2s linear infinite;
+}
+.coffee-medium__smoke {
+  width: 8px;
+  height: 20px;
+  position: absolute;  
+  border-radius: 5px;
+  background-color: #b3aeae;
+}
+@keyframes smokeOne {
+  0% {
+    bottom: 20px;
+    opacity: 0;
+  }
+  40% {
+    bottom: 50px;
+    opacity: .5;
+  }
+  80% {
+    bottom: 80px;
+    opacity: .3;
+  }
+  100% {
+    bottom: 80px;
+    opacity: 0;
+  }
+}
+@keyframes smokeTwo {
+  0% {
+    bottom: 40px;
+    opacity: 0;
+  }
+  40% {
+    bottom: 70px;
+    opacity: .5;
+  }
+  80% {
+    bottom: 80px;
+    opacity: .3;
+  }
+  100% {
+    bottom: 80px;
+    opacity: 0;
+  }
+}
+.coffee-medium__smoke-one {
+  opacity: 0;
+  bottom: 50px;
+  left: 102px;
+  animation: smokeOne 3s 4s linear infinite;
+}
+.coffee-medium__smoke-two {
+  opacity: 0;
+  bottom: 70px;
+  left: 118px;
+  animation: smokeTwo 3s 5s linear infinite;
+}
+.coffee-medium__smoke-three {
+  opacity: 0;
+  bottom: 65px;
+  right: 118px;
+  animation: smokeTwo 3s 6s linear infinite;
+}
+.coffee-medium__smoke-for {
+  opacity: 0;
+  bottom: 50px;
+  right: 102px;
+  animation: smokeOne 3s 5s linear infinite;
+}
+.coffee-footer {
+  width: 95%;
+  height: 15px;
+  position: absolute;
+  bottom: 25px;
+  left: calc(50% - 47.5%);
+  background-color: #64605c;
+  border-radius: 10px;
+  z-index: 2;
+}
+.coffee-footer::after {
+  content: "";
+  width: 106%;
+  height: 26px;
+  position: absolute;
+  bottom: -25px;
+  left: -8px;
+  background-color: #000;
+}
+
 /* ── Filtros ─────────────────────────────── */
 .filter-bar {
   position: sticky; top: 72px; z-index: 10;
@@ -163,11 +426,81 @@
 }
 .btn-add:hover { background: #000; color: #fff; }
 
+/* ── Carrossel nos cards ─────────────────────────────── */
+.prod-img {
+  position: relative;
+}
+
+.prod-carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.prod-carousel-track {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+
+.prod-carousel-slide {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+  transition: transform .8s cubic-bezier(0.16,1,0.3,1);
+  display: block;
+}
+
+.prod-carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.9);
+  border: none;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #000;
+  transition: all 0.25s;
+  border-radius: 4px;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.prod-card:hover .prod-carousel-nav {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.prod-carousel-nav:hover {
+  background: rgba(255,255,255,1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.prod-carousel-nav.prev {
+  left: 0.75rem;
+}
+
+.prod-carousel-nav.next {
+  right: 0.75rem;
+}
+
 /* ── Kits ────────────────────────────────── */
 .kits-section {
   padding: 6rem 6rem 8rem;
   background: #f5f1ec;
-  border-top: 1px solid #e0d8d0;
+  border-top: 1.5px solid #000;
 }
 .kits-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3.5rem; }
 .kit-card {
@@ -187,7 +520,7 @@
 .kit-name { font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;margin-bottom:.5rem; }
 .kit-desc { font-family:'Cormorant Garamond',serif;font-size:.8rem;font-style:italic;color:#7a6a58;line-height:1.8;flex:1;margin-bottom:1.2rem; }
 .kit-price { font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300; }
-  .store-section { padding: 6rem 6rem 10rem; background: #fff; }
+  .store-section { padding: 6rem 6rem 10rem; background: #fff; border-top: 1.5px solid #000; }
   .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; align-items: stretch; }
   .store-card { display: flex; flex-direction: column; border: 1px solid #e0d8d0; background: #f8f4ed; overflow: hidden; }
   .store-card-info { padding: 2rem; display: flex; flex-direction: column; gap: 1rem; }
@@ -231,7 +564,25 @@
     </p>
   </div>
   <div class="page-header-copo reveal-right">
-    <video id="header-video" src="../assets/cafelongo-Picsart-BackgroundRemover.webm" autoplay muted playsinline></video>
+    <div class="coffee-container">
+      <div class="coffee-header">
+        <div class="coffee-header__buttons coffee-header__button-one"></div>
+        <div class="coffee-header__buttons coffee-header__button-two"></div>
+        <div class="coffee-header__display"></div>
+        <div class="coffee-header__details"></div>
+      </div>
+      <div class="coffee-medium">
+        <div class="coffe-medium__exit"></div>
+        <div class="coffee-medium__arm"></div>
+        <div class="coffee-medium__liquid"></div>
+        <div class="coffee-medium__smoke coffee-medium__smoke-one"></div>
+        <div class="coffee-medium__smoke coffee-medium__smoke-two"></div>
+        <div class="coffee-medium__smoke coffee-medium__smoke-three"></div>
+        <div class="coffee-medium__smoke coffee-medium__smoke-for"></div>
+        <div class="coffee-medium__cup"></div>
+      </div>
+      <div class="coffee-footer"></div>
+    </div>
   </div>
 </div>
 
@@ -251,7 +602,13 @@
     <!-- DESTAQUE WIDE: Bourbon Amarelo -->
     <div class="prod-card wide reveal" data-cat="cafe">
       <div class="prod-img">
-        <img src="../assets/produtos/bourbon-amarelo.png" alt="Bourbon Amarelo">
+        <div class="prod-carousel" data-carousel="bourbon-amarelo">
+          <div class="prod-carousel-track">
+            <img src="../assets/produtos/bourbon-amarelo.png" alt="Bourbon Amarelo" class="prod-carousel-slide">
+          </div>
+          <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
+          <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
+        </div>
         <div class="prod-badge-group">
           <div class="prod-badge">Destaque</div>
           <div class="prod-badge">Seleção Premium</div>
@@ -278,7 +635,13 @@
     <!-- Gesha Etíope -->
     <div class="prod-card reveal delay-1" data-cat="cafe">
       <div class="prod-img">
-        <img src="../assets/produtos/gesha-etiope.jpg" alt="Gesha Etíope">
+        <div class="prod-carousel" data-carousel="gesha-etiope">
+          <div class="prod-carousel-track">
+            <img src="../assets/produtos/gesha-etiope.jpg" alt="Gesha Etíope" class="prod-carousel-slide">
+          </div>
+          <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
+          <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
+        </div>
         <div class="prod-badge">Premium</div>
       </div>
       <div class="prod-body">
@@ -295,7 +658,13 @@
     <!-- Honey Mogiana -->
     <div class="prod-card reveal delay-2" data-cat="cafe">
       <div class="prod-img">
-        <img src="../assets/produtos/mogiana.webp" alt="Honey Mogiana">
+        <div class="prod-carousel" data-carousel="mogiana">
+          <div class="prod-carousel-track">
+            <img src="../assets/produtos/mogiana.webp" alt="Honey Mogiana" class="prod-carousel-slide">
+          </div>
+          <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
+          <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
+        </div>
         <div class="prod-badge">Novo</div>
       </div>
       <div class="prod-body">
@@ -312,7 +681,13 @@
     <!-- Natural Cerrado -->
     <div class="prod-card reveal" data-cat="cafe graos">
       <div class="prod-img prod-img--contain">
-        <img src="../assets/cerrado.jpg" alt="Natural Cerrado">
+        <div class="prod-carousel" data-carousel="cerrado">
+          <div class="prod-carousel-track">
+            <img src="../assets/cerrado.jpg" alt="Natural Cerrado" class="prod-carousel-slide">
+          </div>
+          <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
+          <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
+        </div>
       </div>
       <div class="prod-body">
         <div class="prod-origin">Cerrado Mineiro · 1.050m</div>
@@ -328,7 +703,13 @@
     <!-- Natural Bahia -->
     <div class="prod-card reveal delay-1" data-cat="cafe graos">
       <div class="prod-img">
-       <img src="../assets/produtos/natural bahia.avif" alt="Honey Mogiana">
+        <div class="prod-carousel" data-carousel="bahia">
+          <div class="prod-carousel-track">
+            <img src="../assets/produtos/natural bahia.avif" alt="Natural Bahia" class="prod-carousel-slide">
+          </div>
+          <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
+          <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
+        </div>
       </div>
       <div class="prod-body">
         <div class="prod-origin">Chapada Diamantina · 1.400m</div>
@@ -344,7 +725,13 @@
     <!-- Dripper V60 -->
     <div class="prod-card reveal delay-2" data-cat="acessorio">
       <div class="prod-img">
-        <img src="../assets/produtos/dripper-v60.jpg" alt="Dripper V60">
+        <div class="prod-carousel" data-carousel="v60">
+          <div class="prod-carousel-track">
+            <img src="../assets/produtos/dripper-v60.jpg" alt="Dripper V60" class="prod-carousel-slide">
+          </div>
+          <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
+          <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
+        </div>
       </div>
       <div class="prod-body">
         <div class="prod-origin">Equipamento</div>
@@ -360,7 +747,13 @@
     <!-- Moedor Manual -->
     <div class="prod-card reveal delay-3" data-cat="acessorio">
       <div class="prod-img">
-        <img src="../assets/produtos/moedor-manual.webp" alt="Moedor Manual">
+        <div class="prod-carousel" data-carousel="moedor">
+          <div class="prod-carousel-track">
+            <img src="../assets/produtos/moedor-manual.webp" alt="Moedor Manual" class="prod-carousel-slide">
+          </div>
+          <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
+          <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
+        </div>
       </div>
       <div class="prod-body">
         <div class="prod-origin">Equipamento</div>
@@ -522,6 +915,34 @@ function filterProducts(btn, cat) {
       try { v.pause(); } catch(e) {}
     });
   })();
+</script>
+<script>
+// Carrossel de produtos
+function prodCarouselPrev(btn) {
+  const carousel = btn.closest('.prod-carousel');
+  const track = carousel.querySelector('.prod-carousel-track');
+  const slides = track.querySelectorAll('.prod-carousel-slide');
+  const slideWidth = slides[0].offsetWidth;
+  const currentScroll = track.scrollLeft;
+  
+  track.scrollTo({
+    left: currentScroll - slideWidth,
+    behavior: 'smooth'
+  });
+}
+
+function prodCarouselNext(btn) {
+  const carousel = btn.closest('.prod-carousel');
+  const track = carousel.querySelector('.prod-carousel-track');
+  const slides = track.querySelectorAll('.prod-carousel-slide');
+  const slideWidth = slides[0].offsetWidth;
+  const currentScroll = track.scrollLeft;
+  
+  track.scrollTo({
+    left: currentScroll + slideWidth,
+    behavior: 'smooth'
+  });
+}
 </script>
 </body>
 </html>
