@@ -216,7 +216,7 @@
 .store-section::after {
   content: "";
   position: absolute;
-  bottom: -2rem;
+  bottom: 0;
   left: 6rem;
   right: 6rem;
   height: 1px;
@@ -225,7 +225,7 @@
 
 .store-layout {
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 16fr 3fr;
   gap: 1.5rem;
   margin-top: 3rem;
   align-items: stretch;
@@ -249,6 +249,8 @@
   background: #f0ebe4;
   cursor: grab;
   border-right: 1.5px solid #000;
+  transform: scale(0.96);
+  max-height: 450px;
 }
 
 .carousel-container:active {
@@ -258,10 +260,12 @@
 .maps-container {
   cursor: pointer;
   background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .maps-container:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .maps-container iframe {
@@ -273,7 +277,7 @@
 }
 
 .store-layout.maps-active {
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 3fr 16fr;
 }
 
 .store-layout.maps-active .carousel-container {
@@ -287,12 +291,10 @@
 }
 
 .carousel-container:hover {
-  transform: scale(1.02);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .store-layout.maps-active .carousel-container:hover {
-  transform: scale(1);
   opacity: 1;
 }
 
@@ -525,7 +527,7 @@
           <li class="carousel__slide">
             <figure>
               <div>
-                <img src="assets/sobre/pedro-lima-barista.jpg" alt="Loja física">
+                <img src="assets/sobre/Fachada2.png" alt="Loja física">
               </div>
               <figcaption>
                 Atendimento personalizado em nossa loja
@@ -628,11 +630,11 @@
     <span class="processo-hint">← Arraste →</span>
   </div>
   <div class="processo-track" id="processo-track">
-    <div class="processo-card"><div class="step-no">01</div><div class="step-name">Seleção de Origem</div><img src="assets/visita.jpg" alt=""><div class="step-desc">Visitamos cada fazenda pessoalmente. Avaliamos altitude, solo, microclima e práticas sustentáveis antes de qualquer parceria.</div></div>
-    <div class="processo-card"><div class="step-no">02</div><div class="step-name">Colheita Seletiva</div><img src="assets/colhido.jpg" alt=""><div class="step-desc">Apenas grãos no ponto ideal de maturação são colhidos. Processo manual que garante homogeneidade e qualidade superior.</div></div>
-    <div class="processo-card"><div class="step-no">03</div><div class="step-name">Torra Artesanal</div><img src="assets/torra.jpg" alt=""><div class="step-desc">Torras em pequenos lotes com controle preciso de temperatura e tempo para realçar as notas únicas de cada origem.</div></div>
-    <div class="processo-card"><div class="step-no">04</div><div class="step-name">Controle de Qualidade</div><img src="assets/analise.jpeg" alt=""><div class="step-desc">Cada lote passa por cupping — degustação técnica que avalia aroma, sabor, acidez, corpo e finalização.</div></div>
-    <div class="processo-card"><div class="step-no">05</div><div class="step-name">Entrega Fresca</div><img src="assets/cafénosso-removebg-preview.png" alt=""><div class="step-desc">Embalagem com válvula de desgaseificação. Enviado em até 72h após a torra para máximo frescor na sua xícara.</div></div>
+    <div class="processo-card"><div class="step-no">01</div><div class="step-name">Seleção de Origem</div><img src="assets/sobre/fazenda.png" alt=""><div class="step-desc">Visitamos cada fazenda pessoalmente. Avaliamos altitude, solo, microclima e práticas sustentáveis antes de qualquer parceria.</div></div>
+    <div class="processo-card"><div class="step-no">02</div><div class="step-name">Colheita Seletiva</div><img src="assets/sobre/colheita.jpg" alt=""><div class="step-desc">Apenas grãos no ponto ideal de maturação são colhidos. Processo manual que garante homogeneidade e qualidade superior.</div></div>
+    <div class="processo-card"><div class="step-no">03</div><div class="step-name">Torra Artesanal</div><img src="assets/sobre/torra1.jpg" alt=""><div class="step-desc">Torras em pequenos lotes com controle preciso de temperatura e tempo para realçar as notas únicas de cada origem.</div></div>
+    <div class="processo-card"><div class="step-no">04</div><div class="step-name">Controle de Qualidade</div><img src="assets/sobre/cupping.jfif" alt=""><div class="step-desc">Cada lote passa por cupping — degustação técnica que avalia aroma, sabor, acidez, corpo e finalização.</div></div>
+    <div class="processo-card"><div class="step-no">05</div><div class="step-name">Entrega Fresca</div><img src="assets/produtos/pacote padrão.png" alt=""><div class="step-desc">Embalagem com válvula de desgaseificação. Enviado em até 72h após a torra para máximo frescor na sua xícara.</div></div>
   </div>
 </section>
 

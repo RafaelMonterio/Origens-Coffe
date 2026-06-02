@@ -51,6 +51,23 @@
 .nav-img-config { width: 20px; height: auto; }
 .nav-img-sair { width: 20px; height: auto; }
 
+/* Admin Dashboard */
+.admin-badge { display: inline-block; background: var(--brown-mid); color: #fff; font-size: .55rem; letter-spacing: .15em; padding: .35rem .65rem; border-radius: 999px; margin-top: .4rem; text-transform: uppercase; font-weight: 600; }
+.stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 2.5rem; }
+.stat-card { background: linear-gradient(135deg, rgba(160,112,74,.08) 0%, rgba(160,112,74,.03) 100%); border: 1px solid rgba(160,112,74,.1); padding: 1.8rem; border-radius: 16px; }
+.stat-card-value { font-family: var(--font-display); font-size: 2.2rem; font-weight: 300; color: var(--brown-mid); margin-bottom: .3rem; }
+.stat-card-label { font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gray-600); }
+.stat-card-sub { font-size: .75rem; color: var(--gray-600); margin-top: .5rem; }
+.chart-container { background: linear-gradient(135deg, rgba(160,112,74,.04) 0%, transparent 100%); border: 1px solid rgba(160,112,74,.08); padding: 2rem; border-radius: 16px; margin-bottom: 1.5rem; }
+.chart-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 300; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(160,112,74,.1); }
+.bar-chart { display: flex; align-items: flex-end; justify-content: space-around; height: 200px; margin: 1.5rem 0; }
+.bar { flex: 1; background: linear-gradient(180deg, var(--brown-mid) 0%, var(--brown-lt) 100%); margin: 0 .5rem; border-radius: 8px 8px 0 0; position: relative; min-height: 20px; }
+.bar-label { font-size: .65rem; text-align: center; color: var(--gray-600); margin-top: .5rem; }
+.bar-value { position: absolute; top: -1.5rem; left: 50%; transform: translateX(-50%); font-size: .68rem; color: var(--brown-mid); font-weight: 500; }
+.chart-legend { display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; font-size: .7rem; }
+.legend-item { display: flex; align-items: center; gap: .5rem; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
 .perfil-main { padding: 3rem 4rem; background: var(--white); }
 .perfil-section { display: none; }
 .perfil-section.active { display: block; }
@@ -115,6 +132,7 @@
       <button class="perfil-nav-item active" onclick="showTab('pedidos',this)"><div class="nav-icon-wrapper"><img src="../assets/perfil/pedidos.png" alt="" class="nav-icon nav-img-pedidos"></div> Meus Pedidos</button>
       <button class="perfil-nav-item" onclick="showTab('assinatura',this)"><div class="nav-icon-wrapper"><img src="../assets/perfil/assinaturasicon.png" alt="" class="nav-icon nav-img-assinatura"></div> Assinatura</button>
       <button class="perfil-nav-item" onclick="showTab('cursos',this)"><div class="nav-icon-wrapper"><img src="../assets/perfil/curos.png" alt="" class="nav-icon nav-img-cursos"></div> Meus Cursos</button>
+      <button class="perfil-nav-item" id="admin-nav-item" style="display:none;color:var(--brown-mid);font-weight:600" onclick="showTab('dados-gerais',this)"><div class="nav-icon-wrapper"><img src="../assets/perfil/Data.webp" alt="" srcset=""></div> Dados Gerais</button>
       <button class="perfil-nav-item" onclick="showTab('config',this)"><div class="nav-icon-wrapper"><img src="../assets/perfil/config.png" alt="" class="nav-icon nav-img-config"></div> Configurações</button>
       <button class="perfil-nav-item" onclick="logout()" style="margin-top:auto;color:var(--gray-400)"><div class="nav-icon-wrapper"><img src="../assets/perfil/sair.png" alt="" class="nav-icon nav-img-sair"></div> Sair</button>
     </nav>
@@ -128,6 +146,14 @@
       <div class="section-head">
         <div class="section-head-title">Meus Pedidos</div>
         <a href="loja.html" class="btn btn-outline-dark btn-sm">Continuar comprando</a>
+      </div>
+      <div style="background:#f0f0f0;padding:1rem;border-radius:8px;margin-bottom:2rem;font-family:monospace;font-size:.75rem;color:#333">
+        <strong>DEBUG:</strong> localStorage('origens_user'):<br>
+        <span id="debug-user">carregando...</span>
+        <br><br>
+        <button onclick="setUser({name:'Rafael Admin',email:'rafaelvasm@gmail.com',isAdmin:true});location.reload()" style="padding:.5rem 1rem;background:#6b3a1f;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:.75rem">
+          [TESTE] Login como Admin
+        </button>
       </div>
       <div class="pedido-card reveal">
         <div class="pedido-header">
@@ -222,6 +248,181 @@
       </div>
     </div>
 
+    <!-- DADOS GERAIS (ADMIN) -->
+    <div class="perfil-section" id="tab-dados-gerais">
+      <div class="section-head">
+        <div style="display:flex;flex-direction:column">
+          <div class="section-head-title">Dashboard Admin</div>
+          <div class="admin-badge">Administrador</div>
+        </div>
+      </div>
+      
+      <div class="stats-grid reveal">
+        <div class="stat-card">
+          <div class="stat-card-value">R$ 12.450</div>
+          <div class="stat-card-label">Faturamento (30d)</div>
+          <div class="stat-card-sub">↑ 12% vs período anterior</div>
+        </div>
+        <div class="stat-card reveal delay-1">
+          <div class="stat-card-value">543</div>
+          <div class="stat-card-label">Pedidos (30d)</div>
+          <div class="stat-card-sub">↑ 23% nova semana</div>
+        </div>
+        <div class="stat-card reveal delay-2">
+          <div class="stat-card-value">156</div>
+          <div class="stat-card-label">Assinaturas ativas</div>
+          <div class="stat-card-sub">↑ 8 novas</div>
+        </div>
+        <div class="stat-card reveal delay-3">
+          <div class="stat-card-value">6.532</div>
+          <div class="stat-card-label">Visitantes (30d)</div>
+          <div class="stat-card-sub">↑ 18% crescimento</div>
+        </div>
+        <div class="stat-card reveal delay-4">
+          <div class="stat-card-value">915</div>
+          <div class="stat-card-label">Clientes cadastrados</div>
+          <div class="stat-card-sub">↑ 47 novos clientes</div>
+        </div>
+        <div class="stat-card reveal delay-5">
+          <div class="stat-card-value">R$ 22,94</div>
+          <div class="stat-card-label">Ticket Médio</div>
+          <div class="stat-card-sub">Por unidade vendida</div>
+        </div>
+      </div>
+
+      <!-- Receita por Método de Pagamento -->
+      <div class="chart-container" style="opacity:1">
+        <div class="chart-title">Receita por Método de Pagamento (30 dias)</div>
+        <div style="display:flex;align-items:flex-end;gap:1rem;height:280px;margin:2rem 0;justify-content:space-between;padding:0 1rem">
+          <div style="flex:1">
+            <div style="width:100%;height:182px;background:#a07040;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">Débito<br>R$ 4.850</div>
+          </div>
+          <div style="flex:1">
+            <div style="width:100%;height:201px;background:#a07040;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">Crédito<br>R$ 5.320</div>
+          </div>
+          <div style="flex:1">
+            <div style="width:100%;height:61px;background:#a07040;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">PIX<br>R$ 1.580</div>
+          </div>
+          <div style="flex:1">
+            <div style="width:100%;height:33px;background:#a07040;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">Boleto<br>R$ 700</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vendas por Produto -->
+      <div class="chart-container" style="opacity:1">
+        <div class="chart-title">Vendas por Produto (30 dias)</div>
+        <div style="display:flex;align-items:flex-end;gap:1rem;height:280px;margin:2rem 0;justify-content:space-between;padding:0 1rem">
+          <div style="flex:1">
+            <div style="width:100%;height:182px;background:#6b3a1f;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">Bourbon<br>856 un</div>
+          </div>
+          <div style="flex:1">
+            <div style="width:100%;height:117px;background:#6b3a1f;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">Gesha<br>534 un</div>
+          </div>
+          <div style="flex:1">
+            <div style="width:100%;height:246px;background:#6b3a1f;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">Mogiana<br>1.124 un</div>
+          </div>
+          <div style="flex:1">
+            <div style="width:100%;height:170px;background:#6b3a1f;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">Cerrado<br>778 un</div>
+          </div>
+          <div style="flex:1">
+            <div style="width:100%;height:126px;background:#6b3a1f;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">Bahia<br>572 un</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Assinaturas por Plano -->
+      <div class="chart-container" style="opacity:1">
+        <div class="chart-title">Assinaturas por Plano</div>
+        <div style="display:flex;align-items:flex-end;gap:2rem;height:250px;margin:2rem 0;justify-content:space-between">
+          <div style="flex:1">
+            <div style="width:100%;height:100%;background:#8b5a3c;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">Essencial<br>92 assin</div>
+          </div>
+          <div style="flex:1">
+            <div style="width:100%;height:63%;background:#8b5a3c;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">Gourmet<br>58 assin</div>
+          </div>
+          <div style="flex:1">
+            <div style="width:100%;height:28%;background:#8b5a3c;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">Premium+<br>26 assin</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clientes por Região -->
+      <div class="chart-container" style="opacity:1">
+        <div class="chart-title">Clientes por Região Geográfica</div>
+        <div style="display:flex;align-items:flex-end;gap:1.5rem;height:250px;margin:2rem 0;justify-content:space-between">
+          <div style="flex:1">
+            <div style="width:100%;height:100%;background:#9d6b4a;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">São Paulo<br>356 cli</div>
+          </div>
+          <div style="flex:1">
+            <div style="width:100%;height:70%;background:#9d6b4a;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">MG<br>248 cli</div>
+          </div>
+          <div style="flex:1">
+            <div style="width:100%;height:52%;background:#9d6b4a;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">RJ<br>184 cli</div>
+          </div>
+          <div style="flex:1">
+            <div style="width:100%;height:36%;background:#9d6b4a;border-radius:4px;margin-bottom:.5rem"></div>
+            <div style="font-size:.7rem;text-align:center;color:#666">Outros<br>127 cli</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status e Métricas -->
+      <div class="chart-container reveal delay-4">
+        <div class="chart-title">Status do Negócio (últimos 6 meses)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-top:1.5rem">
+          <div style="padding:1.5rem;background:rgba(34,139,34,.08);border-radius:12px;border:1px solid rgba(34,139,34,.15)">
+            <div style="font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:#228B22;margin-bottom:.3rem">Tendência</div>
+            <div style="font-size:1.5rem;color:#228B22;font-weight:500">↑ 18% crescimento</div>
+          </div>
+          <div style="padding:1.5rem;background:rgba(160,112,74,.08);border-radius:12px;border:1px solid rgba(160,112,74,.15)">
+            <div style="font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:.3rem">Meta</div>
+            <div style="font-size:1.5rem;color:var(--brown-mid);font-weight:500">✓ 127% atingida</div>
+          </div>
+          <div style="padding:1.5rem;background:rgba(0,102,204,.08);border-radius:12px;border:1px solid rgba(0,102,204,.15)">
+            <div style="font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:#0066cc;margin-bottom:.3rem">Ticket médio</div>
+            <div style="font-size:1.5rem;color:#0066cc;font-weight:500">R$ 156,82</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Taxa de Conversão e Retenção -->
+      <div class="chart-container reveal delay-5">
+        <div class="chart-title">Performance de Conversão</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem">
+          <div>
+            <div style="font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gray-600);margin-bottom:1rem">Taxa de conversão</div>
+            <div style="position:relative;height:8px;background:var(--gray-100);border-radius:4px;overflow:hidden">
+              <div style="width:8.3%;height:100%;background:linear-gradient(90deg,var(--brown-mid),var(--brown-lt));border-radius:4px"></div>
+            </div>
+            <div style="font-size:.72rem;margin-top:.5rem;color:var(--brown-mid);font-weight:500">8.3% (543 de 6.532 visitantes)</div>
+          </div>
+          <div>
+            <div style="font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gray-600);margin-bottom:1rem">Taxa de retenção</div>
+            <div style="position:relative;height:8px;background:var(--gray-100);border-radius:4px;overflow:hidden">
+              <div style="width:76%;height:100%;background:linear-gradient(90deg,#228B22,#32CD32);border-radius:4px"></div>
+            </div>
+            <div style="font-size:.72rem;margin-top:.5rem;color:#228B22;font-weight:500">76% (302 de 398 pedidos repetem)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- CONFIG -->
     <div class="perfil-section" id="tab-config">
       <div class="section-head">
@@ -279,6 +480,16 @@ function saveConfig() {
 
 function loadPerfilUI() {
   const user = getUser();
+  console.log('=== PERFIL LOAD ===');
+  console.log('User:', user);
+  console.log('isAdmin:', user?.isAdmin);
+  
+  // Debug info
+  const debugEl = document.getElementById('debug-user');
+  if (debugEl) {
+    debugEl.textContent = JSON.stringify(user, null, 2);
+  }
+  
   if (!user) { window.location.href = '../index.html'; return; }
   document.getElementById('avatar-initial').textContent   = user.name[0].toUpperCase();
   document.getElementById('perfil-name-display').textContent  = user.name;
@@ -287,9 +498,25 @@ function loadPerfilUI() {
   const em = document.getElementById('config-email');
   if (nm) nm.value = user.name;
   if (em) em.value = user.email;
+  
+  // Mostrar seção admin se for administrador
+  const adminItem = document.getElementById('admin-nav-item');
+  console.log('Admin item element:', adminItem);
+  
+  if (user.isAdmin) {
+    console.log('User is admin! Showing admin nav item');
+    if (adminItem) {
+      adminItem.style.display = 'flex';
+      adminItem.style.visibility = 'visible';
+      console.log('Admin item displayed');
+    }
+  } else {
+    console.log('User is NOT admin');
+  }
 }
 
 document.addEventListener('DOMContentLoaded', loadPerfilUI);
+
 </script>
 </body>
 </html>

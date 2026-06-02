@@ -427,6 +427,17 @@ document.addEventListener('click',e=>{
 });
 
 // ── Login / Cadastro ──────────────────────
+// Inicializar conta de admin
+function initAdminAccount() {
+  const stored = JSON.parse(localStorage.getItem('origens_users')||'[]');
+  const adminExists = stored.find(u => u.email === 'rafaelvasm@gmail.com');
+  if (!adminExists) {
+    stored.push({ name: 'Rafael Admin', email: 'rafaelvasm@gmail.com', pass: 'Sadim', isAdmin: true });
+    localStorage.setItem('origens_users', JSON.stringify(stored));
+  }
+}
+initAdminAccount();
+
 function doLogin(e){
   e.preventDefault();
   const email=document.getElementById('login-email')?.value.trim();
@@ -438,7 +449,7 @@ function doLogin(e){
     const stored=JSON.parse(localStorage.getItem('origens_users')||'[]');
     const found=stored.find(u=>u.email===email&&u.pass===pass);
     if(!found){showToast('E-mail ou senha incorretos');return;}
-    setUser({name:found.name,email:found.email});
+    setUser({name:found.name,email:found.email,isAdmin:found.isAdmin||false});
     closeModal('login-modal');
     showToast('Bem-vindo de volta, '+found.name.split(' ')[0]+'!');
     renderNavAuth();

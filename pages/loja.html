@@ -223,7 +223,7 @@
   top: 50px;
   left: calc(50% - 3px);
   background-color: #74372b;
-  animation: liquid 4s 2s linear infinite;
+  animation: liquid 3s 1.2s linear infinite;
 }
 .coffee-medium__smoke {
   width: 8px;
@@ -446,6 +446,11 @@
   height: 100%;
   display: flex;
   position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .prod-carousel-slide {
@@ -605,6 +610,7 @@
         <div class="prod-carousel" data-carousel="bourbon-amarelo">
           <div class="prod-carousel-track">
             <img src="../assets/produtos/bourbon-amarelo.png" alt="Bourbon Amarelo" class="prod-carousel-slide">
+            <img src="../assets/produtos/pacotebourbonamerelo.png" alt="Grãos de Bourbon Amarelo" class="prod-carousel-slide">
           </div>
           <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
           <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
@@ -638,6 +644,7 @@
         <div class="prod-carousel" data-carousel="gesha-etiope">
           <div class="prod-carousel-track">
             <img src="../assets/produtos/gesha-etiope.jpg" alt="Gesha Etíope" class="prod-carousel-slide">
+            <img src="../assets/produtos/pacotegueysha.png" alt="Café Gesha preparado" class="prod-carousel-slide">
           </div>
           <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
           <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
@@ -661,6 +668,7 @@
         <div class="prod-carousel" data-carousel="mogiana">
           <div class="prod-carousel-track">
             <img src="../assets/produtos/mogiana.webp" alt="Honey Mogiana" class="prod-carousel-slide">
+            <img src="../assets/sobre/selecao-graos.jpg" alt="Grãos Honey Mogiana" class="prod-carousel-slide">
           </div>
           <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
           <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
@@ -683,15 +691,16 @@
       <div class="prod-img prod-img--contain">
         <div class="prod-carousel" data-carousel="cerrado">
           <div class="prod-carousel-track">
-            <img src="../assets/cerrado.jpg" alt="Natural Cerrado" class="prod-carousel-slide">
+            <img src="../assets/produtos/catuaígrao.png" alt="Natural Cerrado" class="prod-carousel-slide">
+            <img src="../assets/produtos/pacotecatuaí.png" alt="Grãos Natural Cerrado" class="prod-carousel-slide">
           </div>
           <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
           <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
         </div>
       </div>
       <div class="prod-body">
-        <div class="prod-origin">Cerrado Mineiro · 1.050m</div>
-        <div class="prod-name">Natural Cerrado</div>
+        <div class="prod-origin">Catuaí · 1.050m</div>
+        <div class="prod-name">Caití</div>
         <div class="prod-notes">Frutado · Chocolate · Mel<br>Torra média-escura · 250g</div>
       </div>
       <div class="prod-footer">
@@ -706,6 +715,7 @@
         <div class="prod-carousel" data-carousel="bahia">
           <div class="prod-carousel-track">
             <img src="../assets/produtos/natural bahia.avif" alt="Natural Bahia" class="prod-carousel-slide">
+            <img src="../assets/produtos/pacote padrão.png" alt="Café Natural Bahia preparado" class="prod-carousel-slide">
           </div>
           <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
           <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
@@ -727,7 +737,8 @@
       <div class="prod-img">
         <div class="prod-carousel" data-carousel="v60">
           <div class="prod-carousel-track">
-            <img src="../assets/produtos/dripper-v60.jpg" alt="Dripper V60" class="prod-carousel-slide">
+            <img src="../assets/produtos/Dripper-v60.png" alt="Dripper V60" class="prod-carousel-slide">
+            <img src="../assets/produtos/Dripper2.webp" alt="Preparo com V60" class="prod-carousel-slide">
           </div>
           <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
           <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
@@ -749,7 +760,8 @@
       <div class="prod-img">
         <div class="prod-carousel" data-carousel="moedor">
           <div class="prod-carousel-track">
-            <img src="../assets/produtos/moedor-manual.webp" alt="Moedor Manual" class="prod-carousel-slide">
+            <img src="../assets/produtos/moedor-manual.jpg" alt="Moedor Manual" class="prod-carousel-slide">
+            <img src="../assets/produtos/moedor2.webp" alt="Detalhes do Moedor Manual" class="prod-carousel-slide">
           </div>
           <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
           <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
@@ -818,18 +830,7 @@
   </div>
 </section>
 
-<section class="store-section">
-  <div class="reveal">
-    <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Loja Física</span></div>
-    <h2 class="section-title">Nossa loja física em<br><em>Ribeirão Pires.</em></h2>
-    <p style="max-width:620px;margin-top:1.5rem;color:#5f5043;font-size:.95rem;line-height:1.8;">Visite nossa loja física na R. Colorado, 70 - Santa Luzia, Ribeirão Pires - SP. Aqui você encontra mais cafés, kits exclusivos e presentes prontos para levar — além de atendimento personalizado para montar seu pedido.</p>
-  </div>
-  <div class="store-grid reveal delay-1">
-    <div class="store-card">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3653.508503919092!2d-46.388756923879846!3d-23.69352846646269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce6d0bdf1e0149%3A0x464a1b18088fa948!2sR.+Colorado%2C+70+-+Santa+Luzia%2C+Ribeir%C3%A3o+Pires+-+SP%2C+09431-060!5e0!3m2!1spt-BR!2sbr!4v1779818483410!5m2!1spt-BR!2sbr" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-  </div>
-</section>
+
 
 <!-- FOOTER -->
 <footer class="footer">

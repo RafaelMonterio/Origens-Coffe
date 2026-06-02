@@ -9,6 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/global.css">
 <style>
+/* ── Navbar com efeito de vidro ────────────────────── */
+.navbar {
+  background: rgba(13,11,9,.96) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
 .contato-wrap {
   display: grid;
   grid-template-columns: minmax(320px,1.05fr) minmax(320px,0.95fr);
@@ -208,17 +214,6 @@ function submitContato(e) {
   showToast('Mensagem enviada! Responderemos em breve.');
   e.target.reset();
 }
-// Navbar transparente scroll
-const nav = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 60) {
-    nav.style.background = 'rgba(10,8,6,.9)';
-    nav.style.backdropFilter = 'blur(20px)';
-  } else {
-    nav.style.background = 'transparent';
-    nav.style.backdropFilter = '';
-  }
-}, { passive: true });
 </script>
 </body>
 </html>

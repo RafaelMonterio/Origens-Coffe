@@ -267,8 +267,10 @@ body.cursor-dark #cursor-ring {
 .delay-1 { --anim-delay: 80ms; }
 .delay-2 { --anim-delay: 160ms; }
 .delay-3 { --anim-delay: 240ms; }
+.delay-4 { --anim-delay: 320ms; }
+.delay-5 { --anim-delay: 400ms; }
 .delay-1{transition-delay:.1s} .delay-2{transition-delay:.2s}
-.delay-3{transition-delay:.3s} .delay-4{transition-delay:.4s}
+.delay-3{transition-delay:.3s} .delay-4{transition-delay:.4s} .delay-5{transition-delay:.5s}
 
 /* ─── Footer ────────────────────────────── */
 .footer {
