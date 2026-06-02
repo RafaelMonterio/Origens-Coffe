@@ -203,6 +203,20 @@ body.cursor-dark #cursor-ring {
 }
 .btn-dark { background: #000; border-color: #000; color: #fff; }
 .btn-dark:hover { background: var(--brown); border-color: var(--brown); }
+.nav-actions .btn,
+.nav-actions-wrap .btn,
+#nav-auth-actions .btn {
+  border-color: transparent !important;
+}
+#nav-auth-actions .btn-dark {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  padding: .65rem 1rem !important;
+}
+#nav-auth-actions .btn-dark:hover {
+  background: rgba(255,255,255,.08) !important;
+}
 .btn-outline-dark { background: transparent; border-color: #000; color: #000; }
 .btn-outline-dark:hover { background: #000; color: #fff; }
 .btn-brown { background: var(--brown); border-color: var(--brown); color: #fff; }

@@ -370,6 +370,7 @@ function renderNavAuth(){
   const base=getBasePath();
 
   if(user){
+    const displayName = user.isAdmin ? 'Admin' : (user.name ? user.name.split(' ')[0] : 'Conta');
     actionsEl.innerHTML=`
       <div style="position:relative">
         <button id="cart-nav-btn" onclick="openCart()" title="Carrinho" style="background:none;border:none;color:#fff;display:flex;align-items:center;justify-content:center;position:relative;padding:.3rem .5rem;">
@@ -383,8 +384,8 @@ function renderNavAuth(){
       </div>
       <div style="position:relative" id="user-menu-wrap">
       <button id="user-nav-btn" onclick="toggleUserMenu()" style="display:flex;align-items:center;gap:.5rem;background:transparent;border:none;padding:0;color:#fff;font-family:'TAN Pearl', 'Cormorant Garamond', serif;font-size:.72rem;text-transform:uppercase;">
-          <span style="width:18px;height:18px;border-radius:50%;background:var(--brown-mid);display:inline-flex;align-items:center;justify-content:center;font-size:.55rem;color:#fff">${(user.name||'U')[0].toUpperCase()}</span>
-          ${user.name?user.name.split(' ')[0]:'Conta'}
+          <span style="width:18px;height:18px;border-radius:50%;background:var(--brown-mid);display:inline-flex;align-items:center;justify-content:center;font-size:.55rem;color:#fff">${displayName[0].toUpperCase()}</span>
+          ${displayName}
         </button>
         <div id="user-menu" class="user-menu" style="display:none;">
           <a href="${base}pages/perfil.html" style="display:block;padding:.75rem 1.2rem;font-size:.72rem;color:var(--gray-600);border-bottom:1px solid var(--gray-100);transition:color .2s" onmouseenter="this.style.color='var(--black)'" onmouseleave="this.style.color='var(--gray-600)'">Meu Perfil</a>
@@ -400,6 +401,7 @@ function renderNavAuth(){
       <button class="btn btn-dark btn-sm" onclick="openModal('cadastro-modal')">Criar conta</button>
     `;
   }
+  window.dispatchEvent(new Event('origensAuthChange'));
 }
 
 function toggleUserMenu(){
@@ -432,7 +434,7 @@ function initAdminAccount() {
   const stored = JSON.parse(localStorage.getItem('origens_users')||'[]');
   const adminExists = stored.find(u => u.email === 'rafaelvasm@gmail.com');
   if (!adminExists) {
-    stored.push({ name: 'Rafael Admin', email: 'rafaelvasm@gmail.com', pass: 'Sadim', isAdmin: true });
+    stored.push({ name: 'Admin', email: 'rafaelvasm@gmail.com', pass: 'Sadim', isAdmin: true });
     localStorage.setItem('origens_users', JSON.stringify(stored));
   }
 }

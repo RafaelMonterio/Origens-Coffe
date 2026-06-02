@@ -333,6 +333,45 @@
 
 /* ── Grid produtos ───────────────────────── */
 .produtos-section { padding: 0 6rem 8rem; background: #fff; }
+.admin-toolbar {
+  display: none;
+  justify-content: flex-end;
+  gap: .75rem;
+  padding: 1rem 6rem 0;
+}
+.admin-toolbar .btn { padding: .55rem 1.2rem; }
+.admin-image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
+  gap: .75rem;
+  margin-top: .75rem;
+}
+.admin-image-thumb {
+  position: relative;
+  border: 1px solid #e0d8d0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.admin-image-thumb img { width: 100%; height: 100px; object-fit: cover; display: block; }
+.admin-image-thumb button { position: absolute; top: .35rem; right: .35rem; border:none; background:rgba(0,0,0,.65); color:#fff; width:26px; height:26px; border-radius:50%; cursor:pointer; }
+.admin-form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.admin-form-group { display:flex; flex-direction:column; gap:.35rem; margin-bottom:1rem; }
+.admin-form-group label { font-size:.75rem; font-weight:600; color:#333; }
+.admin-form-group input,
+.admin-form-group textarea,
+.admin-form-group select { border:1px solid #d8d0c8; border-radius:8px; padding:.85rem 1rem; background:#fff; font-family:'Montserrat',sans-serif; font-size:.9rem; color:#1e1610; }
+.admin-form-group textarea { min-height:120px; resize:vertical; }
+.admin-modal-actions { display:flex; gap:.75rem; justify-content:flex-end; margin-top:1rem; flex-wrap:wrap; }
+.admin-modal-actions .btn { padding:.75rem 1.1rem; }
+.prod-actions { display:flex; align-items:center; gap:.75rem; }
+.btn-add { width: 42px; height: 42px; border-radius: 50%; border: 1px solid #000; background: transparent; color: #000; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: transform .2s, background .25s, color .25s; cursor: pointer; }
+.btn-add:hover { background: #000; color: #fff; transform: scale(1.05); }
+.btn-admin-manage { display: none; }
+.admin-view .btn-add,
+.admin-view .btn-buy-kit { display: none !important; }
+.admin-view .btn-admin-manage { display: inline-flex !important; }
+.admin-controls { display:flex; gap:.75rem; padding:1rem 1.6rem 1.2rem; border-top:1px solid #e0d8d0; background:#faf7f3; justify-content:flex-end; }
 .produtos-grid {
   display: grid; grid-template-columns: repeat(4,1fr);
   border: 1px solid #e0d8d0;
@@ -354,6 +393,10 @@
 .prod-card.wide .prod-img { width: 50%; aspect-ratio: auto; min-height: 300px; flex-shrink: 0; }
 .prod-card.wide .prod-body { padding: 2.5rem; }
 .prod-card.wide .prod-name { font-size: 2rem; }
+
+/* Wrapper for wide product layout (image left, description right) */
+.prod-card.wide .prod-body-wrapper { width: 50%; display: flex; flex-direction: column; }
+.prod-card.wide .prod-body-wrapper .prod-footer { margin-top: auto; }
 
 .prod-img {
   width: 100%; aspect-ratio: 4/3;
@@ -599,6 +642,10 @@
   <button class="filter-btn" onclick="filterProducts(this,'acessorio')">Acessórios</button>
   <button class="filter-btn" onclick="filterProducts(this,'kit')">Kits</button>
 </div>
+<div class="admin-toolbar" id="admin-toolbar">
+  <button class="btn btn-outline-dark btn-sm" onclick="openNewProductModal()">+ Adicionar produto</button>
+  <button class="btn btn-outline-dark btn-sm" onclick="openNewKitModal()">+ Adicionar kit/presente</button>
+</div>
 
 <!-- PRODUTOS -->
 <section class="produtos-section">
@@ -621,7 +668,7 @@
           
         </div>
       </div>
-      <div style="display:flex;flex-direction:column;flex:1">
+      <div class="prod-body-wrapper">
         <div class="prod-body">
           <div class="prod-origin">Sul de Minas · 1.200m</div>
           <div class="prod-name">Bourbon Amarelo</div>
@@ -685,13 +732,14 @@
         <button class="btn-add" onclick="addToCart('Honey Mogiana','R$ 74,50','Mogiana · 1.100m')">+</button>
       </div>
     </div>
+    
 
     <!-- Natural Cerrado -->
     <div class="prod-card reveal" data-cat="cafe graos">
       <div class="prod-img prod-img--contain">
         <div class="prod-carousel" data-carousel="cerrado">
           <div class="prod-carousel-track">
-            <img src="../assets/produtos/catuaígrao.png" alt="Natural Cerrado" class="prod-carousel-slide">
+            <img src="../assets/café.png" alt="Natural Cerrado" class="prod-carousel-slide">
             <img src="../assets/produtos/pacotecatuaí.png" alt="Grãos Natural Cerrado" class="prod-carousel-slide">
           </div>
           <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
@@ -708,6 +756,7 @@
         <button class="btn-add" onclick="addToCart('Natural Cerrado','R$ 51,99','Cerrado Mineiro')">+</button>
       </div>
     </div>
+
 
     <!-- Natural Bahia -->
     <div class="prod-card reveal delay-1" data-cat="cafe graos">
@@ -731,6 +780,8 @@
         <button class="btn-add" onclick="addToCart('Natural Bahia','R$ 88,50','Chapada Diamantina')">+</button>
       </div>
     </div>
+
+    
 
     <!-- Dripper V60 -->
     <div class="prod-card reveal delay-2" data-cat="acessorio">
@@ -787,47 +838,7 @@
     <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Kits Curados</span></div>
     <h2 class="section-title">Kits &amp; <em>Presentes.</em></h2>
   </div>
-  <div class="kits-grid">
-    <div class="kit-card reveal">
-      <div class="kit-img">
-        <img src="../assets/produtos/kit-barista.jpg" alt="Moedor Manual">
-      </div>
-      <div class="kit-body">
-        <div class="kit-name">Kit Barista Iniciante</div>
-        <div class="kit-desc">Prensa Francesa 350ml + 250g Bourbon Amarelo + Guia de preparo impresso.</div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
-          <div class="kit-price">R$ 189,99</div>
-          <button class="btn btn-dark btn-sm" onclick="addToCart('Kit Barista Iniciante','R$ 189','Curadoria ORIGENS')">Comprar</button>
-        </div>
-      </div>
-    </div>
-    <div class="kit-card reveal delay-1">
-      <div class="kit-img">
-        <img src="../assets/produtos/kit-v60.jpg" alt="Moedor Manual">
-      </div>
-      <div class="kit-body">
-        <div class="kit-name">Kit V60 Completo</div>
-        <div class="kit-desc">Dripper V60 + Filtros + 250g Gesha Etíope + Kettle dosador 350ml.</div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
-          <div class="kit-price">R$ 320,50</div>
-          <button class="btn btn-dark btn-sm" onclick="addToCart('Kit V60 Completo','R$ 320','Curadoria ORIGENS')">Comprar</button>
-        </div>
-      </div>
-    </div>
-    <div class="kit-card reveal delay-2">
-      <div class="kit-img">
-        <img src="../assets/produtos/caixa-presente.jpg" alt="Moedor Manual">
-      </div>
-      <div class="kit-body">
-        <div class="kit-name">Caixa Presente Premium</div>
-        <div class="kit-desc">3 origens exclusivas 100g cada + Moedor manual + Livro de origens assinado.</div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
-          <div class="kit-price">R$ 450,00</div>
-          <button class="btn btn-dark btn-sm" onclick="addToCart('Caixa Presente Premium','R$ 450','Curadoria ORIGENS')">Comprar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="kits-grid" id="kits-grid"></div>
 </section>
 
 
@@ -875,6 +886,32 @@
       <button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:.85rem;margin-top:.5rem">Criar conta →</button>
     </form>
     <div class="modal-footer-txt">Já tem conta? <a href="#" onclick="switchModal('cadastro-modal','login-modal')">Entrar</a></div>
+  </div>
+</div>
+<div id="product-admin-modal" class="modal-overlay">
+  <div class="modal-backdrop" onclick="closeModal('product-admin-modal')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('product-admin-modal')">×</button>
+    <div class="modal-title">Gerenciar Produto</div>
+    <div class="modal-sub">Adicione, edite ou exclua cards de produto com imagens do dispositivo.</div>
+    <form id="admin-product-form" onsubmit="saveAdminProduct(event)">
+      <div class="admin-form-grid">
+        <div class="admin-form-group"><label for="admin-prod-name">Nome do produto</label><input id="admin-prod-name" type="text" required></div>
+        <div class="admin-form-group"><label for="admin-prod-price">Preço</label><input id="admin-prod-price" type="text" required placeholder="R$ 0,00"></div>
+        <div class="admin-form-group"><label for="admin-prod-origin">Origem / País</label><input id="admin-prod-origin" type="text" required placeholder="Sul de Minas · 1.200m"></div>
+        <div class="admin-form-group"><label for="admin-prod-cats">Categorias</label><input id="admin-prod-cats" type="text" placeholder="cafe, graos, acessorio"></div>
+        <div class="admin-form-group" style="grid-column:1 / -1"><label for="admin-prod-notes">Notas e descrição</label><textarea id="admin-prod-notes" placeholder="Detalhes do produto e notas de sabor"></textarea></div>
+        <div class="admin-form-group"><label for="admin-prod-badges">Badges</label><input id="admin-prod-badges" type="text" placeholder="Destaque, Premium"></div>
+        <div class="admin-form-group"><label for="admin-prod-images">Imagens (arquivo)</label><input id="admin-prod-images" type="file" accept="image/*" multiple></div>
+        <div class="admin-form-group"><label for="admin-prod-image-url">Ou URL da imagem</label><div style="display:flex;gap:.5rem;"><input id="admin-prod-image-url" type="text" placeholder="https://..." style="flex:1"><button type="button" class="btn btn-outline-dark btn-sm" onclick="addAdminImageUrl()">Adicionar</button></div></div>
+      </div>
+      <div class="admin-image-grid" id="admin-image-preview"></div>
+      <div class="admin-modal-actions">
+        <button type="submit" class="btn btn-dark">Salvar produto</button>
+        <button type="button" class="btn btn-outline-dark" onclick="closeModal('product-admin-modal')">Cancelar</button>
+        <button type="button" class="btn btn-outline-dark" id="admin-delete-product-btn" onclick="deleteAdminProduct()" style="display:none;background:#fff;color:#000;border:1px solid #000;">Excluir produto</button>
+      </div>
+    </form>
   </div>
 </div>
 <div id="cart-panel" class="cart-panel">
@@ -944,6 +981,372 @@ function prodCarouselNext(btn) {
     behavior: 'smooth'
   });
 }
+
+const defaultStoreProducts = [
+  {
+    id: 'bourbon-amarelo',
+    categories: ['cafe'],
+    name: 'Bourbon Amarelo',
+    origin: 'Sul de Minas · 1.200m',
+    notes: 'Grão cultivado a 1.200m com processamento natural. Notas de caramelo, nozes e chocolate ao leite. Torra média · 250g',
+    price: 'R$ 67,00',
+    badges: ['Destaque', 'Seleção Premium'],
+    images: ['../assets/produtos/bourbon-amarelo.png','../assets/produtos/pacotebourbonamerelo.png']
+  },
+  {
+    id: 'gesha-etiope',
+    categories: ['cafe'],
+    name: 'Gesha Etíope',
+    origin: 'Yirgacheffe · 1.900m',
+    notes: 'Floral · Jasmim · Bergamota. Torra clara · 250g',
+    price: 'R$ 133,99',
+    badges: ['Premium'],
+    images: ['../assets/produtos/gesha-etiope.jpg','../assets/produtos/pacotegueysha.png']
+  },
+  {
+    id: 'honey-mogiana',
+    categories: ['cafe'],
+    name: 'Honey Mogiana',
+    origin: 'Mogiana · 1.100m',
+    notes: 'Mel · Frutas Vermelhas · Suave. Torra média · 250g',
+    price: 'R$ 74,50',
+    badges: ['Novo'],
+    images: ['../assets/produtos/mogiana.webp','../assets/sobre/selecao-graos.jpg']
+  },
+  {
+    id: 'natural-cerrado',
+    categories: ['cafe','graos'],
+    name: 'Natural Cerrado',
+    origin: 'Catuaí · 1.050m',
+    notes: 'Frutado · Chocolate · Mel. Torra média-escura · 250g',
+    price: 'R$ 51,99',
+    badges: [],
+    images: ['../assets/café.png','../assets/produtos/pacotecatuaí.png']
+  },
+  {
+    id: 'natural-bahia',
+    categories: ['cafe','graos'],
+    name: 'Natural Bahia',
+    origin: 'Chapada Diamantina · 1.400m',
+    notes: 'Tabaco · Cacau · Especiarias. Torra escura · 250g',
+    price: 'R$ 88,50',
+    badges: [],
+    images: ['../assets/produtos/natural bahia.avif','../assets/produtos/pacote padrão.png']
+  },
+  {
+    id: 'dripper-v60',
+    categories: ['acessorio'],
+    name: 'Dripper V60',
+    origin: 'Equipamento',
+    notes: 'Cerâmica branca · Com 40 filtros. Para 1–4 xícaras',
+    price: 'R$ 117,99',
+    badges: [],
+    images: ['../assets/produtos/Dripper-v60.png','../assets/produtos/Dripper2.webp']
+  },
+  {
+    id: 'moedor-manual',
+    categories: ['acessorio'],
+    name: 'Moedor Manual',
+    origin: 'Equipamento',
+    notes: 'Aço inox · Regulagem fina a grossa. Ideal para V60 e Prensa',
+    price: 'R$ 245,00',
+    badges: [],
+    images: ['../assets/produtos/moedor-manual.jpg','../assets/produtos/moedor2.webp']
+  }
+];
+
+const storeProductsKey = 'origens_products';
+const kitsKey = 'origens_kits';
+let currentAdminProductId = null;
+let currentAdminKitId = null;
+let currentAdminContext = 'product';
+let currentAdminImages = [];
+
+const defaultKits = [
+  { id:'kit-barista-iniciante', name:'Kit Barista Iniciante', origin:'Kit & Presente', notes:'Prensa Francesa 350ml + 250g Bourbon Amarelo + Guia de preparo impresso.', price:'R$ 189,99', badges:['Kit'], images:['../assets/produtos/kit-barista.jpg'] },
+  { id:'kit-v60-completo', name:'Kit V60 Completo', origin:'Kit & Presente', notes:'Dripper V60 + Filtros + 250g Gesha Etíope + Kettle dosador 350ml.', price:'R$ 320,50', badges:['Kit'], images:['../assets/produtos/kit-v60.jpg'] },
+  { id:'caixa-presente-premium', name:'Caixa Presente Premium', origin:'Kit & Presente', notes:'3 origens exclusivas 100g cada + Moedor manual + Livro de origens assinado.', price:'R$ 450,00', badges:['Presente'], images:['../assets/produtos/caixa-presente.jpg'] }
+];
+
+function getStoredProducts(){
+  try{
+    const stored = JSON.parse(localStorage.getItem(storeProductsKey) || 'null');
+    return Array.isArray(stored) && stored.length ? stored : null;
+  } catch { return null; }
+}
+
+function getStoredKits(){
+  try{ const stored = JSON.parse(localStorage.getItem(kitsKey) || 'null'); return Array.isArray(stored) && stored.length ? stored : null; } catch { return null; }
+}
+
+function ensureStoredKits(){
+  const stored = getStoredKits();
+  if (stored) return stored;
+  localStorage.setItem(kitsKey, JSON.stringify(defaultKits));
+  return defaultKits.slice();
+}
+
+function saveStoredKits(kits){ localStorage.setItem(kitsKey, JSON.stringify(kits)); }
+
+function ensureStoredProducts(){
+  const stored = getStoredProducts();
+  if (stored) return stored;
+  localStorage.setItem(storeProductsKey, JSON.stringify(defaultStoreProducts));
+  return defaultStoreProducts.slice();
+}
+
+function saveStoredProducts(products){
+  localStorage.setItem(storeProductsKey, JSON.stringify(products));
+}
+
+function renderProducts(){
+  const grid = document.getElementById('produtos-grid');
+  if(!grid) return;
+  const products = ensureStoredProducts();
+  const filteredProducts = products.filter(p=>!(p.categories||[]).includes('kit'));
+  const isAdmin = getUser()?.isAdmin;
+  grid.innerHTML = filteredProducts.map(product => {
+    const badgesMarkup = product.badges?.filter(Boolean).map(b=>`<div class="prod-badge">${b}</div>`).join('') || '';
+    const images = Array.isArray(product.images) && product.images.length ? product.images : ['../assets/produtos/bourbon-amarelo.png'];
+    const slides = images.map(src => `<img src="${src}" alt="${product.name}" class="prod-carousel-slide">`).join('');
+    const adminAction = isAdmin ? `<button class="btn btn-outline-dark btn-sm admin-manage-btn" onclick="openEditProduct('${product.id}')">Gerenciar</button>` : '';
+  const actionButtons = isAdmin ? adminAction : `<button class="btn-add" onclick="addToCart('${product.name.replace(/'/g,"\\'")}','${product.price}','${product.origin.replace(/'/g,"\\'")}")">+</button>${adminAction}`;
+    return `
+      <div class="prod-card reveal" data-cat="${(product.categories||[]).join(' ')}" id="prod-${product.id}">
+        <div class="prod-img">
+          <div class="prod-carousel" data-carousel="${product.id}">
+            <div class="prod-carousel-track">
+              ${slides}
+            </div>
+            <button class="prod-carousel-nav prev" onclick="prodCarouselPrev(this)">‹</button>
+            <button class="prod-carousel-nav next" onclick="prodCarouselNext(this)">›</button>
+          </div>
+          ${badgesMarkup}
+        </div>
+        <div class="prod-body">
+          <div class="prod-origin">${product.origin || ''}</div>
+          <div class="prod-name">${product.name}</div>
+          <div class="prod-notes">${product.notes || ''}</div>
+        </div>
+        <div class="prod-footer">
+          <div class="prod-price">${product.price || 'R$ 0,00'}</div>
+          <div class="prod-actions">
+            ${actionButtons}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderKits(){
+  const grid = document.getElementById('kits-grid');
+  if(!grid) return;
+  const kits = ensureStoredKits();
+  const isAdmin = getUser()?.isAdmin;
+  grid.innerHTML = kits.map(kit => `
+    <div class="kit-card reveal">
+      <div class="kit-img"><img src="${kit.images?.[0]||'../assets/produtos/kit-barista.jpg'}" alt="${kit.name}"></div>
+      <div class="kit-body">
+        <div class="kit-name">${kit.name}</div>
+        <div class="kit-desc">${kit.notes || ''}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+          <div class="kit-price">${kit.price}</div>
+          <button class="btn btn-dark btn-sm btn-buy-kit" onclick="addToCart('${kit.name.replace(/'/g,"\\'")}','${kit.price}','${kit.origin.replace(/'/g,"\\'")}')">Comprar</button>
+          <button class="btn btn-outline-dark btn-sm btn-admin-manage" onclick="openEditKit('${kit.id}')">Gerenciar</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openNewKitModal(){
+  currentAdminContext = 'kit';
+  currentAdminKitId = null;
+  currentAdminImages = [];
+  document.getElementById('admin-product-form').reset();
+  document.getElementById('admin-prod-cats').value = 'kit';
+  document.getElementById('admin-prod-badges').value = 'Kit';
+  document.getElementById('admin-image-preview').innerHTML = '';
+  document.getElementById('admin-delete-product-btn').style.display='none';
+  document.querySelector('#product-admin-modal .modal-title').textContent = 'Gerenciar Kit / Presente';
+  document.querySelector('#product-admin-modal .modal-sub').textContent = 'Edite ou exclua kits e presentes usando o mesmo painel de produtos.';
+  openModal('product-admin-modal');
+}
+
+function openEditKit(id){
+  const kits = ensureStoredKits();
+  const kit = kits.find(k=>k.id===id);
+  if(!kit) return;
+  currentAdminContext = 'kit';
+  currentAdminKitId = id;
+  currentAdminImages = Array.isArray(kit.images) ? [...kit.images] : [];
+  document.getElementById('admin-prod-name').value = kit.name || '';
+  document.getElementById('admin-prod-price').value = kit.price || '';
+  document.getElementById('admin-prod-origin').value = kit.origin || '';
+  document.getElementById('admin-prod-notes').value = kit.notes || '';
+  document.getElementById('admin-prod-cats').value = 'kit';
+  document.getElementById('admin-prod-badges').value = (kit.badges||[]).join(', ');
+  document.getElementById('admin-image-preview').innerHTML = '';
+  document.getElementById('admin-prod-images').value = '';
+  document.getElementById('admin-delete-product-btn').style.display='inline-flex';
+  document.querySelector('#product-admin-modal .modal-title').textContent = 'Gerenciar Kit / Presente';
+  document.querySelector('#product-admin-modal .modal-sub').textContent = 'Edite ou exclua kits e presentes usando o mesmo painel de produtos.';
+  renderAdminImagePreview();
+  openModal('product-admin-modal');
+}
+
+function renderAdminTools(){
+  const adminToolbar = document.getElementById('admin-toolbar');
+  const isAdmin = getUser()?.isAdmin;
+  document.body.classList.toggle('admin-view', !!isAdmin);
+  if(adminToolbar){ adminToolbar.style.display = isAdmin ? 'flex' : 'none'; }
+  renderProducts();
+  renderKits();
+}
+
+function openNewProductModal(){
+  currentAdminContext = 'product';
+  currentAdminProductId = null;
+  currentAdminImages = [];
+  document.getElementById('admin-product-form').reset();
+  document.getElementById('admin-prod-cats').value = '';
+  document.getElementById('admin-prod-badges').value = '';
+  document.getElementById('admin-image-preview').innerHTML = '';
+  document.getElementById('admin-delete-product-btn').style.display='none';
+  document.querySelector('#product-admin-modal .modal-title').textContent = 'Gerenciar Produto';
+  document.querySelector('#product-admin-modal .modal-sub').textContent = 'Adicione, edite ou exclua cards de produto com imagens do dispositivo.';
+  openModal('product-admin-modal');
+}
+
+function openEditProduct(id){
+  const products = ensureStoredProducts();
+  const product = products.find(p=>p.id===id);
+  if(!product) return;
+  currentAdminContext = 'product';
+  currentAdminProductId = id;
+  currentAdminImages = Array.isArray(product.images)? [...product.images] : [];
+  document.getElementById('admin-prod-name').value = product.name || '';
+  document.getElementById('admin-prod-price').value = product.price || '';
+  document.getElementById('admin-prod-origin').value = product.origin || '';
+  document.getElementById('admin-prod-notes').value = product.notes || '';
+  document.getElementById('admin-prod-cats').value = (product.categories||[]).join(', ');
+  document.getElementById('admin-prod-badges').value = (product.badges||[]).join(', ');
+  document.getElementById('admin-image-preview').innerHTML = '';
+  document.getElementById('admin-prod-images').value = '';
+  document.getElementById('admin-delete-product-btn').style.display='inline-flex';
+  document.querySelector('#product-admin-modal .modal-title').textContent = 'Gerenciar Produto';
+  document.querySelector('#product-admin-modal .modal-sub').textContent = 'Adicione, edite ou exclua cards de produto com imagens do dispositivo.';
+  renderAdminImagePreview();
+  openModal('product-admin-modal');
+}
+
+function renderAdminImagePreview(){
+  const preview = document.getElementById('admin-image-preview');
+  if(!preview) return;
+  preview.innerHTML = currentAdminImages.map((src,index)=>(
+    `<div class="admin-image-thumb">
+      <img src="${src}" alt="Imagem ${index+1}">
+      <button type="button" onclick="removeAdminImage(${index})">×</button>
+    </div>`
+  )).join('');
+}
+
+function addAdminImageUrl(){
+  const input = document.getElementById('admin-prod-image-url');
+  const url = input.value.trim();
+  if(!url) return;
+  currentAdminImages.push(url);
+  input.value = '';
+  renderAdminImagePreview();
+}
+
+function removeAdminImage(index){
+  currentAdminImages.splice(index,1);
+  renderAdminImagePreview();
+}
+
+function saveAdminProduct(e){
+  e.preventDefault();
+  const name = document.getElementById('admin-prod-name').value.trim();
+  const price = document.getElementById('admin-prod-price').value.trim();
+  const origin = document.getElementById('admin-prod-origin').value.trim();
+  const notes = document.getElementById('admin-prod-notes').value.trim();
+  const cats = document.getElementById('admin-prod-cats').value.split(',').map(s=>s.trim()).filter(Boolean);
+  const badges = document.getElementById('admin-prod-badges').value.split(',').map(s=>s.trim()).filter(Boolean);
+  if(!name||!price||!origin){ showToast('Preencha nome, preço e origem'); return; }
+
+  const itemData = {
+    id: (currentAdminContext === 'kit' ? currentAdminKitId : currentAdminProductId) || (currentAdminContext === 'kit' ? 'kit-'+Date.now() : 'prod-'+Date.now()),
+    name,
+    origin,
+    notes,
+    price,
+    images: currentAdminImages.length ? currentAdminImages : ['../assets/produtos/bourbon-amarelo.png']
+  };
+
+  if(currentAdminContext === 'kit'){
+    const kits = ensureStoredKits();
+    const index = kits.findIndex(k=>k.id===itemData.id);
+    if(index !== -1){ kits[index] = { ...itemData, badges }; showToast('Kit atualizado com sucesso'); }
+    else { kits.unshift({ ...itemData, badges }); showToast('Kit adicionado com sucesso'); }
+    saveStoredKits(kits);
+    renderKits();
+  } else {
+    itemData.categories = cats;
+    itemData.badges = badges;
+    const products = ensureStoredProducts();
+    const index = products.findIndex(p=>p.id===itemData.id);
+    if(index !== -1){ products[index] = itemData; showToast('Produto atualizado com sucesso'); }
+    else { products.unshift(itemData); showToast('Produto adicionado com sucesso'); }
+    saveStoredProducts(products);
+    renderProducts();
+  }
+  closeModal('product-admin-modal');
+}
+
+function deleteAdminProduct(id){
+  const productId = id || (currentAdminContext === 'kit' ? currentAdminKitId : currentAdminProductId);
+  if(!productId) return;
+  if(!confirm('Tem certeza que deseja excluir este item?')) return;
+  if(currentAdminContext === 'kit'){
+    let kits = ensureStoredKits();
+    kits = kits.filter(k=>k.id!==productId);
+    saveStoredKits(kits);
+    renderKits();
+    showToast('Kit excluído');
+  } else {
+    let products = ensureStoredProducts();
+    products = products.filter(p=>p.id!==productId);
+    saveStoredProducts(products);
+    renderProducts();
+    showToast('Produto excluído');
+  }
+  closeModal('product-admin-modal');
+}
+
+function handleAdminImageFiles(event){
+  const files = Array.from(event.target.files || []);
+  if(!files.length) return;
+  files.forEach(file=>{
+    const reader = new FileReader();
+    reader.onload = ()=>{
+      currentAdminImages.push(reader.result);
+      renderAdminImagePreview();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  renderProducts();
+  renderAdminTools();
+  const input = document.getElementById('admin-prod-images');
+  if(input){ input.addEventListener('change', handleAdminImageFiles); }
+  window.addEventListener('origensAuthChange', ()=>{
+    renderAdminTools();
+  });
+});
 </script>
 </body>
 </html>

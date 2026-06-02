@@ -50,6 +50,20 @@
 .tab-btn:hover { color: var(--black); }
 .tab-btn.active { color: var(--brown); border-bottom-color: var(--brown-mid); }
 
+.admin-toolbar { display: none; justify-content: flex-end; gap: .75rem; padding: 1.5rem 0 0; }
+.admin-toolbar .btn { padding: .7rem 1.2rem; }
+.admin-manager-preview { display: grid; grid-template-columns: 180px 1fr; gap: 1rem; align-items: center; margin-bottom: 1.5rem; padding: 1.25rem 1.25rem 0; border-bottom: 1px solid rgba(158,146,128,.18); }
+.admin-manager-preview img { width: 100%; border-radius: 18px; object-fit: cover; aspect-ratio: 4 / 3; }
+.admin-manager-preview-info { display: flex; flex-direction: column; gap: .5rem; }
+.admin-manager-preview-info h3 { margin: 0; font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: #1f1710; }
+.admin-manager-preview-info p { margin: 0; color: #5f5043; line-height: 1.7; }
+.admin-form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.admin-form-group { display:flex; flex-direction:column; gap:.35rem; margin-bottom:1rem; }
+.admin-form-group label { font-size:.75rem; font-weight:600; color:#333; }
+.admin-form-group input, .admin-form-group textarea, .admin-form-group select { border:1px solid #d8d0c8; border-radius:8px; padding:.85rem 1rem; background:#fff; font-family:'Montserrat',sans-serif; font-size:.9rem; color:#1e1610; }
+.admin-form-group textarea { min-height:120px; resize:vertical; }
+.admin-modal-actions { display:flex; gap:.75rem; justify-content:flex-end; margin-top:1rem; flex-wrap:wrap; }
+.admin-modal-actions .btn { padding:.75rem 1.1rem; }
 .cursos-section { padding: 5rem 6rem 8rem; background: var(--white); }
 .cursos-grid {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -189,111 +203,10 @@
     <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Catálogo de Cursos</span></div>
     <h2 class="section-title">Escolha seu<br><em>caminho.</em></h2>
   </div>
-  <div class="cursos-grid">
-
-    <!-- Workshop destaque -->
-    <div class="curso-card workshop reveal" data-tipo="presencial">
-      <div class="workshop-img"><img src="../assets/workshop1.PNG" alt="" srcset=""></div>
-      <div class="workshop-body">
-        <div class="curso-type-tag">Presencial — São Paulo</div>
-        <div class="curso-name">Workshop Imersivo com Pedro Lima</div>
-        <div class="curso-desc">Um dia inteiro na cafeteria ORIGENS. Cupping de 8 origens, extração com diferentes métodos, latte art ao vivo e visita guiada ao laboratório de torras. Turmas reduzidas — máximo 12 alunos.</div>
-        <div class="curso-tags">
-          <span class="curso-tag">Cupping</span>
-          <span class="curso-tag">Latte Art</span>
-          <span class="curso-tag">Torra</span>
-          <span class="curso-tag">Todos os níveis</span>
-        </div>
-        <div class="curso-bottom">
-          <div>
-            <div class="curso-price-val">R$ 250</div>
-            <div style="font-size:.62rem;color:var(--gray-600);margin-top:.25rem;letter-spacing:.08em">por pessoa</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:1rem">
-            <div class="curso-meta-info">1 dia completo<br>Sáb ou Dom</div>
-            <button class="btn btn-brown" onclick="openModal('cadastro-modal')">Inscrever-se</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="curso-card reveal" data-tipo="online">
-      <div class="curso-type-tag">Online · 8 semanas</div>
-      <div class="curso-name">Barista do Zero</div>
-      <div class="curso-desc">Do básico ao avançado: histórico do café, extrações perfeitas (espresso, coado, prensa), latte art e degustação técnica. Aulas ao vivo + gravadas + materiais em PDF.</div>
-      <div class="curso-tags">
-        <span class="curso-tag">Iniciante</span>
-        <span class="curso-tag">Espresso</span>
-        <span class="curso-tag">Coado</span>
-        <span class="curso-tag">Latte Art</span>
-      </div>
-      <div class="curso-bottom">
-        <div><div class="curso-price-val">R$ 150</div></div>
-        <div style="display:flex;align-items:center;gap:1rem">
-          <div class="curso-meta-info">8 semanas<br>Ao vivo + gravado</div>
-          <button class="btn btn-brown" onclick="openModal('cadastro-modal')">Inscrever-se</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="curso-card reveal delay-1" data-tipo="online">
-      <div class="curso-type-tag">Online · 4 semanas</div>
-      <div class="curso-name">Métodos Alternativos</div>
-      <div class="curso-desc">Chemex, V60, AeroPress, Prensa Francesa, Moka Pot. Cada método tem sua técnica ideal de moagem, temperatura e tempo. Descubra qual combina com você.</div>
-      <div class="curso-tags">
-        <span class="curso-tag">Intermediário</span>
-        <span class="curso-tag">V60</span>
-        <span class="curso-tag">AeroPress</span>
-        <span class="curso-tag">Chemex</span>
-      </div>
-      <div class="curso-bottom">
-        <div><div class="curso-price-val">R$ 180</div></div>
-        <div style="display:flex;align-items:center;gap:1rem">
-          <div class="curso-meta-info">4 semanas<br>Ao vivo + gravado</div>
-          <button class="btn btn-brown" onclick="openModal('cadastro-modal')">Inscrever-se</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="curso-card reveal delay-2" data-tipo="avancado">
-      <div class="curso-type-tag">Online · 3 semanas</div>
-      <div class="curso-name">Degustação &amp; Blend</div>
-      <div class="curso-desc">Aprenda a identificar origens, notas sensoriais (acidez, corpo, doçura, amargor) e a criar seus próprios blends com consistência. Curso de nível avançado.</div>
-      <div class="curso-tags">
-        <span class="curso-tag">Avançado</span>
-        <span class="curso-tag">Cupping</span>
-        <span class="curso-tag">Sensorial</span>
-        <span class="curso-tag">Blend</span>
-      </div>
-      <div class="curso-bottom">
-        <div><div class="curso-price-val">R$ 120</div></div>
-        <div style="display:flex;align-items:center;gap:1rem">
-          <div class="curso-meta-info">3 semanas<br>Ao vivo + gravado</div>
-          <button class="btn btn-brown" onclick="openModal('cadastro-modal')">Inscrever-se</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="curso-card reveal delay-3" data-tipo="online">
-      <div class="curso-type-tag">Online · 6 semanas</div>
-      <div class="curso-name">Café de Origem &amp; Preparação</div>
-      <div class="curso-desc">Entenda perfis de terroir, processo de produção e extrações que valorizam cada origem. Ideal para quem quer dominar cafés especiais do grão à xícara.</div>
-      <div class="curso-tags">
-        <span class="curso-tag">Intermediário</span>
-        <span class="curso-tag">Origem</span>
-        <span class="curso-tag">Extração</span>
-        <span class="curso-tag">Qualidade</span>
-      </div>
-      <div class="curso-bottom">
-        <div><div class="curso-price-val">R$ 230</div></div>
-        <div style="display:flex;align-items:center;gap:1rem">
-          <div class="curso-meta-info">6 semanas<br>Ao vivo + gravado</div>
-          <button class="btn btn-brown" onclick="openModal('cadastro-modal')">Inscrever-se</button>
-        </div>
-      </div>
-    </div>
-
+  <div class="admin-toolbar" id="cursos-admin-toolbar">
+    <button class="btn btn-outline-dark btn-sm" onclick="openNewCourseModal()">+ Gerenciar cursos</button>
   </div>
+  <div class="cursos-grid" id="cursos-grid"></div>
 </section>
 
 <!-- DEPOIMENTOS -->
@@ -357,6 +270,37 @@
     <div class="modal-footer-txt">Já tem conta? <a href="#" onclick="switchModal('cadastro-modal','login-modal')">Entrar</a></div>
   </div>
 </div>
+<div id="course-admin-modal" class="modal-overlay">
+  <div class="modal-backdrop" onclick="closeModal('course-admin-modal')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('course-admin-modal')">×</button>
+    <div class="modal-title">Gerenciar Curso</div>
+    <div class="modal-sub">Adicione ou edite cursos e workshops do catálogo.</div>
+    <div class="admin-manager-preview" id="course-admin-preview">
+      <img src="../assets/workshop1.PNG" alt="Prévia do curso" id="course-admin-image-preview">
+      <div class="admin-manager-preview-info">
+        <h3 id="course-preview-title">Curso ORIGENS</h3>
+        <p id="course-preview-desc">Preencha os campos para atualizar a prévia deste curso.</p>
+      </div>
+    </div>
+    <form id="admin-course-form" onsubmit="saveAdminCourse(event)">
+      <div class="admin-form-grid">
+        <div class="admin-form-group"><label for="admin-course-title">Título do curso</label><input id="admin-course-title" type="text" required oninput="updateCoursePreview()"></div>
+        <div class="admin-form-group"><label for="admin-course-price">Preço</label><input id="admin-course-price" type="text" required placeholder="R$ 0,00"></div>
+        <div class="admin-form-group"><label for="admin-course-type">Tipo</label><select id="admin-course-type"><option value="online">Online</option><option value="presencial">Presencial</option><option value="avancado">Avançado</option></select></div>
+        <div class="admin-form-group"><label for="admin-course-meta">Duração / Local</label><input id="admin-course-meta" type="text" placeholder="8 semanas · Online"></div>
+        <div class="admin-form-group" style="grid-column:1 / -1"><label for="admin-course-desc">Descrição</label><textarea id="admin-course-desc" placeholder="Descrição do curso e diferenciais" oninput="updateCoursePreview()"></textarea></div>
+        <div class="admin-form-group"><label for="admin-course-tags">Tags</label><input id="admin-course-tags" type="text" placeholder="Iniciante, Espresso, Latte Art"></div>
+        <div class="admin-form-group"><label for="admin-course-image">URL da imagem</label><input id="admin-course-image" type="text" placeholder="https://..." onchange="updateCoursePreview()"></div>
+      </div>
+      <div class="admin-modal-actions">
+        <button type="submit" class="btn btn-dark">Salvar curso</button>
+        <button type="button" class="btn btn-outline-dark" onclick="closeModal('course-admin-modal')">Cancelar</button>
+        <button type="button" class="btn btn-outline-dark" id="admin-delete-course-btn" onclick="deleteAdminCourse()" style="display:none;background:#fff;color:#000;border:1px solid #000;">Excluir curso</button>
+      </div>
+    </form>
+  </div>
+</div>
 <div id="global-toast" class="toast"></div>
 
 <script src="../js/global.js"></script>
@@ -369,6 +313,151 @@ function filterCursos(btn, tipo) {
     card.style.display = (tipo === 'todos' || card.dataset.tipo === tipo) ? '' : 'none';
   });
 }
+
+const defaultCursos = [
+  { id:'workshop-imersivo', type:'presencial', title:'Workshop Imersivo com Pedro Lima', desc:'Um dia inteiro na cafeteria ORIGENS. Cupping de 8 origens, extração com diferentes métodos, latte art ao vivo e visita guiada ao laboratório de torras. Turmas reduzidas — máximo 12 alunos.', meta:'1 dia completo · São Paulo', price:'R$ 250', tags:['Cupping','Latte Art','Torra','Todos os níveis'], image:'../assets/workshop1.PNG', featured:true },
+  { id:'barista-do-zero', type:'online', title:'Barista do Zero', desc:'Do básico ao avançado: histórico do café, extrações perfeitas (espresso, coado, prensa), latte art e degustação técnica. Aulas ao vivo + gravadas + materiais em PDF.', meta:'8 semanas · Online', price:'R$ 150', tags:['Iniciante','Espresso','Coado','Latte Art'], image:'../assets/workshop2.jpg' },
+  { id:'metodos-alternativos', type:'online', title:'Métodos Alternativos', desc:'Chemex, V60, AeroPress, Prensa Francesa, Moka Pot. Cada método tem sua técnica ideal de moagem, temperatura e tempo. Descubra qual combina com você.', meta:'4 semanas · Online', price:'R$ 180', tags:['Intermediário','V60','AeroPress','Chemex'], image:'../assets/workshop3.jpg' },
+  { id:'degustacao-blend', type:'avancado', title:'Degustação & Blend', desc:'Aprenda a identificar origens, notas sensoriais e a criar seus próprios blends com consistência. Curso de nível avançado.', meta:'3 semanas · Online', price:'R$ 120', tags:['Avançado','Cupping','Sensorial','Blend'], image:'../assets/workshop4.jpg' },
+  { id:'origem-preparacao', type:'online', title:'Café de Origem & Preparação', desc:'Entenda perfis de terroir, processo de produção e extrações que valorizam cada origem. Ideal para quem quer dominar cafés especiais do grão à xícara.', meta:'6 semanas · Online', price:'R$ 230', tags:['Intermediário','Origem','Extração','Qualidade'], image:'../assets/workshop5.jpg' }
+];
+
+const cursosKey = 'origens_courses';
+let currentCourseId = null;
+
+function getStoredCursos(){
+  try { return JSON.parse(localStorage.getItem(cursosKey) || 'null'); } catch { return null; }
+}
+function ensureStoredCursos(){
+  const stored = getStoredCursos();
+  if (stored && stored.length) return stored;
+  localStorage.setItem(cursosKey, JSON.stringify(defaultCursos));
+  return defaultCursos.slice();
+}
+function saveStoredCursos(cursos){ localStorage.setItem(cursosKey, JSON.stringify(cursos)); }
+
+function renderCursos(){
+  const grid = document.getElementById('cursos-grid');
+  if(!grid) return;
+  const cursos = ensureStoredCursos();
+  const isAdmin = getUser()?.isAdmin;
+  grid.innerHTML = cursos.map(curso => {
+    const tags = (curso.tags||[]).map(tag=>`<span class="curso-tag">${tag}</span>`).join('');
+    const actionButton = isAdmin
+      ? `<button class="btn ${curso.featured ? 'btn-white btn-sm' : 'btn btn-outline-dark btn-sm'}" onclick="openEditCourse('${curso.id}')">Gerenciar</button>`
+      : `<button class="btn btn-brown" onclick="openModal('cadastro-modal')">Inscrever-se</button>`;
+    return `
+      <div class="curso-card reveal" data-tipo="${curso.type}">
+        ${curso.featured?'<div class="curso-type-tag">Destaque</div>':''}
+        <div class="curso-type-tag">${curso.type === 'presencial' ? 'Presencial' : curso.type === 'online' ? 'Online' : 'Avançado'} · ${curso.meta}</div>
+        <div class="curso-name">${curso.title}</div>
+        <div class="curso-desc">${curso.desc}</div>
+        <div class="curso-tags">${tags}</div>
+        <div class="curso-bottom">
+          <div><div class="curso-price-val">${curso.price}</div></div>
+          <div style="display:flex;align-items:center;gap:1rem">
+            <div class="curso-meta-info">${curso.meta}</div>
+            ${actionButton}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderAdminCourseTools(){
+  const toolbar=document.getElementById('cursos-admin-toolbar');
+  const isAdmin = getUser()?.isAdmin;
+  document.body.classList.toggle('admin-view', !!isAdmin);
+  if(toolbar) toolbar.style.display = isAdmin ? 'flex' : 'none';
+  renderCursos();
+}
+
+function openNewCourseModal(){
+  currentCourseId=null;
+  const form=document.getElementById('admin-course-form');
+  if(form) form.reset();
+  document.getElementById('admin-course-type').value='online';
+  document.getElementById('admin-course-image').value='../assets/workshop1.PNG';
+  document.getElementById('admin-course-title').value='';
+  document.getElementById('admin-course-price').value='';
+  document.getElementById('admin-course-meta').value='';
+  document.getElementById('admin-course-desc').value='';
+  document.getElementById('admin-course-tags').value='';
+  document.getElementById('course-preview-title').textContent='Novo curso ORIGENS';
+  document.getElementById('course-preview-desc').textContent='Defina um título e descrição para ver a prévia do curso.';
+  document.getElementById('course-admin-image-preview').src='../assets/workshop1.PNG';
+  document.getElementById('admin-delete-course-btn').style.display='none';
+  openModal('course-admin-modal');
+}
+
+function openEditCourse(id){
+  const cursos=ensureStoredCursos();
+  const curso=cursos.find(c=>c.id===id);
+  if(!curso) return;
+  currentCourseId=id;
+  document.getElementById('admin-course-title').value=curso.title||'';
+  document.getElementById('admin-course-price').value=curso.price||'';
+  document.getElementById('admin-course-type').value=curso.type||'online';
+  document.getElementById('admin-course-meta').value=curso.meta||'';
+  document.getElementById('admin-course-desc').value=curso.desc||'';
+  document.getElementById('admin-course-tags').value=(curso.tags||[]).join(', ');
+  document.getElementById('admin-course-image').value=curso.image||'../assets/workshop1.PNG';
+  document.getElementById('course-preview-title').textContent=curso.title||'Curso ORIGENS';
+  document.getElementById('course-preview-desc').textContent=curso.desc||'Atualize os campos para ver a prévia do curso.';
+  document.getElementById('course-admin-image-preview').src=curso.image||'../assets/workshop1.PNG';
+  document.getElementById('admin-delete-course-btn').style.display='inline-flex';
+  openModal('course-admin-modal');
+}
+
+function updateCoursePreview(){
+  const title = document.getElementById('admin-course-title').value.trim() || 'Curso ORIGENS';
+  const desc = document.getElementById('admin-course-desc').value.trim() || 'Preencha os campos para visualizar uma prévia do curso.';
+  const image = document.getElementById('admin-course-image').value.trim() || '../assets/workshop1.PNG';
+  document.getElementById('course-preview-title').textContent = title;
+  document.getElementById('course-preview-desc').textContent = desc;
+  document.getElementById('course-admin-image-preview').src = image;
+}
+
+function saveAdminCourse(e){
+  e.preventDefault();
+  const title=document.getElementById('admin-course-title').value.trim();
+  const price=document.getElementById('admin-course-price').value.trim();
+  const type=document.getElementById('admin-course-type').value;
+  const meta=document.getElementById('admin-course-meta').value.trim();
+  const desc=document.getElementById('admin-course-desc').value.trim();
+  const tags=document.getElementById('admin-course-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const image=document.getElementById('admin-course-image').value.trim()||'../assets/workshop1.PNG';
+  if(!title||!price){ showToast('Preencha título e preço'); return; }
+  const cursos=ensureStoredCursos();
+  const courseData={ id: currentCourseId || 'curso-'+Date.now(), title, price, type, meta, desc, tags, image };
+  if(currentCourseId){
+    const idx=cursos.findIndex(c=>c.id===currentCourseId);
+    if(idx!==-1) cursos[idx]=courseData;
+    showToast('Curso atualizado com sucesso');
+  } else {
+    cursos.unshift(courseData);
+    showToast('Curso adicionado com sucesso');
+  }
+  saveStoredCursos(cursos);
+  renderCursos();
+  closeModal('course-admin-modal');
+}
+
+function deleteAdminCourse(){
+  if(!currentCourseId) return;
+  if(!confirm('Excluir este curso permanentemente?')) return;
+  const cursos=ensureStoredCursos().filter(c=>c.id!==currentCourseId);
+  saveStoredCursos(cursos);
+  renderCursos();
+  closeModal('course-admin-modal');
+  showToast('Curso excluído');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  renderAdminCourseTools();
+  window.addEventListener('origensAuthChange', renderAdminCourseTools);
+});
 </script>
 </body>
 </html>

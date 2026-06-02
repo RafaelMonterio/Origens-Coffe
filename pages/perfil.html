@@ -61,6 +61,12 @@
 .chart-container { background: linear-gradient(135deg, rgba(160,112,74,.04) 0%, transparent 100%); border: 1px solid rgba(160,112,74,.08); padding: 2rem; border-radius: 16px; margin-bottom: 1.5rem; }
 .chart-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 300; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(160,112,74,.1); }
 .bar-chart { display: flex; align-items: flex-end; justify-content: space-around; height: 200px; margin: 1.5rem 0; }
+.admin-actions-grid { display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap:1rem; margin-bottom:2rem; }
+.admin-action-card { background:#fff; border:1px solid rgba(160,112,74,.12); border-radius:18px; padding:1.5rem; box-shadow:0 12px 26px rgba(30,22,16,.05); transition:transform .25s,box-shadow .25s; }
+.admin-action-card:hover { transform:translateY(-3px); box-shadow:0 18px 32px rgba(30,22,16,.1); }
+.admin-action-label { display:block; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:#7a6a58; margin-bottom:.75rem; }
+.admin-action-title { font-family:var(--font-display); font-size:1.3rem; font-weight:300; color:#2f1f14; margin-bottom:1rem; }
+.admin-action-card button { margin-top:auto; align-self:flex-start; }
 .bar { flex: 1; background: linear-gradient(180deg, var(--brown-mid) 0%, var(--brown-lt) 100%); margin: 0 .5rem; border-radius: 8px 8px 0 0; position: relative; min-height: 20px; }
 .bar-label { font-size: .65rem; text-align: center; color: var(--gray-600); margin-top: .5rem; }
 .bar-value { position: absolute; top: -1.5rem; left: 50%; transform: translateX(-50%); font-size: .68rem; color: var(--brown-mid); font-weight: 500; }
@@ -147,14 +153,7 @@
         <div class="section-head-title">Meus Pedidos</div>
         <a href="loja.html" class="btn btn-outline-dark btn-sm">Continuar comprando</a>
       </div>
-      <div style="background:#f0f0f0;padding:1rem;border-radius:8px;margin-bottom:2rem;font-family:monospace;font-size:.75rem;color:#333">
-        <strong>DEBUG:</strong> localStorage('origens_user'):<br>
-        <span id="debug-user">carregando...</span>
-        <br><br>
-        <button onclick="setUser({name:'Rafael Admin',email:'rafaelvasm@gmail.com',isAdmin:true});location.reload()" style="padding:.5rem 1rem;background:#6b3a1f;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:.75rem">
-          [TESTE] Login como Admin
-        </button>
-      </div>
+      <!-- Debug panel removed: removed test login button and localStorage dump for production/admin and user views -->
       <div class="pedido-card reveal">
         <div class="pedido-header">
           <div><div class="pedido-id">#00142</div><div class="pedido-date">10 Mai 2025</div></div>
@@ -290,6 +289,8 @@
         </div>
       </div>
 
+      <!-- Admin quick-action cards removed as requested -->
+
       <!-- Receita por Método de Pagamento -->
       <div class="chart-container" style="opacity:1">
         <div class="chart-title">Receita por Método de Pagamento (30 dias)</div>
@@ -343,42 +344,34 @@
       <!-- Assinaturas por Plano -->
       <div class="chart-container" style="opacity:1">
         <div class="chart-title">Assinaturas por Plano</div>
-        <div style="display:flex;align-items:flex-end;gap:2rem;height:250px;margin:2rem 0;justify-content:space-between">
-          <div style="flex:1">
-            <div style="width:100%;height:100%;background:#8b5a3c;border-radius:4px;margin-bottom:.5rem"></div>
-            <div style="font-size:.7rem;text-align:center;color:#666">Essencial<br>92 assin</div>
-          </div>
-          <div style="flex:1">
-            <div style="width:100%;height:63%;background:#8b5a3c;border-radius:4px;margin-bottom:.5rem"></div>
-            <div style="font-size:.7rem;text-align:center;color:#666">Gourmet<br>58 assin</div>
-          </div>
-          <div style="flex:1">
-            <div style="width:100%;height:28%;background:#8b5a3c;border-radius:4px;margin-bottom:.5rem"></div>
-            <div style="font-size:.7rem;text-align:center;color:#666">Premium+<br>26 assin</div>
-          </div>
+        <div class="bar-chart">
+          <div class="bar" id="plan-bar-essencial" style="height:100%;"><span class="bar-value">92</span></div>
+          <div class="bar" id="plan-bar-gourmet" style="height:68%;"><span class="bar-value">58</span></div>
+          <div class="bar" id="plan-bar-premium" style="height:36%;"><span class="bar-value">26</span></div>
+        </div>
+        <div class="chart-legend">
+          <div class="legend-item"><span class="legend-dot" style="background:#8b5a3c"></span>Essencial</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#8b5a3c"></span>Gourmet</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#8b5a3c"></span>Premium+</div>
         </div>
       </div>
 
       <!-- Clientes por Região -->
       <div class="chart-container" style="opacity:1">
         <div class="chart-title">Clientes por Região Geográfica</div>
-        <div style="display:flex;align-items:flex-end;gap:1.5rem;height:250px;margin:2rem 0;justify-content:space-between">
-          <div style="flex:1">
-            <div style="width:100%;height:100%;background:#9d6b4a;border-radius:4px;margin-bottom:.5rem"></div>
-            <div style="font-size:.7rem;text-align:center;color:#666">São Paulo<br>356 cli</div>
-          </div>
-          <div style="flex:1">
-            <div style="width:100%;height:70%;background:#9d6b4a;border-radius:4px;margin-bottom:.5rem"></div>
-            <div style="font-size:.7rem;text-align:center;color:#666">MG<br>248 cli</div>
-          </div>
-          <div style="flex:1">
-            <div style="width:100%;height:52%;background:#9d6b4a;border-radius:4px;margin-bottom:.5rem"></div>
-            <div style="font-size:.7rem;text-align:center;color:#666">RJ<br>184 cli</div>
-          </div>
-          <div style="flex:1">
-            <div style="width:100%;height:36%;background:#9d6b4a;border-radius:4px;margin-bottom:.5rem"></div>
-            <div style="font-size:.7rem;text-align:center;color:#666">Outros<br>127 cli</div>
-          </div>
+        <div class="bar-chart">
+          <div class="bar" id="region-bar-sudeste" style="height:88%;"><span class="bar-value">810</span></div>
+          <div class="bar" id="region-bar-sul" style="height:68%;"><span class="bar-value">620</span></div>
+          <div class="bar" id="region-bar-nordeste" style="height:46%;"><span class="bar-value">368</span></div>
+          <div class="bar" id="region-bar-centrooeste" style="height:28%;"><span class="bar-value">184</span></div>
+          <div class="bar" id="region-bar-norte" style="height:18%;"><span class="bar-value">92</span></div>
+        </div>
+        <div class="chart-legend">
+          <div class="legend-item"><span class="legend-dot" style="background:#9d6b4a"></span>Sudeste</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#9d6b4a"></span>Sul</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#9d6b4a"></span>Nordeste</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#9d6b4a"></span>Centro-Oeste</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#9d6b4a"></span>Norte</div>
         </div>
       </div>
 
@@ -491,9 +484,12 @@ function loadPerfilUI() {
   }
   
   if (!user) { window.location.href = '../index.html'; return; }
-  document.getElementById('avatar-initial').textContent   = user.name[0].toUpperCase();
-  document.getElementById('perfil-name-display').textContent  = user.name;
-  document.getElementById('perfil-email-display').textContent = user.email;
+  document.body.classList.toggle('admin-view', !!user.isAdmin);
+  const displayName = user.isAdmin ? 'Admin' : user.name;
+  const displayEmail = user.isAdmin ? 'admin@origens.cafe' : user.email;
+  document.getElementById('avatar-initial').textContent   = displayName[0].toUpperCase();
+  document.getElementById('perfil-name-display').textContent  = displayName;
+  document.getElementById('perfil-email-display').textContent = displayEmail;
   const nm = document.getElementById('config-name');
   const em = document.getElementById('config-email');
   if (nm) nm.value = user.name;
@@ -514,6 +510,8 @@ function loadPerfilUI() {
     console.log('User is NOT admin');
   }
 }
+
+// Admin quick-action handlers removed as requested (UI triggers deleted).
 
 document.addEventListener('DOMContentLoaded', loadPerfilUI);
 

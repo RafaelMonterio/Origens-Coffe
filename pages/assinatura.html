@@ -85,9 +85,21 @@
 .plano-col.featured:hover { background: #19130f; }
 .plano-featured-label {
   position: absolute; top: 1rem; left: 50%; transform: translateX(-50%);
-  background: rgba(255,255,255,.08); color: #fff;
-  padding: .35rem 1.1rem; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; white-space: nowrap; border: 1px solid rgba(255,255,255,.12); border-radius: 999px;
 }
+.admin-toolbar { display: none; justify-content: flex-end; gap: .75rem; padding: 1rem 0 0; }
+.admin-toolbar .btn { padding: .7rem 1.2rem; }
+.admin-manager-preview { display: grid; grid-template-columns: 180px 1fr; gap: 1rem; align-items: center; margin-bottom: 1.5rem; padding: 1.25rem 1.25rem 0; border-bottom: 1px solid rgba(158,146,128,.18); }
+.admin-manager-preview img { width: 100%; border-radius: 18px; object-fit: cover; aspect-ratio: 4 / 3; }
+.admin-manager-preview-info { display: flex; flex-direction: column; gap: .5rem; }
+.admin-manager-preview-info h3 { margin: 0; font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: #1f1710; }
+.admin-manager-preview-info p { margin: 0; color: #5f5043; line-height: 1.7; }
+.admin-form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.admin-form-group { display:flex; flex-direction:column; gap:.35rem; margin-bottom:1rem; }
+.admin-form-group label { font-size:.75rem; font-weight:600; color:#333; }
+.admin-form-group input, .admin-form-group textarea, .admin-form-group select { border:1px solid #d8d0c8; border-radius:8px; padding:.85rem 1rem; background:#fff; font-family:'Montserrat',sans-serif; font-size:.9rem; color:#1e1610; }
+.admin-form-group textarea { min-height:120px; resize:vertical; }
+.admin-modal-actions { display:flex; gap:.75rem; justify-content:flex-end; margin-top:1rem; flex-wrap:wrap; }
+.admin-modal-actions .btn { padding:.75rem 1.1rem; }
 .plano-name {
   font-family: var(--font-display); font-size: 1rem; font-weight: 400; letter-spacing: .3em; text-transform: uppercase; margin-bottom: 1.8rem;
 }
@@ -204,55 +216,10 @@
     <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Escolha seu plano</span></div>
     <h2 class="section-title">Qual plano é<br><em>para você?</em></h2>
   </div>
-  <div class="planos-grid">
-
-    <div class="plano-col reveal">
-      <div class="plano-name">Essencial</div>
-      <div class="plano-price">R$ 79,99</div>
-      <div class="plano-period">por mês · frete grátis</div>
-      <ul class="plano-list">
-        <li>250g de grão selecionado</li>
-        <li>1 origem por mês</li>
-        <li>Frete grátis para todo Brasil</li>
-        <li>Guia de preparo digital</li>
-        <li>Cancele quando quiser</li>
-      </ul>
-      <button class="btn btn-outline-dark" style="width:100%;justify-content:center;padding:.85rem" onclick="openModal('cadastro-modal')">Assinar Essencial</button>
-    </div>
-
-    <div class="plano-col featured reveal delay-1">
-      <div class="plano-featured-label">Mais Popular</div>
-      <div class="plano-name" style="color:var(--white)">Gourmet</div>
-      <div class="plano-price" style="color:var(--brown-lt)">R$ 139,99</div>
-      <div class="plano-period">por mês · frete grátis</div>
-      <ul class="plano-list">
-        <li>500g de grão premium</li>
-        <li>2 origens exclusivas por mês</li>
-        <li>Frete grátis para todo Brasil</li>
-        <li>Vídeo exclusivo do barista</li>
-        <li>10% de desconto na loja</li>
-        <li>Cancele quando quiser</li>
-      </ul>
-      <button class="btn btn-white" style="width:100%;justify-content:center;padding:.85rem" onclick="openModal('cadastro-modal')">Assinar Gourmet</button>
-    </div>
-
-    <div class="plano-col reveal delay-2">
-      <div class="plano-name">Barista</div>
-      <div class="plano-price">R$ 219,99</div>
-      <div class="plano-period">por mês · frete grátis</div>
-      <ul class="plano-list">
-        <li>1kg de grão premium</li>
-        <li>3 origens exclusivas por mês</li>
-        <li>Frete grátis para todo Brasil</li>
-        <li>Acesso completo a cursos online</li>
-        <li>20% de desconto na loja</li>
-        <li>Surpresa mensal do barista</li>
-        <li>Cancele quando quiser</li>
-      </ul>
-      <button class="btn btn-outline-dark" style="width:100%;justify-content:center;padding:.85rem" onclick="openModal('cadastro-modal')">Assinar Barista</button>
-    </div>
-
+  <div class="admin-toolbar" id="planos-admin-toolbar">
+    <button class="btn btn-outline-dark btn-sm" onclick="openNewPlanModal()">+ Gerenciar planos</button>
   </div>
+  <div class="planos-grid" id="planos-grid"></div>
 </section>
 
 <!-- FAQ ASSINATURA -->
@@ -336,6 +303,36 @@
     <div class="modal-footer-txt">Já tem conta? <a href="#" onclick="switchModal('cadastro-modal','login-modal')">Entrar</a></div>
   </div>
 </div>
+<div id="plan-admin-modal" class="modal-overlay">
+  <div class="modal-backdrop" onclick="closeModal('plan-admin-modal')"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('plan-admin-modal')">×</button>
+    <div class="modal-title">Gerenciar Plano</div>
+    <div class="modal-sub">Adicione ou edite os planos de assinatura aqui.</div>
+    <div class="admin-manager-preview" id="plan-admin-preview">
+      <img src="../assets/produtos/pacote padrão.png" alt="Prévia do plano" id="plan-admin-image-preview">
+      <div class="admin-manager-preview-info">
+        <h3 id="plan-preview-title">Plano ORIGENS</h3>
+        <p id="plan-preview-desc">Preencha os campos para atualizar a prévia deste plano.</p>
+      </div>
+    </div>
+    <form id="admin-plan-form" onsubmit="saveAdminPlan(event)">
+      <div class="admin-form-grid">
+        <div class="admin-form-group"><label for="admin-plan-name">Nome do plano</label><input id="admin-plan-name" type="text" required oninput="updatePlanPreview()"></div>
+        <div class="admin-form-group"><label for="admin-plan-price">Preço</label><input id="admin-plan-price" type="text" required placeholder="R$ 0,00" oninput="updatePlanPreview()"></div>
+        <div class="admin-form-group"><label for="admin-plan-period">Período</label><input id="admin-plan-period" type="text" placeholder="por mês · frete grátis" oninput="updatePlanPreview()"></div>
+        <div class="admin-form-group"><label for="admin-plan-featured">Destaque</label><select id="admin-plan-featured"><option value="false">Não</option><option value="true">Sim</option></select></div>
+        <div class="admin-form-group" style="grid-column:1 / -1"><label for="admin-plan-features">Recursos</label><textarea id="admin-plan-features" placeholder="Um recurso por linha"></textarea></div>
+        <div class="admin-form-group" style="grid-column:1 / -1"><label for="admin-plan-cta">Texto do botão</label><input id="admin-plan-cta" type="text" placeholder="Assinar Gourmet"></div>
+      </div>
+      <div class="admin-modal-actions">
+        <button type="submit" class="btn btn-dark">Salvar plano</button>
+        <button type="button" class="btn btn-outline-dark" onclick="closeModal('plan-admin-modal')">Cancelar</button>
+        <button type="button" class="btn btn-outline-dark" id="admin-delete-plan-btn" onclick="deleteAdminPlan()" style="display:none;background:#fff;color:#000;border:1px solid #000;">Excluir plano</button>
+      </div>
+    </form>
+  </div>
+</div>
 <div id="cart-panel" class="cart-panel">
   <div class="cart-panel-header"><div class="cart-panel-title">Carrinho</div><div style="display:flex;align-items:center;gap:.75rem"><span id="cart-badge" style="width:22px;height:22px;border-radius:50%;background:var(--brown-mid);color:#fff;font-size:.6rem;display:flex;align-items:center;justify-content:center;font-weight:600">0</span><button class="cart-close-btn" onclick="closeCart()">×</button></div></div>
   <div class="cart-items" id="cart-items-list"></div>
@@ -356,6 +353,130 @@ function toggleFaq(btn) {
   document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
   if (!wasOpen) item.classList.add('open');
 }
+
+const defaultPlans = [
+  { id:'essencial', name:'Essencial', price:'R$ 79,99', period:'por mês · frete grátis', features:['250g de grão selecionado','1 origem por mês','Frete grátis para todo Brasil','Guia de preparo digital','Cancele quando quiser'], cta:'Assinar Essencial', featured:false },
+  { id:'gourmet', name:'Gourmet', price:'R$ 139,99', period:'por mês · frete grátis', features:['500g de grão premium','2 origens exclusivas por mês','Frete grátis para todo Brasil','Vídeo exclusivo do barista','10% de desconto na loja','Cancele quando quiser'], cta:'Assinar Gourmet', featured:true },
+  { id:'barista', name:'Barista', price:'R$ 219,99', period:'por mês · frete grátis', features:['1kg de grão premium','3 origens exclusivas por mês','Frete grátis para todo Brasil','Acesso completo a cursos online','20% de desconto na loja','Surpresa mensal do barista','Cancele quando quiser'], cta:'Assinar Barista', featured:false }
+];
+
+const planosKey='origens_plans';
+let currentPlanId=null;
+
+function getStoredPlans(){try{return JSON.parse(localStorage.getItem(planosKey)||'null');}catch{return null;}}
+function ensureStoredPlans(){const stored=getStoredPlans(); if(stored && stored.length) return stored; localStorage.setItem(planosKey, JSON.stringify(defaultPlans)); return defaultPlans.slice();}
+function saveStoredPlans(plans){localStorage.setItem(planosKey, JSON.stringify(plans));}
+
+function renderPlans(){
+  const grid=document.getElementById('planos-grid'); if(!grid) return;
+  const plans=ensureStoredPlans();
+  const isAdmin=getUser()?.isAdmin;
+  grid.innerHTML=plans.map(plan=>{
+    const listItems=plan.features.map(item=>`<li>${item}</li>`).join('');
+    const classes=['plano-col','reveal']; if(plan.featured) classes.push('featured');
+    const planAction = isAdmin
+      ? `<button class="btn ${plan.featured ? 'btn-white btn-sm' : 'btn btn-outline-dark btn-sm'}" onclick="openEditPlan('${plan.id}')">Gerenciar</button>`
+      : `<button class="btn ${plan.featured ? 'btn-white' : 'btn btn-outline-dark'}" style="width:100%;justify-content:center;padding:.85rem" onclick="openModal('cadastro-modal')">${plan.cta}</button>`;
+    return `
+      <div class="${classes.join(' ')}">
+        ${plan.featured?'<div class="plano-featured-label">Mais Popular</div>':''}
+        <div class="plano-name" ${plan.featured?'style="color:var(--white)"':''}>${plan.name}</div>
+        <div class="plano-price" ${plan.featured?'style="color:var(--brown-lt)"':''}>${plan.price}</div>
+        <div class="plano-period" ${plan.featured?'style="color:rgba(255,255,255,.6)"':''}>${plan.period}</div>
+        <ul class="plano-list">${listItems}</ul>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:flex-end">
+          ${planAction}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderAdminPlanTools(){
+  const toolbar=document.getElementById('planos-admin-toolbar');
+  const isAdmin=getUser()?.isAdmin;
+  document.body.classList.toggle('admin-view', !!isAdmin);
+  if(toolbar) toolbar.style.display=isAdmin?'flex':'none';
+  renderPlans();
+}
+
+function openNewPlanModal(){
+  currentPlanId=null;
+  document.getElementById('admin-plan-form').reset();
+  document.getElementById('admin-plan-featured').value='false';
+  document.getElementById('admin-plan-name').value='';
+  document.getElementById('admin-plan-price').value='';
+  document.getElementById('admin-plan-period').value='';
+  document.getElementById('admin-plan-features').value='';
+  document.getElementById('admin-plan-cta').value='Assinar';
+  document.getElementById('plan-preview-title').textContent='Novo plano ORIGENS';
+  document.getElementById('plan-preview-desc').textContent='Preencha o nome e o valor para visualizar o plano.';
+  document.getElementById('admin-delete-plan-btn').style.display='none';
+  openModal('plan-admin-modal');
+}
+
+function openEditPlan(id){
+  const plans=ensureStoredPlans();
+  const plan=plans.find(p=>p.id===id); if(!plan) return;
+  currentPlanId=id;
+  document.getElementById('admin-plan-name').value=plan.name||'';
+  document.getElementById('admin-plan-price').value=plan.price||'';
+  document.getElementById('admin-plan-period').value=plan.period||'';
+  document.getElementById('admin-plan-featured').value=plan.featured?'true':'false';
+  document.getElementById('admin-plan-features').value=(plan.features||[]).join('\n');
+  document.getElementById('admin-plan-cta').value=plan.cta||'Assinar';
+  document.getElementById('plan-preview-title').textContent=plan.name||'Plano ORIGENS';
+  document.getElementById('plan-preview-desc').textContent=plan.price ? `${plan.price} · ${plan.period}` : 'Atualize o nome e valor para visualizar o plano.';
+  document.getElementById('admin-delete-plan-btn').style.display='inline-flex';
+  openModal('plan-admin-modal');
+}
+
+function updatePlanPreview(){
+  const name = document.getElementById('admin-plan-name').value.trim() || 'Plano ORIGENS';
+  const price = document.getElementById('admin-plan-price').value.trim();
+  const period = document.getElementById('admin-plan-period').value.trim();
+  document.getElementById('plan-preview-title').textContent = name;
+  document.getElementById('plan-preview-desc').textContent = price ? `${price}${period ? ' · ' + period : ''}` : 'Preencha o nome e o preço para ver a prévia do plano.';
+}
+
+function saveAdminPlan(e){
+  e.preventDefault();
+  const name=document.getElementById('admin-plan-name').value.trim();
+  const price=document.getElementById('admin-plan-price').value.trim();
+  const period=document.getElementById('admin-plan-period').value.trim();
+  const featured=document.getElementById('admin-plan-featured').value==='true';
+  const features=document.getElementById('admin-plan-features').value.split('\n').map(f=>f.trim()).filter(Boolean);
+  const cta=document.getElementById('admin-plan-cta').value.trim()||'Assinar';
+  if(!name||!price){showToast('Preencha nome e preço do plano');return;}
+  const plans=ensureStoredPlans();
+  const planData={ id: currentPlanId||'plan-'+Date.now(), name, price, period, featured, features, cta };
+  if(currentPlanId){
+    const idx=plans.findIndex(p=>p.id===currentPlanId);
+    if(idx!==-1) plans[idx]=planData;
+    showToast('Plano atualizado com sucesso');
+  } else {
+    plans.unshift(planData);
+    showToast('Plano adicionado com sucesso');
+  }
+  saveStoredPlans(plans);
+  renderPlans();
+  closeModal('plan-admin-modal');
+}
+
+function deleteAdminPlan(){
+  if(!currentPlanId) return;
+  if(!confirm('Excluir este plano permanentemente?')) return;
+  const plans=ensureStoredPlans().filter(p=>p.id!==currentPlanId);
+  saveStoredPlans(plans);
+  renderPlans();
+  closeModal('plan-admin-modal');
+  showToast('Plano excluído');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  renderAdminPlanTools();
+  window.addEventListener('origensAuthChange', renderAdminPlanTools);
+});
 </script>
 </body>
 </html>
